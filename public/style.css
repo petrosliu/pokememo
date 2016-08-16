@@ -1,0 +1,115 @@
+th {
+    height: 50px;
+}
+div.sprite {
+    position: relative;
+    width: 100%;
+}
+div.sprite > img {
+    max-height: 50px;
+    max-width: 50px;
+    display: block;
+    margin: 0 auto;
+}
+div.sprite > p {
+    font-size: 30px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    vertical-align: middle;
+    line-height: 50px;
+    text-align: center;
+    opacity: 0.1;
+    z-index: 0;
+    transition-delay: 0.2s;
+    transition-duration: 0.5s;
+    -webkit-transition-delay: 0.2s;
+    -webkit-transition-duration: 0.5s;
+}
+div.sprite:hover > p {
+    z-index: 1000;
+    opacity: 0.8;
+}
+img.seen {
+    -webkit-filter: grayscale(0);
+    filter: grayscale(0);
+}
+img.unseen {
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+}
+div.egg {
+    position: relative;
+    width: 100%;
+}
+div.egg > img {
+    max-height: 50px;
+    max-width: 50px;
+    display: block;
+    margin: 0 auto;
+}
+div.egg > p {
+    font-size: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    vertical-align: middle;
+    line-height: 50px;
+    text-align: center;
+}
+.label-poison {
+    background-color: mediumpurple;
+}
+.label-water {
+    background-color: dodgerblue;
+}
+.label-normal {
+    background-color: darkgray;
+}
+.label-flying {
+    background-color: lightskyblue;
+}
+.label-grass {
+    background-color: yellowgreen;
+}
+.label-ground {
+    background-color: saddlebrown;
+}
+.label-psychic {
+    background-color: rebeccapurple;
+}
+.label-fire {
+    background-color: firebrick;
+}
+.label-bug {
+    background-color: yellowgreen;
+}
+.label-rock {
+    background-color: dimgrey;
+}
+.label-electric {
+    background-color: darkorange;
+}
+.label-fighting {
+    background-color: darkred;
+}
+.label-fairy {
+    background-color: hotpink;
+}
+.label-ice {
+    background-color: blue;
+}
+.label-ghost {
+    background-color: lightslategray;
+}
+.label-dragon {
+    background-color: darkslategray;
+}
+.label-steel {
+    background-color: lightsteelblue;
+}
+.label-dark {
+    background-color: black;
+}
