@@ -3,9 +3,9 @@ var app = express();
 var mongoose = require('mongoose');
 
 mongoose.connect('mongodb://admin:admin@ds040489.mlab.com:40489/pokemon');
-app.configure(function() {
+app.configure(function () {
     // set the static files location /public/img will be /img for users
-    app.use(express.static(__dirname + '/public'));
+    app.use(express.static(__dirname));
     // log every request to the console
     app.use(express.logger('dev'));
     // pull information from html in POST
@@ -23,7 +23,7 @@ var Todo = mongoose.model('Todo', {
 var pokemon = require('./models/pokemon');
 var PokemonDB = mongoose.model('Pokemon', pokemon.schema);
 PokemonDB.collection.remove({});
-PokemonDB.collection.insert(pokemon.allPokemons, function(err) {
+PokemonDB.collection.insert(pokemon.allPokemons, function (err) {
     if (err) {
         console.log('Oh?');
     } else {
@@ -35,9 +35,9 @@ PokemonDB.collection.insert(pokemon.allPokemons, function(err) {
 
 // ----- define routes
 // get all todos
-app.get('/api/todos', function(req, res) {
+app.get('/api/todos', function (req, res) {
     // use mongoose to get all todos in the database
-    Todo.find(function(err, todos) {
+    Todo.find(function (err, todos) {
         // if there is an error retrieving, send the error. nothing after res.send(err) will execute
         if (err) {
             res.send(err);
@@ -46,9 +46,9 @@ app.get('/api/todos', function(req, res) {
     });
 });
 
-app.get('/api/pokemons', function(req, res) {
+app.get('/api/pokemons', function (req, res) {
     // use mongoose to get all todos in the database
-    PokemonDB.find(function(err, pokemons) {
+    PokemonDB.find(function (err, pokemons) {
         // if there is an error retrieving, send the error. nothing after res.send(err) will execute
         if (err) {
             res.send(err);
@@ -58,17 +58,17 @@ app.get('/api/pokemons', function(req, res) {
 });
 
 // create Todo and send back all todos after creation
-app.post('/api/todos', function(req, res) {
+app.post('/api/todos', function (req, res) {
     // create a Todo, information comes from AJAX request from Angular
     Todo.create({
         text: req.body.text,
         done: false
-    }, function(err, todo) {
+    }, function (err, todo) {
         if (err) {
             res.send(err);
         }
         // get and return all the todos after you create another
-        Todo.find(function(err, todos) {
+        Todo.find(function (err, todos) {
             if (err) {
                 res.send(err);
             }
@@ -77,14 +77,14 @@ app.post('/api/todos', function(req, res) {
     });
 });
 // delete a todo
-app.delete('/api/todos/:todo_id', function(req, res) {
+app.delete('/api/todos/:todo_id', function (req, res) {
     Todo.remove({
         _id: req.params.todo_id
-    }, function(err, todo) {
+    }, function (err, todo) {
         if (err)
             res.send(err);
         // get and return all the todos after you create another
-        Todo.find(function(err, todos) {
+        Todo.find(function (err, todos) {
             if (err) {
                 res.send(err);
             }
@@ -94,10 +94,9 @@ app.delete('/api/todos/:todo_id', function(req, res) {
 });
 
 // get the index.html
-app.get('/', function(req, res) {
-    res.sendfile('./public/index.html');
+app.get('/', function (req, res) {
+    res.sendfile('index.html');
 });
-
-app.get('/pokemon', function(req, res) {
-    res.sendfile('./public/pokemon.html');
+app.get('*', function (req, res) {
+    res.redirect('/');
 });

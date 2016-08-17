@@ -1,10 +1,59 @@
+body { 
+    padding-top: 70px;
+    margin: 0;
+    min-height: 100%;
+}
+
+html {
+  height: 100%;
+}
+.navbar {
+    background-color: rgba(255, 255, 255, 0.5);
+    border: none;
+}
+div.row {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+.footer {
+  padding-top: 50px;
+  padding-bottom: 10px;
+  text-align: center;
+  color: grey;
+}
+div.bg-container{
+    position: fixed;
+    top:0;
+    left:0;
+    height:100%;
+    width: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+div.landing-bg{
+    position: absolute;
+    left:-20px;
+    right:-20px;
+    top:-20px;
+    bottom:-20px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    -webkit-transition: background-image 20s linear;
+    transition: background-image 20s linear;
+    -webkit-filter: blur(20px);
+    filter: blur(20px);
+}
+
 div.pokemon-list>div {
     min-height:60px;
     padding-top: 10px;
 }
 
 div.pokemon-list>div:nth-child(odd) {
-    background-color: #FAFAFA;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+div.pokemon-list>div:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.7);
 }
 
 div.pokemon-list div.pokemon-name {
@@ -124,4 +173,7 @@ img.egg-icon {
 
 div.pokemon-list .progress {
     margin-top: 5px;
+    height: 16px;
+    font-weight: bold;
+    font-size: 75%;
 }

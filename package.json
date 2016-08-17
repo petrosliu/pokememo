@@ -1,9 +1,9 @@
 {
-    "name"         : "node-todo",
+    "name"         : "pokememo",
     "version"      : "0.0.0",
-    "description"  : "Simple todo application.",
+    "description"  : "Pokemon memo.",
     "main"         : "server.js",
-    "author"       : "petrosliu",
+    "author"       : "Yiding Liu",
     "dependencies" :
     {
         "express"    : "~3.4.4",
