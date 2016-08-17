@@ -28,14 +28,25 @@
 </div>
 <!-- TODO LIST -->
 <div class="row">
-    <div class="col-xs-1 col-xs-offset-11">
-        <select class="form-control" ng-model="sortBy" ng-init="sortBy = 'id'">
-                    <option value="id">#</option>
-                    <option value="name">A-Z</option>
-                </select>
+    <div class="col-xs-12">
+        <div class="btn-group btn-group-sm" data-toggle="buttons" ng-init="sortBy = 'id'">
+            <label class="btn btn-default {{ (sortBy == 'id')? 'active':'' }}">
+            <input type="radio" ng-model="sortBy" value="id" name="options" id="option1">#</label>
+            <label class="btn btn-default {{ (sortBy == 'name')? 'active':'' }}">
+            <input type="radio" ng-model="sortBy" value="name" name="options" id="option2">A-Z</label>
+            <label class="btn btn-default {{ (sortBy == '-egg')? 'active':'' }}">
+            <input type="radio" ng-model="sortBy" value="-egg" name="options" id="option3">Egg</label>
+            <label class="btn btn-default {{ (sortBy == '-egg')? 'active':'' }}">
+            <input type="radio" ng-model="sortBy" value="-egg" name="options" id="option3">CP</label>
+            <label class="btn btn-default {{ (sortBy == '-egg')? 'active':'' }}">
+            <input type="radio" ng-model="sortBy" value="-egg" name="options" id="option3">Collection</label>
+        </div>
     </div>
-    <div class="col-xs-12 pokemon-list">
-        <div class="col-xs-12" ng-repeat="p in pokemons | orderBy:sortBy">
+
+
+
+    <div class="col-xs-12 pokedex-list">
+        <div class="col-xs-12" ng-repeat="p in pokedex | orderBy:sortBy">
             <div class="col-xs-1">
                 <div class="sprite">
                     <p>{{ p.id | pokeidx }}</p>
@@ -60,10 +71,10 @@
                     <div class="pull-right" ng-if="p.location"><span class="label label-{{p.location | lowercase | spaceless}}"><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;{{p.location}}</span></div>
                 </div>
                 <div class="col-xs-12">
-                    <div ng-if="p.candy_count" class="progress progress-striped">
-                        <div class="progress-bar label-{{p.type[0] | lowercase}}" role="progressbar" style="width:{{3/p.candy_count*100}}%">
+                    <div class="progress progress-striped">
+                        <div ng-if="p.candy_count" class="progress-bar label-{{p.type[0] | lowercase}}" role="progressbar" style="width:{{3/p.candy_count*100}}%">
                         </div>
-                        <div class="pull-right">3/{{p.candy_count}}&nbsp;</div>
+                        <div ng-if="p.candy_count" class="pull-right">3/{{p.candy_count}}&nbsp;</div>
                     </div>
                 </div>
             </div>

@@ -44,25 +44,25 @@ div.landing-bg{
     filter: blur(20px);
 }
 
-div.pokemon-list>div {
+div.pokedex-list>div {
     min-height:60px;
     padding-top: 10px;
 }
 
-div.pokemon-list>div:nth-child(odd) {
-    background-color: rgba(255, 255, 255, 0.9);
+div.pokedex-list>div:nth-child(odd) {
+    background-color: rgba(255, 255, 255, 0.8);
 }
-div.pokemon-list>div:nth-child(even) {
+div.pokedex-list>div:nth-child(even) {
     background-color: rgba(255, 255, 255, 0.7);
 }
 
-div.pokemon-list div.pokemon-name {
+div.pokedex-list div.pokemon-name {
     margin-top: 5px;
     font-size: 15px;
     font-weight: bold;
 }
 
-div.pokemon-list div.pokemon-type {
+div.pokedex-list div.pokemon-type {
     margin-top: 5px;
 }
 
@@ -171,9 +171,10 @@ img.egg-icon {
     background-color: black;
 }
 
-div.pokemon-list .progress {
+div.pokedex-list .progress {
     margin-top: 5px;
     height: 16px;
     font-weight: bold;
     font-size: 75%;
+    background-color: rgba(255, 255, 255, 0.3);
 }

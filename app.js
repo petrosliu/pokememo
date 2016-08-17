@@ -13,9 +13,9 @@ pokememo.config(function ($routeProvider) {
             templateUrl: 'views/home.html',
             controller: 'homeController'
         })
-        .when('/pokemons', {
-            templateUrl: 'views/pokemons.html',
-            controller: 'pokemonsController'
+        .when('/pokedex', {
+            templateUrl: 'views/pokedex.html',
+            controller: 'pokedexController'
         })
         .otherwise({ redirectTo: '/' })
 
@@ -29,7 +29,7 @@ pokememo.controller('homeController', function ($scope) {
 });
 
 // about page controller
-pokememo.controller('pokemonsController', function ($scope, $http) {
+pokememo.controller('pokedexController', function ($scope, $http) {
     $scope.formData = {};
     // when landing on the page, get all todos and show them
     $http.get('/api/todos')
@@ -41,9 +41,9 @@ pokememo.controller('pokemonsController', function ($scope, $http) {
             console.log('Error: ' + data);
         });
 
-    $http.get('/api/pokemons')
+    $http.get('/api/pokedex')
         .success(function (data) {
-            $scope.pokemons = data;
+            $scope.pokedex = data;
         })
         .error(function (data) {
             console.log('Error: ' + data);

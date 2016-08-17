@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://admin:admin@ds040489.mlab.com:40489/pokemon');
+mongoose.connect('mongodb://admin:admin@ds139985.mlab.com:39985/pokememo');
 app.configure(function () {
     // set the static files location /public/img will be /img for users
     app.use(express.static(__dirname));
@@ -20,14 +20,14 @@ var Todo = mongoose.model('Todo', {
     text: String
 });
 
-var pokemon = require('./models/pokemon');
-var PokemonDB = mongoose.model('Pokemon', pokemon.schema);
-PokemonDB.collection.remove({});
-PokemonDB.collection.insert(pokemon.allPokemons, function (err) {
+var pokedex = require('./models/pokedex');
+var PokedexDB = mongoose.model('Pokedex', pokedex.schema);
+PokedexDB.collection.remove({});
+PokedexDB.collection.insert(pokedex.pokedex, function (err) {
     if (err) {
         console.log('Oh?');
     } else {
-        console.log('%d pokemons were successfully loaded in Pokedex.', pokemon.allPokemons.length);
+        console.log('%d pokemons were successfully loaded in Pokedex.', pokedex.pokedex.length);
     }
 });
 
@@ -43,17 +43,6 @@ app.get('/api/todos', function (req, res) {
             res.send(err);
         }
         res.json(todos); // return all todos in JSON format
-    });
-});
-
-app.get('/api/pokemons', function (req, res) {
-    // use mongoose to get all todos in the database
-    PokemonDB.find(function (err, pokemons) {
-        // if there is an error retrieving, send the error. nothing after res.send(err) will execute
-        if (err) {
-            res.send(err);
-        }
-        res.json(pokemons); // return all todos in JSON format
     });
 });
 
@@ -90,6 +79,21 @@ app.delete('/api/todos/:todo_id', function (req, res) {
             }
             res.json(todos);
         });
+    });
+});
+
+
+app.get('/api/pokedex', function (req, res) {
+    PokedexDB.find(function (err, pokedex) {
+        if (err) {res.send(err);}
+        res.json(pokedex);
+    });
+});
+
+app.get('/api/pokedex/:id', function (req, res) {
+    PokedexDB.findOne({'id':req.params.id}, function (err, pokemon) {
+        if (err) {res.send(err);}
+        res.json(pokemon);
     });
 });
 

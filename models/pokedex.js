@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var pokemonRawDate = [{
+var pokedexRawDate = [{
     "id": 1,
     "num": "001",
     "name": "Bulbasaur",
@@ -1911,7 +1911,7 @@ var pokemonRawDate = [{
     "type": ["Normal", "Flying"],
     "height": "0.79 m",
     "weight": "15.0 kg",
-    "candy": "None",
+    "candy": "Farfetch'd Candy",
     "egg": "5",
     "multipliers": null,
     "weaknesses": [
@@ -2171,7 +2171,7 @@ var pokemonRawDate = [{
     "type": ["Rock", "Ground"],
     "height": "8.79 m",
     "weight": "210.0 kg",
-    "candy": "None",
+    "candy": "Onix Candy",
     "egg": "10",
     "multipliers": null,
     "weaknesses": [
@@ -2409,7 +2409,7 @@ var pokemonRawDate = [{
     "type": ["Fighting"],
     "height": "1.50 m",
     "weight": "49.8 kg",
-    "candy": "None",
+    "candy": "Hitmonlee Candy",
     "egg": "10",
     "multipliers": null,
     "weaknesses": [
@@ -2425,7 +2425,7 @@ var pokemonRawDate = [{
     "type": ["Fighting"],
     "height": "1.40 m",
     "weight": "50.2 kg",
-    "candy": "None",
+    "candy": "Hitmonchan Candy",
     "egg": "10",
     "multipliers": null,
     "weaknesses": [
@@ -2441,7 +2441,7 @@ var pokemonRawDate = [{
     "type": ["Normal"],
     "height": "1.19 m",
     "weight": "65.5 kg",
-    "candy": "None",
+    "candy": "Lickitung Candy",
     "egg": "5",
     "multipliers": null,
     "weaknesses": [
@@ -2541,7 +2541,7 @@ var pokemonRawDate = [{
     "type": ["Normal"],
     "height": "1.09 m",
     "weight": "34.6 kg",
-    "candy": "None",
+    "candy": "Chansey Candy",
     "egg": "10",
     "multipliers": null,
     "weaknesses": [
@@ -2555,7 +2555,7 @@ var pokemonRawDate = [{
     "type": ["Grass"],
     "height": "0.99 m",
     "weight": "35.0 kg",
-    "candy": "None",
+    "candy": "Tangela Candy",
     "egg": "5",
     "multipliers": null,
     "weaknesses": [
@@ -2573,7 +2573,7 @@ var pokemonRawDate = [{
     "type": ["Normal"],
     "height": "2.21 m",
     "weight": "80.0 kg",
-    "candy": "None",
+    "candy": "Kangaskhan Candy",
     "egg": "5",
     "multipliers": null,
     "weaknesses": [
@@ -2714,7 +2714,7 @@ var pokemonRawDate = [{
     "type": ["Psychic"],
     "height": "1.30 m",
     "weight": "54.5 kg",
-    "candy": "None",
+    "candy": "Mr. Mime Candy",
     "egg": "10",
     "multipliers": null,
     "weaknesses": [
@@ -2731,7 +2731,7 @@ var pokemonRawDate = [{
     "type": ["Bug", "Flying"],
     "height": "1.50 m",
     "weight": "56.0 kg",
-    "candy": "None",
+    "candy": "Scyther Candy",
     "egg": "10",
     "multipliers": null,
     "weaknesses": [
@@ -2749,7 +2749,7 @@ var pokemonRawDate = [{
     "type": ["Ice", "Psychic"],
     "height": "1.40 m",
     "weight": "40.6 kg",
-    "candy": "None",
+    "candy": "Jynx Candy",
     "egg": "10",
     "multipliers": null,
     "weaknesses": [
@@ -2768,7 +2768,7 @@ var pokemonRawDate = [{
     "type": ["Electric"],
     "height": "1.09 m",
     "weight": "30.0 kg",
-    "candy": "None",
+    "candy": "Electabuzz Candy",
     "egg": "10",
     "multipliers": null,
     "weaknesses": [
@@ -2782,7 +2782,7 @@ var pokemonRawDate = [{
     "type": ["Fire"],
     "height": "1.30 m",
     "weight": "44.5 kg",
-    "candy": "None",
+    "candy": "Magmar Candy",
     "egg": "10",
     "multipliers": null,
     "weaknesses": [
@@ -2798,7 +2798,7 @@ var pokemonRawDate = [{
     "type": ["Bug"],
     "height": "1.50 m",
     "weight": "55.0 kg",
-    "candy": "None",
+    "candy": "Pinsir Candy",
     "egg": "10",
     "multipliers": null,
     "weaknesses": [
@@ -2814,7 +2814,7 @@ var pokemonRawDate = [{
     "type": ["Normal"],
     "height": "1.40 m",
     "weight": "88.4 kg",
-    "candy": "None",
+    "candy": "Tauros Candy",
     "egg": "5",
     "multipliers": null,
     "weaknesses": [
@@ -2871,7 +2871,7 @@ var pokemonRawDate = [{
     "type": ["Water", "Ice"],
     "height": "2.49 m",
     "weight": "220.0 kg",
-    "candy": "None",
+    "candy": "Lapras Candy",
     "egg": "10",
     "multipliers": null,
     "weaknesses": [
@@ -2950,7 +2950,7 @@ var pokemonRawDate = [{
     "type": ["Electric"],
     "height": "0.79 m",
     "weight": "24.5 kg",
-    "candy": "None",
+    "candy": "Eevee Candy",
     "egg": "0",
     "multipliers": null,
     "weaknesses": [
@@ -2988,7 +2988,7 @@ var pokemonRawDate = [{
     "type": ["Normal"],
     "height": "0.79 m",
     "weight": "36.5 kg",
-    "candy": "None",
+    "candy": "Porygon Candy",
     "egg": "5",
     "multipliers": null,
     "weaknesses": [
@@ -3024,8 +3024,8 @@ var pokemonRawDate = [{
     "type": ["Rock", "Water"],
     "height": "0.99 m",
     "weight": "35.0 kg",
-    "candy": "None",
-    "egg": "Omanyte Candy",
+    "candy": "Omanyte Candy",
+    "egg": "0",
     "multipliers": null,
     "weaknesses": [
         "Electric",
@@ -3091,7 +3091,7 @@ var pokemonRawDate = [{
     "type": ["Rock", "Flying"],
     "height": "1.80 m",
     "weight": "59.0 kg",
-    "candy": "None",
+    "candy": "Aerodactyl Candy",
     "egg": "10",
     "multipliers": null,
     "weaknesses": [
@@ -3109,7 +3109,7 @@ var pokemonRawDate = [{
     "type": ["Normal"],
     "height": "2.11 m",
     "weight": "460.0 kg",
-    "candy": "None",
+    "candy": "Snorlax Candy",
     "egg": "10",
     "multipliers": null,
     "weaknesses": [
@@ -3271,8 +3271,8 @@ var pokemonRawDate = [{
     "location": "Not Available"
 }];
 
-var pokemonSchema = new mongoose.Schema({
-    id: Number,
+var pokedexSchema = new mongoose.Schema({
+    id: {type: Number, unique: true},
     name: String,
     img: String,
     type: [String],
@@ -3286,45 +3286,45 @@ var pokemonSchema = new mongoose.Schema({
     location: String
 });
 
-pokemonSchema.set('toObject', {
+pokedexSchema.set('toObject', {
     virtuals: true
 });
-pokemonSchema.set('toJSON', {
+pokedexSchema.set('toJSON', {
     virtuals: true
 });
 
-var allPokemons = [];
-for (var i = 0; i < pokemonRawDate.length; i++) {
+var pokedex = [];
+for (var i = 0; i < pokedexRawDate.length; i++) {
     var p = {
-        id: pokemonRawDate[i].id,
-        name: pokemonRawDate[i].name,
-        img: pokemonRawDate[i].img,
-        type: pokemonRawDate[i].type,
-        candy: pokemonRawDate[i].candy,
-        candy_count: +pokemonRawDate[i].candy_count,
-        egg: +pokemonRawDate[i].egg,
-        weaknesses: pokemonRawDate[i].weaknesses,
+        id: pokedexRawDate[i].id,
+        name: pokedexRawDate[i].name,
+        img: pokedexRawDate[i].img,
+        type: pokedexRawDate[i].type,
+        candy: pokedexRawDate[i].candy,
+        candy_count: +pokedexRawDate[i].candy_count,
+        egg: +pokedexRawDate[i].egg,
+        weaknesses: pokedexRawDate[i].weaknesses,
         next_evolution: [],
         prev_evolution: []
     };
-    if ('next_evolution' in pokemonRawDate[i]) {
-        for(var j=0;j<pokemonRawDate[i].next_evolution.length;j++){
-            p.next_evolution.push(+pokemonRawDate[i].next_evolution[j].num);
+    if ('next_evolution' in pokedexRawDate[i]) {
+        for(var j=0;j<pokedexRawDate[i].next_evolution.length;j++){
+            p.next_evolution.push(+pokedexRawDate[i].next_evolution[j].num);
         }
     }
-    if ('prev_evolution' in pokemonRawDate[i]) {
-        for(var j=0;j<pokemonRawDate[i].prev_evolution.length;j++){
-            p.prev_evolution.push(+pokemonRawDate[i].prev_evolution[j].num);
+    if ('prev_evolution' in pokedexRawDate[i]) {
+        for(var j=0;j<pokedexRawDate[i].prev_evolution.length;j++){
+            p.prev_evolution.push(+pokedexRawDate[i].prev_evolution[j].num);
         }
     }
-    if ('location' in pokemonRawDate[i]) {
-        p.location = pokemonRawDate[i].location;
+    if ('location' in pokedexRawDate[i]) {
+        p.location = pokedexRawDate[i].location;
     } else {
         p.location = null;
     }
-    allPokemons.push(p);
+    pokedex.push(p);
 }
 
 
-module.exports.schema = pokemonSchema;
-module.exports.allPokemons = allPokemons;
+module.exports.schema = pokedexSchema;
+module.exports.pokedex = pokedex;
