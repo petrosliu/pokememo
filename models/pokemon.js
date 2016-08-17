@@ -654,12 +654,12 @@ var pokemonRawDate = [{
 }, {
     "id": 29,
     "num": "029",
-    "name": "Nidoran ♀ (Female)",
+    "name": "Nidoran♀",
     "img": "assets/pokemons/029.png",
     "type": ["Poison"],
     "height": "0.41 m",
     "weight": "7.0 kg",
-    "candy": "Nidoran ♀ (Female) Candy",
+    "candy": "Nidoran♀ Candy",
     "candy_count": "25",
     "egg": "5",
     "multipliers": [
@@ -685,7 +685,7 @@ var pokemonRawDate = [{
     "type": ["Poison"],
     "height": "0.79 m",
     "weight": "20.0 kg",
-    "candy": "Nidoran ♀ (Female) Candy",
+    "candy": "Nidoran♀ Candy",
     "candy_count": "100",
     "egg": "0",
     "multipliers": [
@@ -698,7 +698,7 @@ var pokemonRawDate = [{
     ],
     "prev_evolution": [{
         "num": "029",
-        "name": "Nidoran(Female)"
+        "name": "Nidoran♀"
     }],
     "next_evolution": [{
         "num": "031",
@@ -712,7 +712,7 @@ var pokemonRawDate = [{
     "type": ["Poison", "Ground"],
     "height": "1.30 m",
     "weight": "60.0 kg",
-    "candy": "Nidoran ♀ (Female) Candy",
+    "candy": "Nidoran♀ Candy",
     "egg": "0",
     "multipliers": null,
     "weaknesses": [
@@ -723,7 +723,7 @@ var pokemonRawDate = [{
     ],
     "prev_evolution": [{
         "num": "029",
-        "name": "Nidoran(Female)"
+        "name": "Nidoran♀"
     }, {
         "num": "030",
         "name": "Nidorina"
@@ -731,12 +731,12 @@ var pokemonRawDate = [{
 }, {
     "id": 32,
     "num": "032",
-    "name": "Nidoran ♂ (Male)",
+    "name": "Nidoran♂",
     "img": "assets/pokemons/032.png",
     "type": ["Poison"],
     "height": "0.51 m",
     "weight": "9.0 kg",
-    "candy": "Nidoran ♂ (Male) Candy",
+    "candy": "Nidoran♂ Candy",
     "candy_count": "25",
     "egg": "5",
     "multipliers": [
@@ -762,7 +762,7 @@ var pokemonRawDate = [{
     "type": ["Poison"],
     "height": "0.89 m",
     "weight": "19.5 kg",
-    "candy": "Nidoran ♂ (Male) Candy",
+    "candy": "Nidoran♂ Candy",
     "candy_count": "100",
     "egg": "0",
     "multipliers": 1.83,
@@ -772,7 +772,7 @@ var pokemonRawDate = [{
     ],
     "prev_evolution": [{
         "num": "032",
-        "name": "Nidoran(Male)"
+        "name": "Nidoran♂"
     }],
     "next_evolution": [{
         "num": "034",
@@ -786,7 +786,7 @@ var pokemonRawDate = [{
     "type": ["Poison", "Ground"],
     "height": "1.40 m",
     "weight": "62.0 kg",
-    "candy": "Nidoran ♂ (Male) Candy",
+    "candy": "Nidoran♂ Candy",
     "egg": "0",
     "multipliers": null,
     "weaknesses": [
@@ -797,7 +797,7 @@ var pokemonRawDate = [{
     ],
     "prev_evolution": [{
         "num": "032",
-        "name": "Nidoran(Male)"
+        "name": "Nidoran♂"
     }, {
         "num": "033",
         "name": "Nidorino"
@@ -1917,7 +1917,8 @@ var pokemonRawDate = [{
     "weaknesses": [
         "Electric",
         "Rock"
-    ]
+    ],
+    "location": "Asia"
 }, {
     "id": 84,
     "num": "084",
@@ -2577,7 +2578,8 @@ var pokemonRawDate = [{
     "multipliers": null,
     "weaknesses": [
         "Fighting"
-    ]
+    ],
+    "location": "Australia"
 }, {
     "id": 116,
     "num": "116",
@@ -2719,7 +2721,8 @@ var pokemonRawDate = [{
         "Bug",
         "Ghost",
         "Dark"
-    ]
+    ],
+    "location": "Europe"
 }, {
     "id": 123,
     "num": "123",
@@ -2816,7 +2819,8 @@ var pokemonRawDate = [{
     "multipliers": null,
     "weaknesses": [
         "Fighting"
-    ]
+    ],
+    "location": "North America"
 }, {
     "id": 129,
     "num": "129",
@@ -2889,7 +2893,8 @@ var pokemonRawDate = [{
     "multipliers": null,
     "weaknesses": [
         "Fighting"
-    ]
+    ],
+    "location": "Not Available"
 }, {
     "id": 133,
     "num": "133",
@@ -3126,7 +3131,8 @@ var pokemonRawDate = [{
         "Electric",
         "Rock",
         "Steel"
-    ]
+    ],
+    "location": "Not Available"
 }, {
     "id": 145,
     "num": "145",
@@ -3141,7 +3147,8 @@ var pokemonRawDate = [{
     "weaknesses": [
         "Ice",
         "Rock"
-    ]
+    ],
+    "location": "Not Available"
 }, {
     "id": 146,
     "num": "146",
@@ -3157,7 +3164,8 @@ var pokemonRawDate = [{
         "Water",
         "Electric",
         "Rock"
-    ]
+    ],
+    "location": "Not Available"
 }, {
     "id": 147,
     "num": "147",
@@ -3242,7 +3250,8 @@ var pokemonRawDate = [{
         "Bug",
         "Ghost",
         "Dark"
-    ]
+    ],
+    "location": "Not Available"
 }, {
     "id": 151,
     "num": "151",
@@ -3258,7 +3267,8 @@ var pokemonRawDate = [{
         "Bug",
         "Ghost",
         "Dark"
-    ]
+    ],
+    "location": "Not Available"
 }];
 
 var pokemonSchema = new mongoose.Schema({
@@ -3271,11 +3281,11 @@ var pokemonSchema = new mongoose.Schema({
     egg: Number,
     multipliers: Number,
     weaknesses: [String],
-    next_evolution: [Number]
+    next_evolution: [Number],
+    prev_evolution: [Number],
+    location: String
 });
-pokemonSchema.virtual('num').get(function() {
-    return ("000" + this.id).slice(-3);
-});
+
 pokemonSchema.set('toObject', {
     virtuals: true
 });
@@ -3293,12 +3303,24 @@ for (var i = 0; i < pokemonRawDate.length; i++) {
         candy: pokemonRawDate[i].candy,
         candy_count: +pokemonRawDate[i].candy_count,
         egg: +pokemonRawDate[i].egg,
-        weaknesses: pokemonRawDate[i].weaknesses
+        weaknesses: pokemonRawDate[i].weaknesses,
+        next_evolution: [],
+        prev_evolution: []
     };
     if ('next_evolution' in pokemonRawDate[i]) {
-        p.next_evolution = +pokemonRawDate[i].next_evolution[0].num;
+        for(var j=0;j<pokemonRawDate[i].next_evolution.length;j++){
+            p.next_evolution.push(+pokemonRawDate[i].next_evolution[j].num);
+        }
+    }
+    if ('prev_evolution' in pokemonRawDate[i]) {
+        for(var j=0;j<pokemonRawDate[i].prev_evolution.length;j++){
+            p.prev_evolution.push(+pokemonRawDate[i].prev_evolution[j].num);
+        }
+    }
+    if ('location' in pokemonRawDate[i]) {
+        p.location = pokemonRawDate[i].location;
     } else {
-        p.next_evolution = 0;
+        p.location = null;
     }
     allPokemons.push(p);
 }

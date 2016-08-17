@@ -43,3 +43,24 @@ function mainController($scope, $http) {
             });
     };
 }
+
+
+
+
+
+pokememo.filter('spaceless',function() {
+    return function(input) {
+        if (input) {
+            return input.replace(/\s+/g, '-');    
+        }
+    }
+});
+
+pokememo.filter('pokeidx',function() {
+    return function(input) {
+        if (input>=0 && input<=999) {
+            return ("000" + input).slice(-3);    
+        }
+        else return ("???");
+    }
+});

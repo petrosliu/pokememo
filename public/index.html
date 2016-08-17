@@ -5,90 +5,20 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Pokememo</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
 </head>
 <!-- SET THE CONTROLLER AND GET ALL TODOS -->
 
 <body ng-controller="mainController">
     <div class="container">
-        <!-- HEADER AND TODO COUNT -->
-        <div class="jumbotron text-center">
-            <h1>I'm a Todo-aholic <span class="label label-info">{{ todos.length }}</span></h1>
-        </div>
-        <!-- TODO LIST -->
-        <div id="todo-list" class="row">
-            <div class="col-sm-4 col-sm-offset-4">
-                <!-- LOOP OVER THE TODOS IN $scope.todos -->
-                <div class="checkbox" ng-repeat="todo in todos">
-                    <label>
-                        <input type="checkbox" ng-click="deleteTodo(todo._id)"> {{ todo.text }}
-                    </label>
-                </div>
-            </div>
-        </div>
-        <!-- FORM TO CREATE TODOS -->
-        <div id="todo-form" class="row">
-            <div class="col-sm-8 col-sm-offset-2 text-center">
-                <form>
-                    <div class="form-group">
-                        <!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
-                        <input type="text" class="form-control input-lg text-center" placeholder="I want to buy a puppy that will love me forever" ng-model="formData.text">
-                    </div>
-                    <!-- createToDo() WILL CREATE NEW TODOS -->
-                    <button type="submit" class="btn btn-primary btn-lg" ng-click="createTodo()">Add</button>
-                </form>
-            </div>
-        </div>
-        <!-- TODO LIST -->
-        <div class="row">
-            <div class="col-sm-2 col-sm-offset-10">
-                <select class="form-control" ng-model="sortBy" ng-init="sortBy = 'id'">
-                    <option value="id">#</option>
-                    <option value="name">A-Z</option>
-                </select>
-            </div>
-            <div class="col-sm-12">
-                <table class="table table-striped">
-                    <tr ng-repeat="p in pokemons | orderBy:sortBy">
-                        <th>
-                            <div class="sprite">
-                                <img src="{{p.img}}" class="img-responsive unseen">
-                                <p>{{ p.num }}</p>
-                            </div>
-                        </th>
-                        <th>
-                            <div class="col-sm-12">{{ p.name }}</div>
-                            <div class="col-sm-12"><span ng-repeat="type in p.type"><span class="label label-{{type | lowercase}}">{{type}}</span> </span>
-                            </div>
-                        </th>
-                        <th>
-                            <div style="min-width:20vw;">
-                                <div ng-if="p.candy_count" class="progress">
-                                    <div class="progress-bar label-{{p.type[0] | lowercase}}" role="progressbar" style="width:{{3/p.candy_count*100}}%">
-                                    </div>
-                                    <p class="pull-right">3/{{p.candy_count}}</p>
-                                </div>
-                            </div>
-                        </th>
-                        <th>
-                            <div class="col-sm-12">
-                                <span ng-repeat="type in p.weaknesses"><span class="label label-{{type | lowercase}}">{{type}}</span> </span>
-                        </th>
-                        <th>
-                            <div ng-if="p.egg" class="egg">
-                                <img src="assets/pokemons/000.png" class="img-responsive">
-                                <p>{{ p.egg }}</p>
-                            </div>
-                            </div>
-                        </th>
-                    </tr>
-                </table>
-            </div>
-        </div>
+        
     </div>
-    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="
+        crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular.min.js"></script>
+    <script src="https://use.fontawesome.com/4d4ce8ea89.js"></script>
     <script src="core.js"></script>
 </body>
 

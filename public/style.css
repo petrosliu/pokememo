@@ -1,6 +1,22 @@
-th {
-    height: 50px;
+div.pokemon-list>div {
+    min-height:60px;
+    padding-top: 10px;
 }
+
+div.pokemon-list>div:nth-child(odd) {
+    background-color: #FAFAFA;
+}
+
+div.pokemon-list div.pokemon-name {
+    margin-top: 5px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+div.pokemon-list div.pokemon-type {
+    margin-top: 5px;
+}
+
 div.sprite {
     position: relative;
     width: 100%;
@@ -39,39 +55,28 @@ img.unseen {
     -webkit-filter: grayscale(100%);
     filter: grayscale(100%);
 }
-div.egg {
-    position: relative;
-    width: 100%;
+
+img.egg-icon {
+    height: 16px;
 }
-div.egg > img {
-    max-height: 50px;
-    max-width: 50px;
-    display: block;
-    margin: 0 auto;
-}
-div.egg > p {
-    font-size: 20px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    vertical-align: middle;
-    line-height: 50px;
-    text-align: center;
-}
+
 .label-poison {
     background-color: mediumpurple;
 }
-.label-water {
+.label-water,
+.label-europe {
     background-color: dodgerblue;
 }
-.label-normal {
+.label-normal,
+.label-not-available,
+.label-evolution {
     background-color: darkgray;
 }
 .label-flying {
     background-color: lightskyblue;
 }
-.label-grass {
+.label-grass,
+.label-australia {
     background-color: yellowgreen;
 }
 .label-ground {
@@ -80,17 +85,20 @@ div.egg > p {
 .label-psychic {
     background-color: rebeccapurple;
 }
-.label-fire {
+.label-fire,
+.label-north-america {
     background-color: firebrick;
 }
 .label-bug {
-    background-color: yellowgreen;
+    background-color: seagreen;
 }
-.label-rock {
+.label-rock,
+.label-egg {
     background-color: dimgrey;
 }
-.label-electric {
-    background-color: darkorange;
+.label-electric,
+.label-asia {
+    background-color: gold;
 }
 .label-fighting {
     background-color: darkred;
@@ -112,4 +120,8 @@ div.egg > p {
 }
 .label-dark {
     background-color: black;
+}
+
+div.pokemon-list .progress {
+    margin-top: 5px;
 }

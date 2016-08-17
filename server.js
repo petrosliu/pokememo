@@ -94,6 +94,10 @@ app.delete('/api/todos/:todo_id', function(req, res) {
 });
 
 // get the index.html
-app.get('*', function(req, res) {
-    res.sendfile('./public/index.html'); // load the single view file (angular will handle the page changes on the front-end)
+app.get('/', function(req, res) {
+    res.sendfile('./public/index.html');
+});
+
+app.get('/pokemon', function(req, res) {
+    res.sendfile('./public/pokemon.html');
 });
