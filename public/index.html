@@ -4,15 +4,18 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-signin-client_id" content="290256821913-25s9cb6a82nur79o9v8tbqqqae8220r8.apps.googleusercontent.com">
     <title>Pokememo</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
         crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/stylesheets/style.css">
     <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="
         crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-route.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-animate.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
     <script src="https://use.fontawesome.com/4d4ce8ea89.js"></script>
     <script src="app.js"></script>
 </head>
@@ -41,12 +44,9 @@
         <p>Copyright &copy; 2016 Petros Liu</p>
     </div>
     <script>
-$(document).ready(function() {
-    $('.landing-bg').css('background-image','url(' + randombgurl() + ')');
-    setTimeout(function(){
-         $('.landing-bg').css('background-image','url(' + randombgurl() + ')');
-   },60000);
-});
+    $(document).ready(function() {
+        $('.landing-bg').css('background-image','url(' + randombgurl() + ')');
+    });
 
 var randombgurl = function(){
     var bgurls = [
@@ -67,7 +67,7 @@ var randombgurl = function(){
         'details_type_bg_rock.png',
         'details_type_bg_water.png',
     ];
-    return '/assets/details_type_bg/' + bgurls[Math.floor(Math.random() * bgurls.length)];
+    return '/assets/images/details_type_bg/' + bgurls[Math.floor(Math.random() * bgurls.length)];
 };
     </script>
 </body>

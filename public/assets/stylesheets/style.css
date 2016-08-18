@@ -12,7 +12,7 @@ html {
     border: none;
 }
 div.row {
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: white;
 }
 .footer {
   padding-top: 50px;
@@ -50,20 +50,16 @@ div.pokedex-list>div {
 }
 
 div.pokedex-list>div:nth-child(odd) {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: #EEE;
 }
 div.pokedex-list>div:nth-child(even) {
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: #FFF;
 }
 
 div.pokedex-list div.pokemon-name {
     margin-top: 5px;
     font-size: 15px;
     font-weight: bold;
-}
-
-div.pokedex-list div.pokemon-type {
-    margin-top: 5px;
 }
 
 div.sprite {
@@ -75,6 +71,8 @@ div.sprite > img {
     max-width: 50px;
     display: block;
     margin: 0 auto;
+    transition-duration: 0.5s;
+    -webkit-transition-duration: 0.5s;
 }
 div.sprite > p {
     font-size: 30px;
@@ -87,26 +85,40 @@ div.sprite > p {
     text-align: center;
     opacity: 0.1;
     z-index: 0;
-    transition-delay: 0.2s;
+    transition-delay: 1s;
     transition-duration: 0.5s;
-    -webkit-transition-delay: 0.2s;
+    -webkit-transition-delay: 1s;
     -webkit-transition-duration: 0.5s;
 }
 div.sprite:hover > p {
     z-index: 1000;
-    opacity: 0.8;
+    opacity: 0.9;
 }
-img.seen {
-    -webkit-filter: grayscale(0);
-    filter: grayscale(0);
+img.seen,
+div.sprite:hover > img.unseen {
+    -webkit-filter: brightness(1);
+    filter: brightness(1);
+    -webkit-filter: contrast(1);
+    filter: contrast(1);
 }
 img.unseen {
-    -webkit-filter: grayscale(100%);
-    filter: grayscale(100%);
+    -webkit-filter: brightness(0.1);
+    filter: brightness(0.1);
+    -webkit-filter: contrast(0);
+    filter: contrast(0);
 }
 
 img.egg-icon {
     height: 16px;
+}
+img.pikachu-icon {
+    height: 12px;
+}
+img.pokeball-icon {
+    height: 12px;
+}
+img.incubator-icon {
+    height: 14px;
 }
 
 .label-poison {
@@ -117,7 +129,7 @@ img.egg-icon {
     background-color: dodgerblue;
 }
 .label-normal,
-.label-not-available,
+.label-unavailable,
 .label-evolution {
     background-color: darkgray;
 }
@@ -135,10 +147,12 @@ img.egg-icon {
     background-color: rebeccapurple;
 }
 .label-fire,
-.label-north-america {
+.label-north-america,
+.label-weaknesses {
     background-color: firebrick;
 }
-.label-bug {
+.label-bug,
+.label-strengths {
     background-color: seagreen;
 }
 .label-rock,
@@ -176,5 +190,9 @@ div.pokedex-list .progress {
     height: 16px;
     font-weight: bold;
     font-size: 75%;
-    background-color: rgba(255, 255, 255, 0.3);
+    background: none;
+}
+
+div.poketype {
+    float: left;
 }

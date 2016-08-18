@@ -1,12 +1,15 @@
 {
-    "name"         : "pokememo",
-    "version"      : "0.0.0",
-    "description"  : "Pokemon memo.",
-    "main"         : "server.js",
-    "author"       : "Yiding Liu",
-    "dependencies" :
-    {
-        "express"    : "~3.4.4",
-        "mongoose"   : "~3.8.22, 4.x"
-    }
+  "name": "pokememo",
+  "version": "0.0.0",
+  "description": "Pokemon memo.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Yiding Liu",
+  "dependencies": {
+    "express": "~3.4.4",
+    "googleapis": "~12.3.0",
+    "mongoose": "~3.8.22, 4.x"
+  }
 }

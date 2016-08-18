@@ -18,7 +18,6 @@ pokememo.config(function ($routeProvider) {
             controller: 'pokedexController'
         })
         .otherwise({ redirectTo: '/' })
-
 });
 
 
@@ -91,4 +90,3 @@ pokememo.filter('pokeidx', function () {
         else return ("???");
     }
 });
-

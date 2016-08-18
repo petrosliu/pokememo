@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 mongoose.connect('mongodb://admin:admin@ds139985.mlab.com:39985/pokememo');
 app.configure(function () {
     // set the static files location /public/img will be /img for users
-    app.use(express.static(__dirname));
+    app.use(express.static(__dirname + '/public'));
     // log every request to the console
     app.use(express.logger('dev'));
     // pull information from html in POST
