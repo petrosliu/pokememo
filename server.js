@@ -12,7 +12,7 @@ app.configure(function () {
     app.use(express.urlencoded())
     app.use(express.json())
 });
-app.listen(8080);
+app.listen(process.env.PORT || 8080);
 console.log("App listening on port 8080");
 
 // ----- define model
