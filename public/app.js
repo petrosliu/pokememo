@@ -17,17 +17,19 @@ pokememo.config(function ($routeProvider) {
             templateUrl: 'views/pokedex.html',
             controller: 'pokedexController'
         })
+        .when('/map', {
+            templateUrl: 'views/map.html',
+            controller: 'mapController'
+        })
         .otherwise({ redirectTo: '/' })
 });
 
 
 // CONTROLLERS ============================================
-// home page controller
 pokememo.controller('homeController', function ($scope) {
 
 });
 
-// about page controller
 pokememo.controller('pokedexController', function ($scope, $http) {
 
     $http.get('/api/pokedex')
@@ -40,7 +42,9 @@ pokememo.controller('pokedexController', function ($scope, $http) {
         });
 });
 
+pokememo.controller('mapController', function ($scope) {
 
+});
 
 pokememo.filter('spaceless', function () {
     return function (input) {

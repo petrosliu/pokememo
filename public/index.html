@@ -31,7 +31,8 @@
         crossorigin="anonymous"></script-->
     <script src="https://use.fontawesome.com/4d4ce8ea89.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
-
+<script src='http://maps.googleapis.com/maps/api/js?key=AIzaSyDKpjawI069owLU8QFpMeqInJAYBgtBueQ&signed_in=true&extension=.js'></script> 
+ 
     <script src="app.js"></script>
 </head>
 
@@ -43,7 +44,7 @@
                 <a href="#!" class="brand-logo center"><img class="responsive-img" src="/assets/favicons/1024.png" style="height:100px;"></a>
                 <ul class="right hide-on-med-and-down">
                     <li><a href="#pokedex">Pokedex</a></li>
-                    <li><a href="badges.html">Map</a></li>
+                    <li><a href="#map">Map</a></li>
                 </ul>
             </div>
         </nav>
@@ -51,15 +52,6 @@
     <div class="container" ng-view>
         <!-- included views -->
     </div>
-
-    <footer class="page-footer grey">
-        <div class="footer-copyright">
-            <div class="container white-text">
-                Copyright &copy; 2016 Yiding Liu
-                <a class="white-text text-lighten-4 right" href="#!">More Links</a>
-            </div>
-        </div>
-    </footer>
 <script>
     $(document).ready(function() {
         $('.landing-bg').css('background-image','url(' + randombgurl() + ')');

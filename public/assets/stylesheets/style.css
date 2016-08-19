@@ -8,14 +8,8 @@ body {
 html {
   height: 100%;
 }
-footer {
-    position: absolute;
-    margin-top: 150px;
-    width: 100%;
-    bottom: 0;
-}
 div.navbar-fixed{
-    padding-bottom: 150px;
+    margin-bottom: 150px;
 }
 
 body > div.container > div.row{
@@ -76,7 +70,7 @@ img.egg-icon {
     height: 25px;
 }
 img.egg-icon-xs {
-    height: 19px;
+    height: 18px;
 }
 img.pikachu-icon {
     height: 18px;
@@ -107,7 +101,8 @@ span.label {
     background-color: lightskyblue;
 }
 .label-grass,
-.label-australia {
+.label-australia,
+.label-strengths  {
     background-color: yellowgreen;
 }
 .label-ground {
@@ -117,12 +112,10 @@ span.label {
     background-color: rebeccapurple;
 }
 .label-fire,
-.label-north-america,
-.label-weaknesses {
+.label-north-america {
     background-color: firebrick;
 }
-.label-bug,
-.label-strengths {
+.label-bug{
     background-color: seagreen;
 }
 .label-rock,
@@ -136,9 +129,6 @@ span.label {
 .label-fighting {
     background-color: darkred;
 }
-.label-fairy {
-    background-color: hotpink;
-}
 .label-ice {
     background-color: blue;
 }
@@ -151,8 +141,9 @@ span.label {
 .label-steel {
     background-color: lightsteelblue;
 }
-.label-dark {
-    background-color: black;
+.label-weaknesses,
+label-fairy {
+    background: lightcoral;
 }
 
 div.pokemon-item .progress {
@@ -196,4 +187,9 @@ input[type=text]:focus:not([readonly]) {
 
 .btn {
     border-radius: 0;
+}
+
+img {
+  -webkit-user-drag: none;
+  user-drag: none;
 }
