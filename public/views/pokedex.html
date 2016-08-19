@@ -1,106 +1,67 @@
-<div class="jumbotron text-center">
-    <h1>I'm a Todo-aholic <span class="label label-info">{{ todos.length }}</span></h1>
-</div>
-<!-- TODO LIST -->
-<div id="todo-list" class="row">
-    <div class="col-xs-4 col-xs-offset-4">
-        <!-- LOOP OVER THE TODOS IN $scope.todos -->
-        <div class="checkbox" ng-repeat="todo in todos">
-            <label>
-                        <input type="checkbox" ng-click="deleteTodo(todo._id)"> {{ todo.text }}
-                    </label>
-        </div>
-    </div>
-</div>
-<!-- FORM TO CREATE TODOS -->
-<div id="todo-form" class="row">
-    <div class="col-xs-8 col-xs-offset-2 text-center">
-        <form>
-            <div class="form-group">
-                <!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
-                <input type="text" class="form-control input-lg text-center" placeholder="I want to buy a puppy that will love me forever"
-                    ng-model="formData.text">
-            </div>
-            <!-- createToDo() WILL CREATE NEW TODOS -->
-            <button type="submit" class="btn btn-primary btn-lg" ng-click="createTodo()">Add</button>
-        </form>
-    </div>
-</div>
-<!-- TODO LIST -->
 <div class="row">
-    <div class="col-xs-12">
-        <div class="btn-toolbar" role="toolbar">
-            <div class="btn-group">Sort: </div>
-            <div class="btn-group btn-group-xs" ng-init="sortBy = 'id'">
-                <button class="btn btn-default {{ (sortBy === 'id')? 'active':'' }}" ng-click="sortBy = 'id'">
-                    <i class="fa fa-sort-numeric-asc fa-fw" aria-hidden="true"></i>
-                </button>
-                <button class="btn btn-default {{ (sortBy === 'name')? 'active':'' }}" ng-click="sortBy = 'name'">
-                    <i class="fa fa-sort-alpha-asc fa-fw" aria-hidden="true"></i>
-                </button>
-                <button class="btn btn-default {{ (sortBy === '-egg')? 'active':'' }}" ng-click="sortBy = '-egg'">
-                    <span class="fa-fw"><img class="egg-icon" src="assets/images/pokemons/000.png"></span>
-                </button>
-            </div>
-            <div class="btn-group">Show: </div>
-            <div class="btn-group btn-group-xs">
-                <button class="btn btn-default">All</button>
-            </div>
-            <div class="btn-group btn-group-xs">
-                <button class="btn btn-default"><span class="fa-fw"><img class="pikachu-icon" src="assets/images/pokemons/025.png"></span></botton>
-                <button class="btn btn-default"><span class="fa-fw"><img class="pikachu-icon unseen" src="assets/images/pokemons/025.png"></span></button>
-            </div>
-            <div class="btn-group btn-group-xs" data-toggle="buttons">
-                <button class="btn btn-default"><span class="fa-fw"><img class="pokeball-icon" src="assets/images/items/20pokeballs.png"></span> Only</button>
-                <button class="btn btn-default"><span class="fa-fw"><img class="incubator-icon" src="assets/images/items/eggincubator.png"></span> Only</button>
-            </div>
+    <div class="input-field col s6 offset-s3 hoverable white z-depth-2">
+        <div class="input-group">
+          <input placeholder="Search" type="text" ng-model="query">
+          <div class="input-group-addon">{{(pokedex | filter:{keywords:query}).length}}</div>
         </div>
     </div>
 
+</div>
 
-
-    <div class="col-xs-12 pokedex-list">
-        <div class="col-xs-12" ng-repeat="p in pokedex | orderBy:sortBy">
-            <div class="col-xs-1">
-                <div class="sprite">
-                    <p>{{ p.id | pokeidx }}</p>
-                    <img src="{{p.img}}" class="img-responsive unseen">
+<div class="row white z-depth-2">
+    <div class="right" ng-init="sortBy = 'id'; showAll = true">
+        <label>Sort:</label>
+        <button class="btn-xs waves-effect waves-light btn btn-flat {{ (sortBy === 'id')? 'active':'' }}" ng-click="sortBy = 'id'"><i class="fa fa-sort-numeric-asc fa-fw"></i></button>
+        <button class="btn-xs waves-effect waves-light btn btn-flat {{ (sortBy === 'name')? 'active':'' }}" ng-click="sortBy = 'name'"><i class="fa fa-sort-alpha-asc fa-fw"></i></button>
+        <button class="btn-xs waves-effect waves-light btn btn-flat {{ (sortBy === '-egg')? 'active':'' }}" ng-click="sortBy = '-egg'"><span class="fa-fw"><img class="egg-icon" src="assets/images/pokemons/000.png"></span></button>
+        <label>Kind:</label>
+        <button class="btn-xs waves-effect waves-light btn btn-flat {{ (showAll === true )? 'active':''}}" ng-click="showAll = true">All</button>
+        <button class="btn-xs waves-effect waves-light btn btn-flat {{ (!showAll && hasSeen)? 'active':''}}" ng-click="hasSeen = true; showAll = false;"><span class="fa-fw"><img class="pikachu-icon" src="assets/images/pokemons/025.png"></span></button>
+        <button class="btn-xs waves-effect waves-light btn btn-flat {{ (!showAll && !hasSeen)? 'active':''}}" ng-click="hasSeen = false; showAll = false;"><span class="fa-fw"><img class="pikachu-icon unseen" src="assets/images/pokemons/025.png"></span></button>
+    </div>
+</div>
+<div class="row pokemon-item valign-wrapper grey-text white z-depth-2" ng-if="(pokedex | filter:{keywords:query}).length===0" style="height:200px;">
+    <div class="col s12">
+    <h5 class="center">No sightings yet.</h5>
+    <h5 class="center"><i class="fa fa-search"></i></h5>
+    </div>
+</div>
+<div class="row pokemon-item valign-wrapper white z-depth-2" ng-repeat="p in pokedex | filter:{keywords:query} | orderBy:sortBy track by p.id">
+    <div class="col s2 sprite">
+        <img src="{{p.img}}" class="img-responsive unseen">
+    </div>
+    <div class="col s2">
+        <div class="col s12 pokemon-name">
+            <div class="pull-left">{{ p.id | pokeidx }}</div>
+        </div>
+        <div class="col s12 pokemon-name">
+            <div class="pull-left">{{ p.name }}</div>
+        </div>
+        <div class="col s12">
+            <div class="pull-left" ng-repeat="type in p.type"><span class="label label-{{type | lowercase}}">{{type}}</span>&nbsp;</div>
+            <div class="pull-left" ng-if="p.egg"><span class="label label-egg"><img src="assets/images/pokemons/000.png" class="egg-icon-xs"> {{ p.egg }}km</span>&nbsp;</div>
+            <div class="pull-left" ng-if="p.location"><span class="label label-{{p.location | lowercase | spaceless}}"><i class="fa fa-map-marker"></i>&nbsp;{{p.location}}</span>&nbsp;</div>
+        </div>
+    </div>
+    <div class="col s8">
+        <div ng-if="p.next_evolution.length" class="col s12">
+            <div class="pull-left"><span class="label label-evolution"><i class="fa {{(p.next_evolution.length >1)?'fa-reply-all':'fa-reply' }} fa-fw fa-rotate-180"></i></span></div>
+            <div class="pull-left" ng-repeat="n in p.next_evolution">&nbsp;<span class="label label-evolution">{{n | pokeidx}}</span></div>
+        </div>
+        <div ng-if="p.strengths.length" class="col s12">
+            <div class="pull-left"><span class="label label-strengths"><i class="fa fa-reply fa-rotate-90 fa-fw"></i></span></div>
+            <div class="pull-left" ng-repeat="type in p.strengths">&nbsp;<span class="label label-{{type | lowercase}}">{{type}}</span></div>
+        </div>
+        <div ng-if="p.weaknesses.length" class="col s12">
+            <div class="pull-left"><span class="label label-weaknesses"><i class="fa fa-reply fa-rotate-270 fa-fw"></i></span></div>
+            <div class="pull-left" ng-repeat="type in p.weaknesses">&nbsp;<span class="label label-{{type | lowercase}}">{{type}}</span></div>
+        </div>
+        <div ng-if="p.prev_evolution.length" class="col s12">
+            <div class="progress progress-striped">
+                <div ng-if="p.candy_count" class="progress-bar label-{{p.type[0] | lowercase}}" role="progressbar" style="width:{{3/p.candy_count*100}}%">
                 </div>
-            </div>
-            <div class="col-xs-2">
-                <div class="col-xs-12 pokemon-name">
-                    {{ p.name }}
-                </div>
-                <div ng-if="p.next_evolution.length" class="col-xs-12">
-                    <div class="pull-left"><i class="fa {{(p.next_evolution.length >1)?'fa-reply-all':'fa-reply' }} fa-fw fa-rotate-180" aria-hidden="true"></i></div>
-                    <div class="pull-left" ng-repeat="n in p.next_evolution">&nbsp;<span class="label label-evolution">{{n | pokeidx}}</span></div>
-                </div>
-            </div>
-            <div class="col-xs-9 pokemon-type">
-                <div class="col-xs-12">
-                    <div class="pull-left" ng-repeat="type in p.type"><span class="label label-{{type | lowercase}}">{{type}}</span>&nbsp;</div>
-                    <div class="pull-left" ng-if="p.egg"><span class="label label-egg"><img src="assets/images/pokemons/000.png" class="egg-icon"> {{ p.egg }}km</span>&nbsp;</div>
-                    <div class="pull-left" ng-if="p.location"><span class="label label-{{p.location | lowercase | spaceless}}"><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;{{p.location}}</span>&nbsp;</div>
-                </div>
-                <div class="col-xs-12 pokemon-type-more">
-                    <div class="pull-left"><span class="label label-strengths"><i class="fa fa-reply fa-rotate-90 fa-fw"></i></span></div>
-                    <div class="pull-left" ng-repeat="type in p.strengths">&nbsp;<span class="label label-{{type | lowercase}}">{{type}}</span></div>
-                </div>
-                <div class="col-xs-12 pokemon-type-more">
-                    <div class="pull-left"><span class="label label-weaknesses"><i class="fa fa-reply fa-rotate-270 fa-fw"></i></span></div>
-                    <div class="pull-left" ng-repeat="type in p.weaknesses">&nbsp;<span class="label label-{{type | lowercase}}">{{type}}</span></div>
-                </div>
-                <div class="col-xs-12">
-                    <div class="progress progress-striped">
-                        <div ng-if="p.candy_count" class="progress-bar label-{{p.type[0] | lowercase}}" role="progressbar" style="width:{{3/p.candy_count*100}}%">
-                        </div>
-                        <div ng-if="p.candy_count" class="pull-right">3/{{p.candy_count}}&nbsp;</div>
-                    </div>
-                </div>
+                <div ng-if="p.candy_count" class="pull-right">3/{{p.candy_count}}&nbsp;</div>
             </div>
         </div>
-        <script>
-            $("[data-toggle=tooltip]").tooltip();
-        </script>
     </div>
 </div>

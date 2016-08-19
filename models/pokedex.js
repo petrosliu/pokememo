@@ -3328,6 +3328,11 @@ var pokedexSchema = new mongoose.Schema({
     location: String
 });
 
+pokedexSchema.virtual('keywords').get(function () {
+    var kw=[this.name,("000" + this.id).slice(-3), this.type, this.egg+'km', this.location];
+    return kw;
+});
+
 pokedexSchema.set('toObject', {
     virtuals: true
 });
@@ -3373,8 +3378,9 @@ for (var i = 0; i < pokedexRawDate.length; i++) {
     if ('location' in pokedexRawDate[i]) {
         p.location = pokedexRawDate[i].location;
     } else {
-        p.location = null;
+        p.location = 'Anywhere';
     }
+
     pokedex.push(p);
 }
 
