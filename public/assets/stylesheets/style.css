@@ -1,3 +1,6 @@
+* {
+    font-family:Arial, FontAwesome;
+}
 body {
     margin: 0;
     min-height: 100%;
@@ -15,7 +18,6 @@ div.navbar-fixed{
 body > div.container > div.row{
     padding: 10px 10px 10px 10px;
 }
-
 
 div.bg-container{
     position: fixed;
@@ -35,12 +37,33 @@ div.landing-bg{
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    -webkit-transition: background-image 20s linear;
-    transition: background-image 20s linear;
+    -webkit-transition: background-image 10s linear;
+    transition: background-image 10s linear;
     -webkit-filter: blur(3px);
     filter: blur(3px);
 }
 
+a.brand-logo:hover img {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+    transition-duration: 0.5s;
+    -webkit-transition-duration: 0.5s;
+}
+
+ul#dropdown.dropdown-content {
+    margin-top:51px;
+    background-color:#F7E58F;
+}
+ul#dropdown.dropdown-content a:hover,
+ul#dropdown.dropdown-content li:hover
+ {
+    background:#E7D57F;
+}
+ul#dropdown.dropdown-content a {
+    color: #D3C16F;
+    font-weight: bold;
+    text-align: center;
+}
 div.pokemon-item div.pokemon-name {
     margin-top: 5px;
     font-size: 15px;
@@ -70,7 +93,7 @@ img.egg-icon {
     height: 25px;
 }
 img.egg-icon-xs {
-    height: 18px;
+    height: 14px;
 }
 img.pikachu-icon {
     height: 18px;
@@ -141,8 +164,11 @@ span.label {
 .label-steel {
     background-color: lightsteelblue;
 }
+.label-dark {
+    background-color: darkgrey;
+}
 .label-weaknesses,
-label-fairy {
+.label-fairy {
     background: lightcoral;
 }
 
@@ -187,9 +213,4 @@ input[type=text]:focus:not([readonly]) {
 
 .btn {
     border-radius: 0;
-}
-
-img {
-  -webkit-user-drag: none;
-  user-drag: none;
 }

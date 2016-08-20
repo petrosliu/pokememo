@@ -3354,7 +3354,8 @@ for (var i = 0; i < pokedexRawDate.length; i++) {
         weaknesses: [],
         egg: +pokedexRawDate[i].egg,
         next_evolution: [],
-        prev_evolution: []
+        prev_evolution: [],
+        location:''
     };
 
     for (var j = 0; j < p.type.length; j++) {
@@ -3377,8 +3378,6 @@ for (var i = 0; i < pokedexRawDate.length; i++) {
     }
     if ('location' in pokedexRawDate[i]) {
         p.location = pokedexRawDate[i].location;
-    } else {
-        p.location = 'Anywhere';
     }
 
     pokedex.push(p);

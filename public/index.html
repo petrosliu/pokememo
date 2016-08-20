@@ -31,7 +31,7 @@
         crossorigin="anonymous"></script-->
     <script src="https://use.fontawesome.com/4d4ce8ea89.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
-<script src='http://maps.googleapis.com/maps/api/js?key=AIzaSyDKpjawI069owLU8QFpMeqInJAYBgtBueQ&signed_in=true&extension=.js'></script> 
+    <script src='http://maps.googleapis.com/maps/api/js?key=AIzaSyDKpjawI069owLU8QFpMeqInJAYBgtBueQ&signed_in=true&extension=.js'></script> 
  
     <script src="app.js"></script>
 </head>
@@ -40,30 +40,32 @@
     <div class="bg-container"><div class="landing-bg"></div></div>
     <div class="navbar-fixed">
         <nav>
-            <div class="nav-wrapper grey">
-                <a href="#!" class="brand-logo center"><img class="responsive-img" src="/assets/favicons/1024.png" style="height:100px;"></a>
-                <ul class="right hide-on-med-and-down">
+            <div class="nav-wrapper" style="background-color:#E7D57F;">
+                <a href="#!" class="brand-logo center dropdown-button" data-hover="true" data-activates='dropdown'><img class="responsive-img" src="/assets/favicons/1024.png" style="height:100px;"></a>
+                <ul id='dropdown' class='dropdown-content'>
                     <li><a href="#pokedex">Pokedex</a></li>
                     <li><a href="#map">Map</a></li>
                 </ul>
             </div>
         </nav>
     </div>
-    <div class="container" ng-view>
+    <div class="container" ng-view ng-Cloak>
         <!-- included views -->
     </div>
-<script>
-    $(document).ready(function() {
-        $('.landing-bg').css('background-image','url(' + randombgurl() + ')');
-        setTimeout(function() {
-            $('.landing-bg').css('background-image','url(' + randombgurl() + ')');
-        }, 60000);
-    });
 
-var randombgurl = function(){
-    var bgtypes = ['default','bug','dragon','electric','fairy','fighting','fire','flying','ghost','ground','ice','normal','poison','psychic','rock','water'];
-    return '/assets/images/details_type_bg/details_type_bg_' + bgtypes[Math.floor(Math.random() * bgtypes.length)] + '.png';
-};
+    <script>
+        $(document).ready(function() {
+            $('.landing-bg').css('background-image','url(' + randombgurl() + ')');
+            setTimeout(function() {
+                $('.landing-bg').css('background-image','url(' + randombgurl() + ')');
+            }, 60000);
+            $(".button-collapse").sideNav();
+        });
+
+        var randombgurl = function(){
+            var bgtypes = ['default','bug','dragon','electric','fairy','fighting','fire','flying','ghost','ground','ice','normal','poison','psychic','rock','water'];
+            return '/assets/images/details_type_bg/details_type_bg_' + bgtypes[Math.floor(Math.random() * bgtypes.length)] + '.png';
+        };
     </script>
 </body>
 
