@@ -63,7 +63,7 @@ pokememo.controller('mapController', function ($scope, $timeout) {
         secondChild.style.margin = '5px';
         secondChild.style.width = '18px';
         secondChild.style.height = '18px';
-        secondChild.style.backgroundImage = 'url(https://maps.gstatic.com/tactile/mylocation/mylocation-sprite-1x.png)';
+        secondChild.style.backgroundImage = 'url(/assets/images/mylocation.png)';
         secondChild.style.backgroundSize = '180px 18px';
         secondChild.style.backgroundPosition = '0px 0px';
         secondChild.style.backgroundRepeat = 'no-repeat';
@@ -102,7 +102,7 @@ pokememo.controller('mapController', function ($scope, $timeout) {
 
     $scope.mapInit = function () {
         var mapOptions = {
-            center: new google.maps.LatLng(34.008151, -118.4969643),
+            center: new google.maps.LatLng(34.009123, -118.497043),
             zoom: 14,
             zoomControl: true,
             zoomControlOptions: {
@@ -128,7 +128,14 @@ pokememo.controller('mapController', function ($scope, $timeout) {
         var myMarker = new google.maps.Marker({
             map: map,
             animation: google.maps.Animation.DROP,
-            position: map.getCenter()
+            position: map.getCenter(),
+            icon: {
+                    url: '/assets/favicons/32.png',
+                    size: new google.maps.Size(64, 76),
+                    origin: new google.maps.Point(0, 0),
+                    anchor: new google.maps.Point(16, 38),
+                    scaledSize: new google.maps.Size(32, 38)
+                }
         });
         addYourLocationButton(map, myMarker);
 
