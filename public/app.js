@@ -86,6 +86,7 @@ pokememo.controller('mapController', function ($scope, $timeout) {
                     var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
                     marker.setPosition(latlng);
                     map.setCenter(latlng);
+                    map.setZoom(17);
                     clearInterval(animationInterval);
                     $('#you_location_img').css('background-position', '-144px 0px');
                 });

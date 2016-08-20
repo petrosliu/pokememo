@@ -30,17 +30,17 @@ div.bg-container{
 }
 div.landing-bg{
     position: absolute;
-    left:-5px;
-    right:-5px;
-    top:-5px;
-    bottom:-5px;
+    left:-10px;
+    right:-10px;
+    top:-10px;
+    bottom:-10px;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
     -webkit-transition: background-image 10s linear;
     transition: background-image 10s linear;
-    -webkit-filter: blur(3px);
-    filter: blur(3px);
+    -webkit-filter: blur(5px);
+    filter: blur(5px);
 }
 
 a.brand-logo:hover img {
