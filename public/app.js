@@ -27,11 +27,11 @@ pokememo.config(function ($routeProvider) {
 
 // CONTROLLERS ============================================
 pokememo.controller('homeController', function ($scope) {
-
+    $scope.user = null;
 });
 
 pokememo.controller('pokedexController', function ($scope, $http) {
-
+    
     $http.get('/api/pokedex')
         .success(function (data) {
             $scope.pokedex = data;
@@ -39,9 +39,28 @@ pokememo.controller('pokedexController', function ($scope, $http) {
         .error(function (data) {
             console.log('Error: ' + data);
         });
+        
 });
 
 pokememo.controller('mapController', function ($scope, $timeout) {
+    var addMarker = function(map,markers,loc){
+        markers.push(new google.maps.Marker({
+            map: map,
+            animation: google.maps.Animation.DROP,
+            position: loc,
+            icon: {
+                    url: '/assets/images/map/marker.png',
+                    size: new google.maps.Size(64, 76),
+                    origin: new google.maps.Point(0, 0),
+                    anchor: new google.maps.Point(16, 38),
+                    scaledSize: new google.maps.Size(32, 38)
+                }
+        }));
+        markers[markers.length-1].addListener('click', function() {
+            map.setZoom(17);
+            map.setCenter(loc);
+        });
+    };
     var addYourLocationButton = function (map, marker) {
         var controlDiv = document.createElement('div');
 
@@ -63,7 +82,7 @@ pokememo.controller('mapController', function ($scope, $timeout) {
         secondChild.style.margin = '5px';
         secondChild.style.width = '18px';
         secondChild.style.height = '18px';
-        secondChild.style.backgroundImage = 'url(/assets/images/mylocation.png)';
+        secondChild.style.backgroundImage = 'url(/assets/images/map/currentLocationBtn.png)';
         secondChild.style.backgroundSize = '180px 18px';
         secondChild.style.backgroundPosition = '0px 0px';
         secondChild.style.backgroundRepeat = 'no-repeat';
@@ -89,6 +108,7 @@ pokememo.controller('mapController', function ($scope, $timeout) {
                     map.setZoom(17);
                     clearInterval(animationInterval);
                     $('#you_location_img').css('background-position', '-144px 0px');
+                    marker.setMap(map);
                 });
             }
             else {
@@ -126,19 +146,30 @@ pokememo.controller('mapController', function ($scope, $timeout) {
         }
         var mapElement = document.getElementById('map');
         map = new google.maps.Map(mapElement, mapOptions);
-        var myMarker = new google.maps.Marker({
-            map: map,
+var locations=[
+    [37.559233, -121.968424],
+    [37.557470, -121.968200],
+    [37.558296, -121.967140],
+    [37.557563, -121.966828]
+];
+var markers=[];
+
+for(var i=0;i<locations.length;i++){
+    addMarker(map,markers,new google.maps.LatLng(locations[i][0], locations[i][1]));
+}
+
+        var currentLoc = new google.maps.Marker({
             animation: google.maps.Animation.DROP,
             position: map.getCenter(),
             icon: {
-                    url: '/assets/favicons/32.png',
-                    size: new google.maps.Size(64, 76),
+                    url: '/assets/images/map/currentLocation.png',
+                    size: new google.maps.Size(64, 64),
                     origin: new google.maps.Point(0, 0),
-                    anchor: new google.maps.Point(16, 38),
-                    scaledSize: new google.maps.Size(32, 38)
+                    anchor: new google.maps.Point(14, 14),
+                    scaledSize: new google.maps.Size(28, 28)
                 }
         });
-        addYourLocationButton(map, myMarker);
+        addYourLocationButton(map, currentLoc);
 
     };
     $scope.render = false;

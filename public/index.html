@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>PokeMemo</title>
+    <title>PokéMemo</title>
 
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
     <link rel="icon" type="image/png" href="/assets/favicons/favicon-32x32.png" sizes="32x32">
@@ -41,10 +41,12 @@
     <div class="navbar-fixed">
         <nav>
             <div class="nav-wrapper" style="background-color:#E7D57F;">
-                <a href="#!" class="brand-logo center dropdown-button" data-hover="true" data-activates='dropdown'><img class="responsive-img" src="/assets/favicons/1024.png" style="height:100px;"></a>
+                <a class="brand-logo center dropdown-button" data-hover="true" data-activates='dropdown'><img class="responsive-img" src="/assets/favicons/1024.png" style="height:100px;"></a>
                 <ul id='dropdown' class='dropdown-content'>
-                    <li><a href="#pokedex">Pokedex</a></li>
+                    <li><a href="#!">Home</a></li>
+                    <li><a href="#pokedex">Pokédex</a></li>
                     <li><a href="#map">Map</a></li>
+                    <li><a onclick="$('.dropdown-button').dropdown('close');"><i class="fa fa-chevron-up"></i></a></li>
                 </ul>
             </div>
         </nav>

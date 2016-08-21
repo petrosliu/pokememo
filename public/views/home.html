@@ -1,5 +1,23 @@
-<div class="row" style="height: 50vh;">
-  <div class="col s12">
-      <h1 class="center">PokéMemo</h1>
+<div class="row valign-wrapper white z-depth-2">
+  <div class="col s12 center">
+    <h1>PokéMemo</h1>
   </div>
+</div>
+
+<div class="row white z-depth-2" ng-if="!user">
+  <form class="col s12 l6 offset-l3">
+    <div class="row hoverable">
+      <input id="username" placeholder="Username" type="text" class="validate center">
+    </div>
+    <div class="row hoverable">
+      <input id="password" placeholder="Password" type="password" class="validate center">
+    </div>
+    <div class="row center">
+      <button class="waves-effect waves-light btn btn-flat" type="submit">Sign up</button>
+      <button class="waves-effect waves-light btn btn-flat" type="submit">Log in</button>
+    </div>
+  </form>
+</div>
+
+<div class="row white z-depth-2" ng-if="user">
 </div>

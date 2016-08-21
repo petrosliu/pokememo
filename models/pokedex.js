@@ -1,4 +1,4 @@
-var mongoose = require('mongoose');
+var mongodb = require('./mongodb');
 
 Array.prototype.unique = function () {
     var a = this.concat();
@@ -3311,7 +3311,7 @@ var pokedexRawDate = [{
         "location": "Unavailable"
     }];
 
-var pokedexSchema = new mongoose.Schema({
+var pokedexSchema = new mongodb.mongoose.Schema({
     id: { type: Number, unique: true },
     name: String,
     img: String,
@@ -3329,7 +3329,7 @@ var pokedexSchema = new mongoose.Schema({
 });
 
 pokedexSchema.virtual('keywords').get(function () {
-    var kw=[this.name,("000" + this.id).slice(-3), this.type, this.egg+'km', this.location];
+    var kw = [this.name, ("000" + this.id).slice(-3), this.type, this.egg + 'km', this.location];
     return kw;
 });
 
@@ -3355,7 +3355,7 @@ for (var i = 0; i < pokedexRawDate.length; i++) {
         egg: +pokedexRawDate[i].egg,
         next_evolution: [],
         prev_evolution: [],
-        location:''
+        location: ''
     };
 
     for (var j = 0; j < p.type.length; j++) {
@@ -3383,5 +3383,32 @@ for (var i = 0; i < pokedexRawDate.length; i++) {
     pokedex.push(p);
 }
 
-module.exports.schema = pokedexSchema;
-module.exports.pokedex = pokedex;
+var PokedexDB = mongodb.mongoose.model('Pokedex', pokedexSchema);
+PokedexDB.collection.remove({});
+PokedexDB.create(pokedex, function (err) {
+    if (err) {
+        console.log(err);
+    } else {
+        PokedexDB.count({}, function (err, count) {
+            if (err) console.log(err);
+            console.log('%d pokemons were successfully loaded in Pokedex.', count);
+        });
+    }
+});
+
+var getPokemon = function (id, callback) {
+    PokedexDB.findOne({ 'id': id }, function (err, pokemon) {
+        if (err) callback(err);
+        else callback(null, pokemon);
+    });
+};
+
+var getAllPokemons = function (callback) {
+    PokedexDB.find(function (err, pokemon) {
+        if (err) callback(err);
+        else callback(null, pokemon);
+    });
+};
+
+module.exports.get = getPokemon;
+module.exports.getAll = getAllPokemons;

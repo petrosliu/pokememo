@@ -12,7 +12,7 @@ html {
   height: 100%;
 }
 div.navbar-fixed{
-    margin-bottom: 150px;
+    margin-bottom: 120px;
 }
 
 body > div.container > div.row{
@@ -196,13 +196,13 @@ div.pokemon-item .progress {
   border-radius: 3px;
   min-width: 40px;
 }
-input[type=text] {
-    margin: 0 0 0 0;
-    border: none;
+input {
+    margin: 0 0 0 0 !important;
+    border: none !important;
 }
-input[type=text]:focus:not([readonly]) {
-    border-bottom: none;
-    box-shadow: none;
+input:focus {
+    border-bottom: none !important;
+    box-shadow: none !important;
 }
 
 .input-group-addon {
@@ -214,3 +214,40 @@ input[type=text]:focus:not([readonly]) {
 .btn {
     border-radius: 0;
 }
+
+#map {
+        position: absolute;
+        top: 56px;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+    }
+    
+    @media only screen and (min-width: 601px) {
+        #map {
+            top: 64px;
+        }
+    }
+    
+    .loading-icon {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+    }
+    
+    .gm-style-iw * {
+        display: block;
+        width: 100%;
+    }
+    
+    .gm-style-iw h4,
+    .gm-style-iw p {
+        margin: 0;
+        padding: 0;
+    }
+    
+    .gm-style-iw a {
+        color: #4272db;
+    }

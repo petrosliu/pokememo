@@ -11,30 +11,8 @@
     </div>
 
     <div class="input-group col s6 right hoverable">
-        <input placeholder="&#xf002; Search" type="text" ng-model="query" style="font-family:Arial, FontAwesome">
+        <input id="search-input" placeholder="&#xf002; Search" type="text" ng-model="query" style="font-family:Arial, FontAwesome">
         <div class="input-group-addon">{{(pokedex | filter:{keywords:query}).length}}</div>
-    </div>
-</div>
-
-<div class="row pokemon-item valign-wrapper white z-depth-2 ng-scope" style="">
-    <div class="col s2 sprite">
-        <img src="assets/images/pokemons/001.png" class="img-responsive unseen">
-    </div>
-    <div class="col s2">
-        <div class="col s12 pokemon-name">
-            <div class="ng-binding">Testasaur</div>
-        </div>
-        <div class="col s12">
-            <div class="pull-left"><span class="label label-evolution ng-binding">-1</span>&nbsp;</div>
-            <div class="pull-left ng-scope"><span class="label label-grass">Grass</span>&nbsp;</div><div class="pull-left ng-scope"><span class="label label-poison">Poison</span>&nbsp;</div>
-            <div class="pull-left ng-scope"><span class="label label-egg ng-binding"><img src="assets/images/pokemons/000.png" class="egg-icon-xs">2km</span>&nbsp;</div>
-        </div>
-    </div>
-    <div class="col s8">
-        <div class="col s12 ng-scope">
-            <div class="pull-left"><span class="label label-evolution"><i class="fa fa-reply-all fa-fw fa-rotate-180" aria-hidden="true"></i></span></div>
-            <div class="pull-left ng-scope">&nbsp;<span class="label label-evolution ng-binding">-2</span></div><div class="pull-left ng-scope">&nbsp;<span class="label label-evolution ng-binding">-3</span></div>
-        </div>
     </div>
 </div>
 
