@@ -41,7 +41,6 @@ _site/
 *.swp
 logs/
 build/
-public/assets/images/
 
 # Sublime editor
 # ==============
