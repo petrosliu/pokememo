@@ -35,22 +35,21 @@ app.get('/api/pokedex/:id', function (req, res) {
     });
 });
 
-app.post('/login', function(req, res) {
-  User.findOne({
-    username: req.body.username
-  }, function(err, user) {
+app.post('/api/login', function(req, res) {
+  User.get(req.body.username, function(err, user) {
     if (err) res.send(err);
-    if (!user) {
+    else if (!user) {
       res.json({ success: false, message: 'Authentication failed. User not found.' });
     } else if (user) {
 
       if (!user.validPassword(req.body.password)) {
         res.json({ success: false, message: 'Authentication failed. Wrong password.' });
-      } else {
+      }
+      else {
         var token = user.generateJwt();
         res.json({
           success: true,
-          message: 'Enjoy your token!',
+          message: 'Token generated.',
           token: token
         });
       }
@@ -58,6 +57,21 @@ app.post('/login', function(req, res) {
   });
 });
 
+app.post('/api/signup',function(req, res){
+  User.get(req.body.username, function(err, user) {
+    if (err) res.send(err);
+    else if (user) res.json({success: false,message: 'Username has already been taken.'});
+    else {
+      User.set(req.body.username,req.body.password,function(err){
+        if(err) res.send(err);
+        else res.json({
+          success: true,
+          message: 'Username signed up successfully.'
+        });
+      });
+    }
+  });
+});
 
 // get the index.html
 app.get('/', function (req, res) {

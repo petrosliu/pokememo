@@ -26,12 +26,25 @@ pokememo.config(function ($routeProvider) {
 
 
 // CONTROLLERS ============================================
-pokememo.controller('homeController', function ($scope) {
+pokememo.controller('homeController', function ($scope, $http) {
+    $scope.form = {};
     $scope.login = function(){
-
+        $http.post('/api/login',$scope.form)
+            .success(function(data){
+                console.log(data);
+            })
+            .error(function (data) {
+                console.log('Error: ' + data);
+            });
     };
     $scope.signup = function(){
-
+        $http.post('/api/signup', $scope.form)
+            .success(function (data) {
+                console.log(data);
+            })
+            .error(function (data) {
+                console.log('Error: ' + data);
+            });
     };
 });
 
