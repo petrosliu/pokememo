@@ -1,9 +1,12 @@
-var mongodb = require('./mongodb');
-var userSchema = new mongodb.mongoose.Schema({
-    username: { type: String, unique: true },
-    password: String,
-    createAt: {type: Date, default: Date.now()},
-    lastLogInAt: {type: Date, default: Date.now()}
+var mongoose = require('./mongodb');
+var crypto = require('crypto');
+var jwt = require('jsonwebtoken');
+require('dotenv').config();
+
+var userSchema = new mongoose.Schema({
+  username: {type: String, unique: true, required: true},
+  hash: String,
+  salt: String
 });
 
 userSchema.set('toObject', {
@@ -13,33 +16,23 @@ userSchema.set('toJSON', {
     virtuals: true
 });
 
-var UserDB = mongodb.mongoose.model('User', userSchema);
-
-var saveUser = function (username, password, callback) {
-    var newUser = new UserDB({'username': username,'password': password});
-    newUser.save(
-        function (err) {
-            if (err) callback(err);
-            else callback(null);
-        }
-    );
+userSchema.methods.setPassword =function(password) {
+    this.salt = crypto.randomBytes(16).toString('hex');
+    this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64).toString('hex');
 };
 
-var removeUser = function (username, callback) {
-    UserDB.remove({'username': username},callback);
-}
+userSchema.methods.validPassword = function(password) {
+    return this.hash === crypto.pbkdf2Sync(password, this.salt, 1000, 64).toString('hex');
+};
 
-var getUser = function (username, callback) {
-    UserDB.findOne({ 'username': username },function (err, user) {
-        if (err) callback(err);
-        else {
-            user.lastLogInAt=Date.now();
-            user.save();
-            callback(err, user);
-        }
-    });
-}
+userSchema.methods.generateJwt = function() {
+    var expiry = new Date();
+    expiry.setDate(expiry.getDate() + 7);
+    return jwt.sign({
+        _id: this._id,
+        username: this.username,
+        exp: parseInt(expiry.getTime() / 1000),
+    }, process.env.JWT_SECRET);
+};
 
-module.exports.save = saveUser;
-module.exports.get = getUser;
-module.exports.remove = removeUser;
+var UserDB = mongoose.model('User', userSchema);

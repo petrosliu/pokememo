@@ -7,14 +7,14 @@
 <div class="row white z-depth-2" ng-if="!user">
   <form class="col s12 l6 offset-l3">
     <div class="row hoverable">
-      <input id="username" placeholder="Username" type="text" class="validate center">
+      <input id="username" placeholder="Username" type="text" class="validate center" ng-model="form.username">
     </div>
     <div class="row hoverable">
-      <input id="password" placeholder="Password" type="password" class="validate center">
+      <input id="password" placeholder="Password" type="password" class="validate center" ng-model="form.password">
     </div>
     <div class="row center">
-      <button class="waves-effect waves-light btn btn-flat" type="submit">Sign up</button>
-      <button class="waves-effect waves-light btn btn-flat" type="submit">Log in</button>
+      <button class="waves-effect waves-light btn btn-flat" type="submit" ng-click="signup()">Sign up</button>
+      <button class="waves-effect waves-light btn btn-flat" type="submit" ng-click="login()">Log in</button>
     </div>
   </form>
 </div>

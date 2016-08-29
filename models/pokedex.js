@@ -1,4 +1,4 @@
-var mongodb = require('./mongodb');
+var mongoose = require('./mongodb');
 
 Array.prototype.unique = function () {
     var a = this.concat();
@@ -3311,7 +3311,7 @@ var pokedexRawDate = [{
         "location": "Unavailable"
     }];
 
-var pokedexSchema = new mongodb.mongoose.Schema({
+var pokedexSchema = new mongoose.Schema({
     id: { type: Number, unique: true },
     name: String,
     img: String,
@@ -3383,7 +3383,7 @@ for (var i = 0; i < pokedexRawDate.length; i++) {
     pokedex.push(p);
 }
 
-var PokedexDB = mongodb.mongoose.model('Pokedex', pokedexSchema);
+var PokedexDB = mongoose.model('Pokedex', pokedexSchema);
 PokedexDB.collection.remove({});
 PokedexDB.create(pokedex, function (err) {
     if (err) {

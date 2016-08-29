@@ -21,13 +21,18 @@ pokememo.config(function ($routeProvider) {
             templateUrl: 'views/map.html',
             controller: 'mapController'
         })
-        .otherwise({ redirectTo: '/' })
+        .otherwise({ redirectTo: '/' });
 });
 
 
 // CONTROLLERS ============================================
 pokememo.controller('homeController', function ($scope) {
-    $scope.user = null;
+    $scope.login = function(){
+
+    };
+    $scope.signup = function(){
+
+    };
 });
 
 pokememo.controller('pokedexController', function ($scope, $http) {
