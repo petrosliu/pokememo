@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+var config = require('./config.js');
 
 app.configure(function () {
     // set the static files location /public/img will be /img for users
@@ -11,9 +12,8 @@ app.configure(function () {
     app.use(express.json());
 });
 
-require('dotenv').config();
-app.listen(process.env.PORT || 8080);
-console.log("App listening on port %d", process.env.PORT || 8080);
+app.listen(config.PORT || 8080);
+console.log("App listening on port %d", config.PORT || 8080);
 
 // ----- include models
 

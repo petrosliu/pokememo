@@ -1,7 +1,7 @@
 var mongoose = require('./mongodb');
 var crypto = require('crypto');
 var jwt = require('jsonwebtoken');
-require('dotenv').config();
+var config = require('../config.js');
 
 var userSchema = new mongoose.Schema({
   username: {type: String, unique: true, required: true},
@@ -32,7 +32,7 @@ userSchema.methods.generateJwt = function() {
         _id: this._id,
         username: this.username,
         exp: parseInt(expiry.getTime() / 1000),
-    }, process.env.JWT_SECRET);
+    }, config.JWT_SECRET);
 };
 
 

@@ -4,11 +4,10 @@
   "description": "Pokemon memo.",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "NODE_ENV=production node server.js"
   },
   "author": "Yiding Liu",
   "dependencies": {
-    "dotenv": "^2.0.0",
     "express": "~3.4.4",
     "jsonwebtoken": "^7.1.9",
     "mongoose": "~3.8.22, 4.x"
