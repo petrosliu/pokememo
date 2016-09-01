@@ -12,13 +12,13 @@
 
     <div class="input-group col s6 right hoverable">
         <input id="search-input" placeholder="&#xf002; Search" type="text" ng-model="query" style="font-family:Arial, FontAwesome">
-        <div class="input-group-addon">{{(pokedex | filter:{keywords:query}).length}}</div>
+        <div class="input-group-addon">{{(pokemon | filter:{keywords:query}).length}}</div>
     </div>
 </div>
 
-<div class="row pokemon-item valign-wrapper white z-depth-2" ng-repeat="p in pokedex | filter:{keywords:query} | orderBy:sortBy track by p.id">
+<div class="row pokemon-item valign-wrapper white z-depth-2" ng-repeat="p in pokemon | filter:{keywords:query} | orderBy:sortBy track by p.id">
     <div class="col s2 sprite">
-        <img src="{{p.img}}" class="img-responsive unseen">
+        <img src="{{p.img}}" class="img-responsive {{(pokedex[p.name])?'seen':'unseen'}}" ng-click="(pokedex[p.name])?deregister(p.id):register(p.id);">
     </div>
     <div class="col s2">
         <div class="col s12 pokemon-name">
@@ -44,16 +44,17 @@
             <div class="pull-left"><span class="label label-weaknesses"><i class="fa fa-reply-all fa-rotate-270 fa-fw"></i></span></div>
             <div class="pull-left" ng-repeat="type in p.weaknesses">&nbsp;<span class="label label-{{type | lowercase}}">{{type}}</span></div>
         </div>
-        <div ng-if="p.prev_evolution.length" class="col s12">
+        <div class="col s12">
             <div class="progress progress-striped">
-                <div ng-if="p.candy_count" class="progress-bar label-{{p.type[0] | lowercase}}" role="progressbar" style="width:{{3/p.candy_count*100}}%">
-                </div>
-                <div ng-if="p.candy_count" class="pull-right">3/{{p.candy_count}}&nbsp;</div>
+                <div ng-if="pokedex[p.candy]!==undefined && p.candy_count" class="progress-bar label-{{p.type[0] | lowercase}}" role="progressbar" style="width:{{pokedex[p.candy]/p.candy_count*100}}%"></div>
+                <div ng-if="pokedex[p.candy]!==undefined && p.candy_count" class="pull-right">{{pokedex[p.candy]}}/{{p.candy_count}}&nbsp;</div>
+                <div ng-if="pokedex[p.candy]!==undefined && !p.candy_count" class="progress-bar label-{{p.type[0] | lowercase}}" role="progressbar" style="width:{{pokedex[p.candy]?100:0}}%"></div>
+                <div ng-if="pokedex[p.candy]!==undefined && !p.candy_count" class="pull-right">{{pokedex[p.candy]}}&nbsp;</div>
             </div>
         </div>
     </div>
 </div>
-<div class="row pokemon-item valign-wrapper grey-text white z-depth-2" ng-if="(pokedex | filter:{keywords:query}).length===0" style="height:200px;">
+<div class="row pokemon-item valign-wrapper grey-text white z-depth-2" ng-if="(pokemon | filter:{keywords:query}).length===0" style="height:200px;">
     <div class="col s12">
     <h5 class="center">No sightings yet.</h5>
     <h5 class="center"><i class="fa fa-search"></i></h5>

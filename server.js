@@ -3,13 +3,13 @@ var app = express();
 var config = require('./config.js');
 
 app.configure(function () {
-    // set the static files location /public/img will be /img for users
-    app.use(express.static(__dirname + '/public'));
-    // log every request to the console
-    app.use(express.logger('dev'));
-    // pull information from html in POST
-    app.use(express.urlencoded());
-    app.use(express.json());
+  // set the static files location /public/img will be /img for users
+  app.use(express.static(__dirname + '/public'));
+  // log every request to the console
+  app.use(express.logger('dev'));
+  // pull information from html in POST
+  app.use(express.urlencoded());
+  app.use(express.json());
 });
 
 app.listen(config.PORT || 8080);
@@ -17,26 +17,27 @@ console.log("App listening on port %d", config.PORT || 8080);
 
 // ----- include models
 
-var Pokedex = require('./models/pokedex');
+var Pokemon = require('./models/pokemon');
 var User = require('./models/user');
+var Pokedex = require('./models/pokedex');
 
 // ----- define routes
-app.get('/api/pokedex', function (req, res) {
-    Pokedex.getAll(function (err, pokemons) {
-        if (err) {res.send(err);}
-        else res.json(pokemons);
-    });
+app.get('/api/pokemons', function (req, res) {
+  Pokemon.getAll(function (err, pokemons) {
+    if (err) { res.send(err); }
+    else res.json(pokemons);
+  });
 });
 
-app.get('/api/pokedex/:id', function (req, res) {
-    Pokedex.get(req.params.id,function (err, pokemon) {
-        if (err) {res.send(err);}
-        else res.json(pokemon);
-    });
+app.get('/api/pokemons/:id', function (req, res) {
+  Pokemon.get(req.params.id, function (err, pokemon) {
+    if (err) { res.send(err); }
+    else res.json(pokemon);
+  });
 });
 
-app.post('/api/login', function(req, res) {
-  User.get(req.body.username, function(err, user) {
+app.post('/api/users/login', function (req, res) {
+  User.get(req.body.username, function (err, user) {
     if (err) res.send(err);
     else if (!user) {
       res.json({ success: false, message: 'Authentication failed. User not found.' });
@@ -57,13 +58,13 @@ app.post('/api/login', function(req, res) {
   });
 });
 
-app.post('/api/signup',function(req, res){
-  User.get(req.body.username, function(err, user) {
+app.post('/api/users/signup', function (req, res) {
+  User.get(req.body.username, function (err, user) {
     if (err) res.send(err);
-    else if (user) res.json({success: false,message: 'Username has already been taken.'});
+    else if (user) res.json({ success: false, message: 'Username has already been taken.' });
     else {
-      User.set(req.body.username,req.body.password,function(err){
-        if(err) res.send(err);
+      User.set(req.body.username, req.body.password, function (err) {
+        if (err) res.send(err);
         else res.json({
           success: true,
           message: 'Username signed up successfully.'
@@ -73,10 +74,114 @@ app.post('/api/signup',function(req, res){
   });
 });
 
+app.get('/api/users', function (req, res) {
+  var token = req.body.token || req.query.token || req.headers['x-access-token'];
+  if (token) {
+    User.auth(token, function (err, user) {
+      if (err) res.send(err);
+      else if (!user) {
+        res.json({
+          success: false,
+          message: 'User not found.'
+        });
+      }
+      else {
+        res.json({
+          success: true,
+          message: 'Token verified.',
+          user: user
+        });
+      }
+    });
+  } else {
+    return res.status(403).send({
+      success: false,
+      message: 'No token provided.'
+    });
+  }
+});
+
+app.get('/api/pokedex', function (req, res) {
+  var token = req.body.token || req.query.token || req.headers['x-access-token'];
+  if (token) {
+    User.auth(token, function (err, user) {
+      if (err) res.send(err);
+      else {
+        Pokedex.get(user, function (err, pokedex) {
+          if (err) res.send(err);
+          else res.json(pokedex);
+        });
+      }
+    });
+  } else {
+    return res.status(403).send({
+      success: false,
+      message: 'No token provided.'
+    });
+  }
+});
+
+app.post('/api/pokedex', function (req, res) {
+  var token = req.body.token || req.query.token || req.headers['x-access-token'];
+  if (token) {
+    User.auth(token, function (err, user) {
+      if (err) res.send(err);
+      else {
+        Pokemon.get(req.body.pokemon, function (err, pokemon) {
+          if (err) { res.send(err); }
+          else {
+            Pokedex.register(user, pokemon, function (err) {
+              if (err) res.send(err);
+              else res.json({
+                success: true,
+                message: 'Registered.'
+              });
+            });
+          }
+        });
+      }
+    });
+  } else {
+    return res.status(403).send({
+      success: false,
+      message: 'No token provided.'
+    });
+  }
+});
+
+
+app.delete('/api/pokedex/:id', function (req, res) {
+  var token = req.body.token || req.query.token || req.headers['x-access-token'];
+  if (token) {
+    User.auth(token, function (err, user) {
+      if (err) res.send(err);
+      else {
+        Pokemon.get(req.params.id, function (err, pokemon) {
+          if (err) { res.send(err); }
+          else {
+            Pokedex.deregister(user, pokemon, function (err) {
+              if (err) res.send(err);
+              else res.json({
+                success: true,
+                message: 'Deregistered.'
+              });
+            });
+          }
+        });
+      }
+    });
+  } else {
+    return res.status(403).send({
+      success: false,
+      message: 'No token provided.'
+    });
+  }
+});
+
 // get the index.html
 app.get('/', function (req, res) {
-    res.sendfile('index.html');
+  res.sendfile('index.html');
 });
 app.get('*', function (req, res) {
-    res.redirect('/');
+  res.redirect('/');
 });

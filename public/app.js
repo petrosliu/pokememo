@@ -26,21 +26,23 @@ pokememo.config(function ($routeProvider) {
 
 
 // CONTROLLERS ============================================
-pokememo.controller('homeController', function ($scope, $http) {
+pokememo.controller('homeController', function ($scope, $http, $window) {
     $scope.form = {};
-    $scope.login = function(){
-        $http.post('/api/login',$scope.form)
-            .success(function(data){
-                console.log(data);
+    $scope.login = function () {
+        $http.post('/api/users/login', $scope.form)
+            .success(function (data) {
+                $window.localStorage['token'] = data.token;
+                $scope.form = {};
             })
             .error(function (data) {
                 console.log('Error: ' + data);
             });
     };
-    $scope.signup = function(){
-        $http.post('/api/signup', $scope.form)
+    $scope.signup = function () {
+        $http.post('/api/users/signup', $scope.form)
             .success(function (data) {
                 console.log(data);
+                $scope.form = {};
             })
             .error(function (data) {
                 console.log('Error: ' + data);
@@ -48,33 +50,81 @@ pokememo.controller('homeController', function ($scope, $http) {
     };
 });
 
-pokememo.controller('pokedexController', function ($scope, $http) {
+pokememo.controller('pokedexController', function ($scope, $http, $window) {
+    $scope.getPokedex =function(){
+        $scope.pokedex = {};
+        if ($window.localStorage['token']) {
+            $http.get('/api/pokedex', {
+                params: { token: $window.localStorage['token'] }
+            })
+                .success(function (data) {
+                    $scope.pokedex = {};
+                    for(var i=0;i<data.length;i++){
+                        $scope.pokedex[data[i].pokemon]=true;
+                        $scope.pokedex[data[i].candy]=data[i].candy_amount;
+                    }
+                    $scope.getPokemon();
+                })
+                .error(function (data) {
+                    console.log('Error: ' + data);
+                });
+        }
+        else $scope.getPokemon();
+    };
+
+    $scope.getPokemon = function(){
+        $http.get('/api/pokemons')
+            .success(function (data) {
+                $scope.pokemon = data;
+                for(var i=0;i<$scope.pokemon.length;i++){
+                    $scope.pokemon[i].registered = ($scope.pokedex[$scope.pokemon[i].name] === true);
+                    if($scope.pokemon[i].registered) $scope.pokemon[i].keywords.push('catched');
+                    else $scope.pokemon[i].keywords.push('unseen');
+                    $scope.pokemon[i].candy_amount = $scope.pokedex[$scope.pokemon[i].candy] || 0;
+                }
+            })
+            .error(function (data) {
+                console.log('Error: ' + data);
+            });
+    };
     
-    $http.get('/api/pokedex')
-        .success(function (data) {
-            $scope.pokedex = data;
-        })
-        .error(function (data) {
-            console.log('Error: ' + data);
-        });
-        
+    $scope.register = function(pokemon){
+        $http.post('/api/pokedex',{pokemon:pokemon,token:$window.localStorage['token']})
+            .success(function (data) {
+                $scope.getPokedex();
+            })
+            .error(function (data) {
+                console.log('Error: ' + data);
+            });
+    };
+    $scope.deregister = function(pokemon){
+        $http.delete('/api/pokedex/'+pokemon,{params: {token:$window.localStorage['token']}})
+            .success(function (data) {
+                $scope.getPokedex();
+            })
+            .error(function (data) {
+                console.log('Error: ' + data);
+            });
+    };
+    $scope.getPokedex();
+    
 });
 
 pokememo.controller('mapController', function ($scope, $timeout) {
-    var addMarker = function(map,markers,loc){
+    var addMarker = function (map, markers, loc) {
         markers.push(new google.maps.Marker({
             map: map,
             animation: google.maps.Animation.DROP,
             position: loc,
             icon: {
-                    url: '/assets/images/map/marker.png',
-                    size: new google.maps.Size(64, 76),
-                    origin: new google.maps.Point(0, 0),
-                    anchor: new google.maps.Point(16, 38),
-                    scaledSize: new google.maps.Size(32, 38)
-                }
+                url: '/assets/images/map/marker.png',
+                size: new google.maps.Size(64, 76),
+                origin: new google.maps.Point(0, 0),
+                anchor: new google.maps.Point(16, 38),
+                scaledSize: new google.maps.Size(32, 38)
+            }
         }));
-        markers[markers.length-1].addListener('click', function() {
+        markers[markers.length - 1].addListener('click', function () {
             map.setZoom(17);
             map.setCenter(loc);
         });
@@ -164,28 +214,28 @@ pokememo.controller('mapController', function ($scope, $timeout) {
         }
         var mapElement = document.getElementById('map');
         map = new google.maps.Map(mapElement, mapOptions);
-var locations=[
-    [37.559233, -121.968424],
-    [37.557470, -121.968200],
-    [37.558296, -121.967140],
-    [37.557563, -121.966828]
-];
-var markers=[];
+        var locations = [
+            [37.559233, -121.968424],
+            [37.557470, -121.968200],
+            [37.558296, -121.967140],
+            [37.557563, -121.966828]
+        ];
+        var markers = [];
 
-for(var i=0;i<locations.length;i++){
-    addMarker(map,markers,new google.maps.LatLng(locations[i][0], locations[i][1]));
-}
+        for (var i = 0; i < locations.length; i++) {
+            addMarker(map, markers, new google.maps.LatLng(locations[i][0], locations[i][1]));
+        }
 
         var currentLoc = new google.maps.Marker({
             animation: google.maps.Animation.DROP,
             position: map.getCenter(),
             icon: {
-                    url: '/assets/images/map/currentLocation.png',
-                    size: new google.maps.Size(64, 64),
-                    origin: new google.maps.Point(0, 0),
-                    anchor: new google.maps.Point(14, 14),
-                    scaledSize: new google.maps.Size(28, 28)
-                }
+                url: '/assets/images/map/currentLocation.png',
+                size: new google.maps.Size(64, 64),
+                origin: new google.maps.Point(0, 0),
+                anchor: new google.maps.Point(14, 14),
+                scaledSize: new google.maps.Size(28, 28)
+            }
         });
         addYourLocationButton(map, currentLoc);
 

@@ -35,24 +35,32 @@ userSchema.methods.generateJwt = function() {
     }, config.JWT_SECRET);
 };
 
-
-
 var UserDB = mongoose.model('User', userSchema);
 
 var getUser = function(username,callback){
-    UserDB.findOne({ 'username' : username }, function (err, user){
+    UserDB.findOne({ username : username }, function (err, user){
         if(err) callback(err);
-        else callback(err,user);
+        else{
+            callback(err,user);
+        }
     });
 };
 
 var setUser = function(username, password, callback){
-    var user = new UserDB({'username': username});
+    var user = new UserDB({ username : username});
     user.setPassword(password);
     user.save(function(err){
         callback(err);
     });
 };
 
+var authUser = function(token, callback){
+    jwt.verify(token, config.JWT_SECRET, function(err, data) {      
+        if (err) return callback(err);    
+        else return getUser(data.username, callback);
+    });
+}
+
 module.exports.get = getUser;
 module.exports.set = setUser;
+module.exports.auth = authUser;

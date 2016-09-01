@@ -75,18 +75,17 @@ div.sprite > img {
     max-width: 120px;
     display: block;
     margin: 0 auto;
-    transition-duration: 0.5s;
-    -webkit-transition-duration: 0.5s;
 }
 
 img.seen {
     -webkit-filter: contrast(1);
     filter: contrast(1);
+    opacity: 1;
 }
 img.unseen {
     -webkit-filter: contrast(0);
     filter: contrast(0);
-    opacity: 0.5
+    opacity: 0.5;
 }
 
 img.egg-icon {

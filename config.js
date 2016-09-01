@@ -3,7 +3,7 @@ var config = function(){
     else{
         return {
             PORT: "8080",
-            MONGO_DB: "mongodb://admin:admin@ds139985.mlab.com:39985/pokememo",
+            MONGO_DB: "mongodb://admin:password@ds139985.mlab.com:39985/pokememo",
             JWT_SECRET: "Kimi ni Kimeta!"
         };
     }
