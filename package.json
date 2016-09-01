@@ -4,7 +4,7 @@
   "description": "Pokemon memo.",
   "main": "server.js",
   "scripts": {
-    "start": "NODE_ENV=production node server.js"
+    "start": "node server.js"
   },
   "author": "Yiding Liu",
   "dependencies": {
