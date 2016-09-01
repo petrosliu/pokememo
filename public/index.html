@@ -31,14 +31,16 @@
         crossorigin="anonymous"></script-->
     <script src="https://use.fontawesome.com/4d4ce8ea89.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
-    <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDKpjawI069owLU8QFpMeqInJAYBgtBueQ&signed_in=true&extension=.js'></script> 
+    <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDKpjawI069owLU8QFpMeqInJAYBgtBueQ&signed_in=true&extension=.js'></script>
     <script src="app.js"></script>
-    
+
     <base href="/">
 </head>
 
 <body>
-    <div class="bg-container"><div class="landing-bg"></div></div>
+    <div class="bg-container">
+        <div class="landing-bg"></div>
+    </div>
     <div class="navbar-fixed">
         <nav>
             <div class="nav-wrapper" style="background-color:#E7D57F;">
@@ -61,7 +63,7 @@
             $('.landing-bg').css('background-image','url(' + randombgurl() + ')');
             setTimeout(function() {
                 $('.landing-bg').css('background-image','url(' + randombgurl() + ')');
-            }, 60000);
+            }, 30000);
             $(".button-collapse").sideNav();
         });
 

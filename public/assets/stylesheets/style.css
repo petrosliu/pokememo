@@ -37,8 +37,8 @@ div.landing-bg{
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    -webkit-transition: background-image 10s linear;
-    transition: background-image 10s linear;
+    -webkit-transition: background-image 10s linear 5s;
+    transition: background-image 10s linear 5s;
     -webkit-filter: blur(5px);
     filter: blur(5px);
 }
@@ -75,6 +75,9 @@ div.sprite > img {
     max-width: 120px;
     display: block;
     margin: 0 auto;
+    cursor: pointer;
+    transition-duration: 1s;
+    -webkit-transition-duration: 1s;
 }
 
 img.seen {
@@ -107,67 +110,103 @@ img.incubator-icon {
 span.label {
     border-radius: 10px;
 }
-.label-poison {
+.label-poison,
+input.label-poison::-webkit-slider-thumb,
+input.label-poison +.thumb {
     background-color: mediumpurple;
 }
 .label-water,
-.label-europe {
+.label-europe,
+input.label-water::-webkit-slider-thumb,
+input.label-water +.thumb {
     background-color: dodgerblue;
 }
 .label-normal,
 .label-unavailable,
-.label-evolution {
+.label-evolution,
+input.label-normal::-webkit-slider-thumb,
+input.label-normal +.thumb {
     background-color: darkgray;
 }
-.label-flying {
+.label-flying,
+input.label-flying::-webkit-slider-thumb,
+input.label-flying +.thumb {
     background-color: lightskyblue;
 }
 .label-grass,
 .label-australia,
-.label-strengths  {
+.label-strengths,
+input.label-grass::-webkit-slider-thumb,
+input.label-grass +.thumb  {
     background-color: yellowgreen;
 }
-.label-ground {
+.label-ground,
+input.label-ground::-webkit-slider-thumb,
+input.label-ground +.thumb {
     background-color: saddlebrown;
 }
-.label-psychic {
+.label-psychic,
+input.label-psychic::-webkit-slider-thumb,
+input.label-psychic +.thumb {
     background-color: rebeccapurple;
 }
 .label-fire,
-.label-north-america {
+.label-north-america,
+input.label-fire::-webkit-slider-thumb,
+input.label-fire +.thumb {
     background-color: firebrick;
 }
-.label-bug{
+.label-bug,
+input.label-bug::-webkit-slider-thumb,
+input.label-bug +.thumb {
     background-color: seagreen;
 }
 .label-rock,
-.label-egg {
+.label-egg,
+input.label-rock::-webkit-slider-thumb,
+input.label-rock +.thumb {
     background-color: dimgrey;
 }
 .label-electric,
-.label-asia {
+.label-asia,
+input.label-electric::-webkit-slider-thumb,
+input.label-electric +.thumb {
     background-color: gold;
 }
-.label-fighting {
+.label-fighting,
+input.label-fighting::-webkit-slider-thumb,
+input.label-fighting +.thumb {
     background-color: darkred;
 }
-.label-ice {
+.label-ice,
+input.label-ice::-webkit-slider-thumb,
+input.label-ice +.thumb {
     background-color: blue;
 }
-.label-ghost {
+.label-ghost,
+input.label-ghost::-webkit-slider-thumb,
+input.label-ghost +.thumb {
     background-color: lightslategray;
 }
-.label-dragon {
+.label-dragon,
+input.label-dragon::-webkit-slider-thumb,
+input.label-dragon +.thumb {
     background-color: darkslategray;
 }
-.label-steel {
+.label-steel,
+input.label-steel::-webkit-slider-thumb,
+input.label-steel +.thumb {
     background-color: lightsteelblue;
 }
-.label-dark {
+.label-dark,
+input.label-dark::-webkit-slider-thumb,
+input.label-dark +.thumb {
     background-color: darkgrey;
 }
 .label-weaknesses,
-.label-fairy {
+.label-fairy,
+input.label-fairy::-webkit-slider-thumb,
+input.label-fairy +.thumb {
     background: lightcoral;
 }
 
@@ -249,4 +288,9 @@ input:focus {
     
     .gm-style-iw a {
         color: #4272db;
+    }
+
+    .modal-content {
+        -webkit-box-shadow: none;
+        box-shadow: none;
     }

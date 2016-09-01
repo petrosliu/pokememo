@@ -50,35 +50,38 @@ pokememo.controller('homeController', function ($scope, $http, $window) {
     };
 });
 
-pokememo.controller('pokedexController', function ($scope, $http, $window) {
-    $scope.getPokedex =function(){
-        $scope.pokedex = {};
+pokememo.controller('pokedexController', function ($scope, $http, $window, $filter) {
+    $scope.getPokedex = function () {
         if ($window.localStorage['token']) {
             $http.get('/api/pokedex', {
                 params: { token: $window.localStorage['token'] }
             })
                 .success(function (data) {
-                    $scope.pokedex = {};
-                    for(var i=0;i<data.length;i++){
-                        $scope.pokedex[data[i].pokemon]=true;
-                        $scope.pokedex[data[i].candy]=data[i].candy_amount;
+                    var pokedex = {};
+                    for (var i = 0; i < data.length; i++) {
+                        pokedex[data[i].pokemon] = true;
+                        pokedex[data[i].candy] = data[i].candy_amount;
                     }
+                    $scope.pokedex = pokedex;
                     $scope.getPokemon();
                 })
                 .error(function (data) {
                     console.log('Error: ' + data);
                 });
         }
-        else $scope.getPokemon();
+        else {
+            $scope.pokedex = {};
+            $scope.getPokemon();
+        }
     };
 
-    $scope.getPokemon = function(){
+    $scope.getPokemon = function () {
         $http.get('/api/pokemons')
             .success(function (data) {
                 $scope.pokemon = data;
-                for(var i=0;i<$scope.pokemon.length;i++){
+                for (var i = 0; i < $scope.pokemon.length; i++) {
                     $scope.pokemon[i].registered = ($scope.pokedex[$scope.pokemon[i].name] === true);
-                    if($scope.pokemon[i].registered) $scope.pokemon[i].keywords.push('catched');
+                    if ($scope.pokemon[i].registered) $scope.pokemon[i].keywords.push('catched');
                     else $scope.pokemon[i].keywords.push('unseen');
                     $scope.pokemon[i].candy_amount = $scope.pokedex[$scope.pokemon[i].candy] || 0;
                 }
@@ -87,27 +90,45 @@ pokememo.controller('pokedexController', function ($scope, $http, $window) {
                 console.log('Error: ' + data);
             });
     };
-    
-    $scope.register = function(pokemon){
-        $http.post('/api/pokedex',{pokemon:pokemon,token:$window.localStorage['token']})
+
+    $scope.register = function (pokemon) {
+        $http.post('/api/pokedex', { pokemon: pokemon.id, token: $window.localStorage['token'] })
             .success(function (data) {
                 $scope.getPokedex();
+                Materialize.toast(pokemon.name + ' registered!', 2000);
             })
             .error(function (data) {
-                console.log('Error: ' + data);
+                Materialize.toast('Error: ' + data, 2000);
             });
     };
-    $scope.deregister = function(pokemon){
-        $http.delete('/api/pokedex/'+pokemon,{params: {token:$window.localStorage['token']}})
-            .success(function (data) {
-                $scope.getPokedex();
-            })
-            .error(function (data) {
-                console.log('Error: ' + data);
-            });
+    $scope.deregister = function (pokemon) {
+        if ($window.confirm("Please confirm deregister?")) {
+            $http.delete('/api/pokedex/' + pokemon.id, { params: { token: $window.localStorage['token'] } })
+                .success(function (data) {
+                    $scope.getPokedex();
+                    Materialize.toast(pokemon.name + ' deregistered!', 2000);
+                    $('#pokemon-modal').closeModal();
+                })
+                .error(function (data) {
+                    Materialize.toast('Error: ' + data, 2000);
+                });
+        }
     };
+
+    $scope.showModel = function (pokemon) {
+        if ($scope.pokedex[pokemon.name] || $scope.pokedex[pokemon.candy] !== undefined) {
+            $scope.modal.pokemon = pokemon;
+            $scope.modal.candy_amount = $scope.pokedex[pokemon.candy];
+            $('#pokemon-modal').openModal();
+        }
+    };
+
+    $scope.updateCandy = function () {
+        console.log($scope.modal.candy_amount);
+    };
+    $scope.modal = {};
     $scope.getPokedex();
-    
+
 });
 
 pokememo.controller('mapController', function ($scope, $timeout) {
