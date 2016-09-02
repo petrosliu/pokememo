@@ -27,8 +27,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-route.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-animate.min.js"></script>
-    <!--script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-        crossorigin="anonymous"></script-->
     <script src="https://use.fontawesome.com/4d4ce8ea89.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
     <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDKpjawI069owLU8QFpMeqInJAYBgtBueQ&signed_in=true&extension=.js'></script>
@@ -37,7 +35,7 @@
     <base href="/">
 </head>
 
-<body>
+<body ng-controller="mainController">
     <div class="bg-container">
         <div class="landing-bg"></div>
     </div>
@@ -51,7 +49,11 @@
                     <li><a href="#map">Map</a></li>
                     <li><a onclick="$('.dropdown-button').dropdown('close');"><i class="fa fa-chevron-up"></i></a></li>
                 </ul>
+                <ul ng-if="user" id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a ng-click="removeUser();">Sign out</a></li>
+                </ul>
             </div>
+            
         </nav>
     </div>
     <div class="container" ng-view ng-Cloak>

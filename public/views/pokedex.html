@@ -1,8 +1,21 @@
+<div class="row white z-depth-2 pokemon-item" ng-if="user">
+    <div class="col s3 center pokemon-name">
+    {{user.username}}'s Pokédex
+    </div>
+    <div class="col s9">
+            <div class="progress progress-striped">
+                <div class="progress-bar label-normal" role="progressbar"
+                    style="width:{{((pokemon | filter:{registered:true}).length/pokemon.length*100)|limitTo:100}}%"></div>
+                <div class="pull-right">{{(pokemon | filter:{registered:true}).length}}/{{pokemon.length}}&nbsp;</div>
+            </div>
+        </div>
+</div>
 <div class="row valign-wrapper white z-depth-2">
     <div class="col s6" ng-init="sortBy = 'id'; kindOf = 'all'">
         <label>Sort:</label>
         <button class="btn-xs waves-effect waves-light btn btn-flat {{ (sortBy === 'id')? 'active':'' }}" ng-click="sortBy = 'id'"><i class="fa fa-sort-numeric-asc fa-fw"></i></button>
         <button class="btn-xs waves-effect waves-light btn btn-flat {{ (sortBy === 'name')? 'active':'' }}" ng-click="sortBy = 'name'"><i class="fa fa-sort-alpha-asc fa-fw"></i></button>
+        <button class="btn-xs waves-effect waves-light btn btn-flat {{ (sortBy === 'progress')? 'active':'' }}" ng-click="sortBy = 'progress'"><i class="fa fa-tasks fa-fw"></i></button>
         <button class="btn-xs waves-effect waves-light btn btn-flat {{ (sortBy === '-egg')? 'active':'' }}" ng-click="sortBy = '-egg'"><span class="fa-fw"><img class="egg-icon" src="assets/images/pokemons/000.png"></span></button>
         <label>Kind:</label>
         <button class="btn-xs waves-effect waves-light btn btn-flat {{ (kindOf === 'all' )? 'active':''}}" ng-click="kindOf = 'all';query = '';">All</button>
@@ -40,10 +53,10 @@
             </div>
         </div>
     </div>
-    <div class="unseen model-button" ng-click="showModel(p);">
-        <div><i class="fa fa-stop"></i></div>
-        <div><i class="fa fa-stop"></i></div>
-        <div><i class="fa fa-stop"></i></div>
+    <div class="col s1 unseen model-button" ng-click="showModel(p);">
+        <div class="right-align"><i class="fa fa-circle"></i></div>
+        <div class="right-align"><i class="fa fa-circle"></i></div>
+        <div class="right-align"><i class="fa fa-circle"></i></div>
     </div>
 </div>
 <div class="row pokemon-item valign-wrapper grey-text white z-depth-2" ng-if="(pokemon | filter:{keywords:query}).length===0"
@@ -57,7 +70,7 @@
 
 <div id="pokemon-modal" class="modal bottom-sheet">
     <div class="modal-content">
-        <div class="row pokemon-item white center">
+        <div class="row pokemon-item center">
             <div class="col s4">
                 <div class="row sprite">
                     <img src="{{modal.pokemon.img}}" class="img-responsive {{(pokedex[modal.pokemon.name])?'seen':'unseen'}}" ng-click="(pokedex[modal.pokemon.name])?deregister(modal.pokemon):register(modal.pokemon);">
@@ -78,21 +91,11 @@
             </div>
 
             <div class="col s8">
-                <div class="col s12" ng-if="modal.pokemon.prev_evolution.length">
-                    <div class="pull-left"><span class="label label-evolution"><i class="fa {{(modal.pokemon.prev_evolution.length >1)?'fa-reply-all':'fa-reply' }} fa-fw"></i></span></div>
-                    <div class="pull-left" ng-repeat="n in modal.pokemon.prev_evolution">&nbsp;<span class="label label-evolution">{{n | pokeidx}}</span></div>
-                </div>
-                <div class="col s12" ng-if="modal.pokemon.next_evolution.length">
-                    <div class="pull-left" an><span class="label label-evolution"><i class="fa {{(modal.pokemon.next_evolution.length >1)?'fa-reply-all':'fa-reply' }} fa-fw fa-rotate-180"></i></span></div>
-                    <div class="pull-left" ng-repeat="n in modal.pokemon.next_evolution">&nbsp;<span class="label label-evolution">{{n | pokeidx}}</span></div>
-                </div>
-                <div class="col s12" ng-if="modal.pokemon.strengths.length">
-                    <div class="pull-left"><span class="label label-strengths"><i class="fa fa-reply-all fa-rotate-90 fa-fw"></i></span></div>
-                    <div class="pull-left" ng-repeat="type in modal.pokemon.strengths">&nbsp;<span class="label label-{{type | lowercase}}">{{type}}</span></div>
-                </div>
-                <div class="col s12" ng-if="modal.pokemon.weaknesses.length">
-                    <div class="pull-left"><span class="label label-weaknesses"><i class="fa fa-reply-all fa-rotate-270 fa-fw"></i></span></div>
-                    <div class="pull-left" ng-repeat="type in modal.pokemon.weaknesses">&nbsp;<span class="label label-{{type | lowercase}}">{{type}}</span></div>
+
+
+                <div class="row">
+                <div class="col s12 left-align">
+                    <b>{{modal.pokemon.candy}}: {{modal.candy_amount}}</b>
                 </div>
                 <div class="col s12">
                     <div class="progress progress-striped">
@@ -111,6 +114,27 @@
                         <input class="label-{{modal.pokemon.type[0]|lowercase}}" type="range" id="candy" min="0" max="{{modal.pokemon.candy_count||200}}" ng-model="modal.candy_amount" ng-mouseup="updateCandy();"/>
                     </p>
                 </div>
+                </div>
+
+                <div class="row">
+                <div class="col s12" ng-if="modal.pokemon.prev_evolution.length">
+                    <div class="pull-left"><span class="label label-evolution"><i class="fa {{(modal.pokemon.prev_evolution.length >1)?'fa-reply-all':'fa-reply' }} fa-fw"></i></span></div>
+                    <div class="pull-left" ng-repeat="n in modal.pokemon.prev_evolution">&nbsp;<span class="label label-evolution">{{n | pokeidx}}</span></div>
+                </div>
+                <div class="col s12" ng-if="modal.pokemon.next_evolution.length">
+                    <div class="pull-left" an><span class="label label-evolution"><i class="fa {{(modal.pokemon.next_evolution.length >1)?'fa-reply-all':'fa-reply' }} fa-fw fa-rotate-180"></i></span></div>
+                    <div class="pull-left" ng-repeat="n in modal.pokemon.next_evolution">&nbsp;<span class="label label-evolution">{{n | pokeidx}}</span></div>
+                </div>
+                <div class="col s12" ng-if="modal.pokemon.strengths.length">
+                    <div class="pull-left"><span class="label label-strengths"><i class="fa fa-reply-all fa-rotate-90 fa-fw"></i></span></div>
+                    <div class="pull-left" ng-repeat="type in modal.pokemon.strengths">&nbsp;<span class="label label-{{type | lowercase}}">{{type}}</span></div>
+                </div>
+                <div class="col s12" ng-if="modal.pokemon.weaknesses.length">
+                    <div class="pull-left"><span class="label label-weaknesses"><i class="fa fa-reply-all fa-rotate-270 fa-fw"></i></span></div>
+                    <div class="pull-left" ng-repeat="type in modal.pokemon.weaknesses">&nbsp;<span class="label label-{{type | lowercase}}">{{type}}</span></div>
+                </div>
+                </div>
+
             </div>
         </div>
     </div>

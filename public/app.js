@@ -26,6 +26,32 @@ pokememo.config(function ($routeProvider) {
 
 
 // CONTROLLERS ============================================
+pokememo.controller('mainController', function ($scope, $http, $window) {
+    $scope.removeUser = function(){
+        $window.localStorage['token'] = '';
+        $scope.user = {};
+        $window.location.reload();
+    }
+    $scope.updateUser = function(){
+        if ($window.localStorage['token']) {
+            $http.get('api/users',{
+                    params: { token: $window.localStorage['token'] }
+                })
+                .success(function (data) {
+                    $scope.user = data.user;
+                    $scope.user.token = $window.localStorage['token'];
+                    Materialize.toast('Hi, '+$scope.user.username+'!', 2000);
+                })
+                .error(function (data) {
+                    $scope.removeUser();
+                    Materialize.toast('Error: ' + data, 2000);
+                });
+        }
+    };
+
+    $scope.updateUser();
+});
+
 pokememo.controller('homeController', function ($scope, $http, $window) {
     $scope.form = {};
     $scope.login = function () {
@@ -33,19 +59,20 @@ pokememo.controller('homeController', function ($scope, $http, $window) {
             .success(function (data) {
                 $window.localStorage['token'] = data.token;
                 $scope.form = {};
+                $scope.updateUser();
             })
             .error(function (data) {
-                console.log('Error: ' + data);
+                Materialize.toast('Error: ' + data, 2000);
             });
     };
     $scope.signup = function () {
         $http.post('/api/users/signup', $scope.form)
             .success(function (data) {
-                console.log(data);
                 $scope.form = {};
+                Materialize.toast('Signed up successfully.', 2000);
             })
             .error(function (data) {
-                console.log('Error: ' + data);
+                    Materialize.toast('Error: ' + data, 2000);
             });
     };
 });
@@ -66,7 +93,7 @@ pokememo.controller('pokedexController', function ($scope, $http, $window, $filt
                     $scope.getPokemon();
                 })
                 .error(function (data) {
-                    console.log('Error: ' + data);
+                    Materialize.toast('Error: ' + data, 2000);
                 });
         }
         else {
@@ -78,16 +105,23 @@ pokememo.controller('pokedexController', function ($scope, $http, $window, $filt
     $scope.getPokemon = function () {
         $http.get('/api/pokemons')
             .success(function (data) {
-                $scope.pokemon = data;
-                for (var i = 0; i < $scope.pokemon.length; i++) {
-                    $scope.pokemon[i].registered = ($scope.pokedex[$scope.pokemon[i].name] === true);
-                    if ($scope.pokemon[i].registered) $scope.pokemon[i].keywords.push('catched');
-                    else $scope.pokemon[i].keywords.push('unseen');
-                    $scope.pokemon[i].candy_amount = $scope.pokedex[$scope.pokemon[i].candy] || 0;
+                for (var i = 0; i < data.length; i++) {
+                    data[i].registered = ($scope.pokedex[data[i].name] === true);
+                    data[i].candy_amount = $scope.pokedex[data[i].candy] || 0;
+                    if (data[i].registered) {
+                        data[i].keywords.push('catched');
+                        data[i].progress = 1000;
+                    }
+                    else{
+                        data[i].keywords.push('unseen');
+                        data[i].progress = data[i].candy_count-data[i].candy_amount || 999;
+                        if(data[i].location === 'Unavailable') data[i].progress = 1001;
+                    }
                 }
+                $scope.pokemon = data;
             })
             .error(function (data) {
-                console.log('Error: ' + data);
+                    Materialize.toast('Error: ' + data, 2000);
             });
     };
 
@@ -123,7 +157,6 @@ pokememo.controller('pokedexController', function ($scope, $http, $window, $filt
         if ($scope.pokedex[pokemon.name] || $scope.pokedex[pokemon.candy] !== undefined) {
             $scope.modal.pokemon = pokemon;
             $scope.modal.candy_amount = $scope.pokedex[pokemon.candy];
-            console.log($scope.modal.candy_amount);
             $('#pokemon-modal').openModal();
         }
     };
