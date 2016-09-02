@@ -301,8 +301,8 @@ pokememo.controller('mapController', function ($scope, $timeout) {
                 url: '/assets/images/map/currentLocation.png',
                 size: new google.maps.Size(64, 64),
                 origin: new google.maps.Point(0, 0),
-                anchor: new google.maps.Point(14, 14),
-                scaledSize: new google.maps.Size(28, 28)
+                anchor: new google.maps.Point(12, 12),
+                scaledSize: new google.maps.Size(24, 24)
             }
         });
         addYourLocationButton(map, currentLoc);
