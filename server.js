@@ -178,6 +178,36 @@ app.delete('/api/pokedex/:id', function (req, res) {
   }
 });
 
+app.post('/api/pokedex/:id', function (req, res) {
+  var token = req.body.token || req.query.token || req.headers['x-access-token'];
+  if (token) {
+    User.auth(token, function (err, user) {
+      if (err) res.send(err);
+      else {
+        Pokemon.get(req.params.id, function (err, pokemon) {
+          if (err) { res.send(err); }
+          else {
+            console.log(pokemon.candy);
+            console.log(req.body.candy_amount);
+            Pokedex.update(user, pokemon.candy, req.body.candy_amount, function (err) {
+              if (err) res.send(err);
+              else res.json({
+                success: true,
+                message: 'Candy updated.'
+              });
+            });
+          }
+        });
+      }
+    });
+  } else {
+    return res.status(403).send({
+      success: false,
+      message: 'No token provided.'
+    });
+  }
+});
+
 // get the index.html
 app.get('/', function (req, res) {
   res.sendfile('index.html');

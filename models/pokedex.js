@@ -39,7 +39,7 @@ var registerPokedex = function(user, pokemon, callback){
         }
         else callback(err);
     });
-}
+};
 
 var deregisterPokedex = function(user, pokemon, callback){
     PokedexDB.remove({
@@ -48,8 +48,15 @@ var deregisterPokedex = function(user, pokemon, callback){
     }, function(err){
         callback(err);
     });
-}
+};
+
+var updatePokedex = function(user, candy, candy_amount, callback){
+    PokedexDB.update({user:user,candy:candy},{candy_amount:candy_amount},{multi:true},function(err,num){
+        callback(err);
+    });
+};
 
 module.exports.get = getPokedex;
 module.exports.register = registerPokedex;
 module.exports.deregister = deregisterPokedex;
+module.exports.update = updatePokedex;

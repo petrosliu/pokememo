@@ -92,26 +92,30 @@ pokememo.controller('pokedexController', function ($scope, $http, $window, $filt
     };
 
     $scope.register = function (pokemon) {
-        $http.post('/api/pokedex', { pokemon: pokemon.id, token: $window.localStorage['token'] })
-            .success(function (data) {
-                $scope.getPokedex();
-                Materialize.toast(pokemon.name + ' registered!', 2000);
-            })
-            .error(function (data) {
-                Materialize.toast('Error: ' + data, 2000);
-            });
-    };
-    $scope.deregister = function (pokemon) {
-        if ($window.confirm("Please confirm deregister?")) {
-            $http.delete('/api/pokedex/' + pokemon.id, { params: { token: $window.localStorage['token'] } })
+        if ($window.localStorage['token']) {
+            $http.post('/api/pokedex', { pokemon: pokemon.id, token: $window.localStorage['token'] })
                 .success(function (data) {
                     $scope.getPokedex();
-                    Materialize.toast(pokemon.name + ' deregistered!', 2000);
-                    $('#pokemon-modal').closeModal();
+                    Materialize.toast(pokemon.name + ' registered!', 2000);
                 })
                 .error(function (data) {
                     Materialize.toast('Error: ' + data, 2000);
                 });
+        }
+    };
+    $scope.deregister = function (pokemon) {
+        if ($window.localStorage['token']) {
+            if ($window.confirm("Please confirm deregister?")) {
+                $http.delete('/api/pokedex/' + pokemon.id, { params: { token: $window.localStorage['token'] } })
+                    .success(function (data) {
+                        $scope.getPokedex();
+                        Materialize.toast(pokemon.name + ' deregistered!', 2000);
+                        $('#pokemon-modal').closeModal();
+                    })
+                    .error(function (data) {
+                        Materialize.toast('Error: ' + data, 2000);
+                    });
+            }
         }
     };
 
@@ -119,12 +123,22 @@ pokememo.controller('pokedexController', function ($scope, $http, $window, $filt
         if ($scope.pokedex[pokemon.name] || $scope.pokedex[pokemon.candy] !== undefined) {
             $scope.modal.pokemon = pokemon;
             $scope.modal.candy_amount = $scope.pokedex[pokemon.candy];
+            console.log($scope.modal.candy_amount);
             $('#pokemon-modal').openModal();
         }
     };
 
     $scope.updateCandy = function () {
-        console.log($scope.modal.candy_amount);
+        if ($window.localStorage['token']) {
+            $http.post('/api/pokedex/'+ $scope.modal.pokemon.id, { candy_amount: $scope.modal.candy_amount, token: $window.localStorage['token'] })
+                .success(function (data) {
+                    $scope.getPokedex();
+                    Materialize.toast($scope.modal.pokemon.candy + ' updated!', 2000);
+                })
+                .error(function (data) {
+                    Materialize.toast('Error: ' + data, 2000);
+                });
+        }
     };
     $scope.modal = {};
     $scope.getPokedex();

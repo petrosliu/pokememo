@@ -1,13 +1,13 @@
 <div class="row valign-wrapper white z-depth-2">
-    <div class="col s6" ng-init="sortBy = 'id'; showAll = true">
+    <div class="col s6" ng-init="sortBy = 'id'; kindOf = 'all'">
         <label>Sort:</label>
         <button class="btn-xs waves-effect waves-light btn btn-flat {{ (sortBy === 'id')? 'active':'' }}" ng-click="sortBy = 'id'"><i class="fa fa-sort-numeric-asc fa-fw"></i></button>
         <button class="btn-xs waves-effect waves-light btn btn-flat {{ (sortBy === 'name')? 'active':'' }}" ng-click="sortBy = 'name'"><i class="fa fa-sort-alpha-asc fa-fw"></i></button>
         <button class="btn-xs waves-effect waves-light btn btn-flat {{ (sortBy === '-egg')? 'active':'' }}" ng-click="sortBy = '-egg'"><span class="fa-fw"><img class="egg-icon" src="assets/images/pokemons/000.png"></span></button>
         <label>Kind:</label>
-        <button class="btn-xs waves-effect waves-light btn btn-flat {{ (showAll === true )? 'active':''}}" ng-click="showAll = true">All</button>
-        <button class="btn-xs waves-effect waves-light btn btn-flat {{ (!showAll && hasSeen)? 'active':''}}" ng-click="hasSeen = true; showAll = false;"><span class="fa-fw"><img class="pikachu-icon" src="assets/images/pokemons/025.png"></span></button>
-        <button class="btn-xs waves-effect waves-light btn btn-flat {{ (!showAll && !hasSeen)? 'active':''}}" ng-click="hasSeen = false; showAll = false;"><span class="fa-fw"><img class="pikachu-icon unseen" src="assets/images/pokemons/025.png"></span></button>
+        <button class="btn-xs waves-effect waves-light btn btn-flat {{ (kindOf === 'all' )? 'active':''}}" ng-click="kindOf = 'all';query = '';">All</button>
+        <button class="btn-xs waves-effect waves-light btn btn-flat {{ (kindOf === 'catched')? 'active':''}}" ng-click="kindOf = 'catched';query = 'catched';"><span class="fa-fw"><img class="pikachu-icon" src="assets/images/pokemons/025.png"></span></button>
+        <button class="btn-xs waves-effect waves-light btn btn-flat {{ (kindOf === 'unseen')? 'active':''}}" ng-click="kindOf = 'unseen';query = 'unseen';"><span class="fa-fw"><img class="pikachu-icon unseen" src="assets/images/pokemons/025.png"></span></button>
     </div>
 
     <div class="input-group col s6 right hoverable">
@@ -17,7 +17,7 @@
 </div>
 
 <div class="row pokemon-item valign-wrapper white z-depth-2" ng-repeat="p in pokemon | filter:{keywords:query} | orderBy:sortBy track by p.id">
-    <div class="col s4 sprite">
+    <div class="col s3 sprite">
         <img src="{{p.img}}" class="img-responsive {{(pokedex[p.name])?'seen':'unseen'}}" ng-click="(pokedex[p.name])?deregister(p):register(p);">
     </div>
     <div class="col s8">
@@ -39,6 +39,11 @@
                 <div ng-if="pokedex[p.candy]!==undefined && !p.candy_count" class="pull-right">{{pokedex[p.candy]}}&nbsp;</div>
             </div>
         </div>
+    </div>
+    <div class="unseen model-button" ng-click="showModel(p);">
+        <div><i class="fa fa-stop"></i></div>
+        <div><i class="fa fa-stop"></i></div>
+        <div><i class="fa fa-stop"></i></div>
     </div>
 </div>
 <div class="row pokemon-item valign-wrapper grey-text white z-depth-2" ng-if="(pokemon | filter:{keywords:query}).length===0"
@@ -103,13 +108,10 @@
                 </div>
                 <div class="col s12">
                     <p ng-if="pokedex[modal.pokemon.candy]!==undefined" class="range-field" style="padding-top:20px;">
-                        <input class="label-{{modal.pokemon.type[0]|lowercase}}" type="range" id="candy" min="0" max="{{modal.pokemon.candy_count||400}}" ng-model="modal.candy_amount" ng-mouseup="updateCandy();" ng-model-options="{debounce:500}"/>
+                        <input class="label-{{modal.pokemon.type[0]|lowercase}}" type="range" id="candy" min="0" max="{{modal.pokemon.candy_count||200}}" ng-model="modal.candy_amount" ng-mouseup="updateCandy();"/>
                     </p>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="modal-footer">
-        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
     </div>
 </div>
