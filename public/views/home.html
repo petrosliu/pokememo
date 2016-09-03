@@ -5,19 +5,53 @@
 </div>
 
 <div class="row white z-depth-2" ng-if="!user">
-  <form class="col s12 l6 offset-l3">
+  <div class="col s12 l6 offset-l3">
     <div class="row hoverable">
-      <input id="username" placeholder="Username" type="text" class="validate center" ng-model="form.username">
+      <input id="username" placeholder="Username" type="text" class="validate center" ng-model="logform.username">
     </div>
     <div class="row hoverable">
-      <input id="password" placeholder="Password" type="password" class="validate center" ng-model="form.password">
+      <input id="password" placeholder="Password" type="password" class="validate center" ng-model="logform.password">
     </div>
     <div class="row center">
       <button class="waves-effect waves-light btn btn-flat" type="submit" ng-click="login()">Log in</button>
       <button class="waves-effect waves-light btn btn-flat" type="submit" ng-click="signup()">Sign up</button>
     </div>
-  </form>
+  </div>
 </div>
 <div class="row white z-depth-2" ng-if="user">
-  {{user.username}}
+  {{user.username}} {{user.player.id}} {{user.name}} {{user.player.team}}
+  <button class="waves-effect waves-light btn btn-flat" ng-click="user.update.username=user.username;user.update.player=user.player;">Edit</button>
+</div>
+
+<div class="row white z-depth-2" ng-if="user.update">
+  <div class="input-field col s12 l6 offset-l3">
+
+    <div class="row hoverable">
+      <input id="username" placeholder="Username" type="text" class="center" ng-model="user.update.username">
+    </div>
+    <div class="row hoverable">
+      <input id="password" placeholder="Password" type="password" class="center" ng-model="user.update.password">
+    </div>
+    <div class="row hoverable">
+      <input id="name" placeholder="Player ID" type="text" class="center" ng-model="user.update.player.id">
+
+      <div class="fixed-action-btn horizontal" style="bottom:-5px;right:10px;position:absolute;">
+        <a class="btn-floating btn-large {{user.update.player.team | teamcolor}} lighten-5"><img ng-src="assets/images/teams/team_{{user.update.player.team | teamcolor}}.png" style="width:40px;"></a>
+        <ul>
+          <li ng-repeat="t in ['','Instinct','Valor','Mystic']">
+            <a class="btn-floating {{t | teamcolor}} lighten-5" ng-click="user.update.player.team=t"><img ng-src="assets/images/teams/team_{{t | teamcolor}}.png" style="width:20px;height:20px;transform:translateX(-8px);"></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="input-field col s12 l6 offset-l3">
+
+    <div class="row center">
+      <button class="waves-effect waves-light btn btn-flat" type="submit" ng-click="updateUser();">Save</button>
+      <button class="waves-effect waves-light btn btn-flat" type="submit" ng-click="user.update=null;">Cancel</button>
+
+    </div>
+  </div>
 </div>

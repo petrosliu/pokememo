@@ -1,19 +1,7 @@
-<div id='map' ng-if="render" ng-init='mapInit()'></div>
+<div id='map' ng-if="render.map" ng-init='mapInit()'></div>
 
-<div class='loading-icon valign-wrapper' ng-if="!render" style="height:100vh;">
+<div class='loading-icon valign-wrapper' ng-if="render.spin" style="height:100vh;">
     <div class="center" style="width:100%;">
-        <div class="preloader-wrapper big active">
-            <div class="spinner-layer" style="border-color:#E7D57F;">
-                <div class="circle-clipper left">
-                    <div class="circle"></div>
-                </div>
-                <div class="gap-patch">
-                    <div class="circle"></div>
-                </div>
-                <div class="circle-clipper right">
-                    <div class="circle"></div>
-                </div>
-            </div>
-        </div>
+        <img style="opacity:.8;width:64px;height:64px;" src="assets/images/map/spinner.gif">
     </div>
 </div>

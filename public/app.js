@@ -27,20 +27,20 @@ pokememo.config(function ($routeProvider) {
 
 // CONTROLLERS ============================================
 pokememo.controller('mainController', function ($scope, $http, $window) {
-    $scope.removeUser = function(){
-        $window.localStorage['token'] = '';
-        $scope.user = {};
+    $scope.removeUser = function () {
+        delete $window.localStorage['token'];
+        delete $scope.user;
         $window.location.reload();
     }
-    $scope.updateUser = function(){
+    $scope.authUser = function () {
         if ($window.localStorage['token']) {
-            $http.get('api/users',{
-                    params: { token: $window.localStorage['token'] }
-                })
+            $http.get('api/users', {
+                params: { token: $window.localStorage['token'] }
+            })
                 .success(function (data) {
                     $scope.user = data.user;
                     $scope.user.token = $window.localStorage['token'];
-                    Materialize.toast('Hi, '+$scope.user.username+'!', 2000);
+                    Materialize.toast('Hi, ' + $scope.user.name + '!', 2000);
                 })
                 .error(function (data) {
                     $scope.removeUser();
@@ -49,31 +49,44 @@ pokememo.controller('mainController', function ($scope, $http, $window) {
         }
     };
 
-    $scope.updateUser();
+    $scope.authUser();
 });
 
 pokememo.controller('homeController', function ($scope, $http, $window) {
-    $scope.form = {};
+    $scope.logform = {};
     $scope.login = function () {
-        $http.post('/api/users/login', $scope.form)
+        $http.post('/api/users/login', $scope.logform)
             .success(function (data) {
                 $window.localStorage['token'] = data.token;
-                $scope.form = {};
-                $scope.updateUser();
+                $scope.logform = {};
+                $scope.authUser();
             })
             .error(function (data) {
                 Materialize.toast('Error: ' + data, 2000);
             });
     };
     $scope.signup = function () {
-        $http.post('/api/users/signup', $scope.form)
+        $http.post('/api/users/signup', $scope.logform)
             .success(function (data) {
-                $scope.form = {};
+                $scope.logform = {};
                 Materialize.toast('Signed up successfully.', 2000);
             })
             .error(function (data) {
-                    Materialize.toast('Error: ' + data, 2000);
+                Materialize.toast('Error: ' + data, 2000);
             });
+    };
+    $scope.updateUser = function () {
+        if ($scope.user.update.username === '') delete $scope.user.update.username;
+        if ($scope.user.update.password === '') delete $scope.user.update.password;
+        $http.post('/api/users', { update: $scope.user.update, token: $window.localStorage['token'] })
+            .success(function (data) {
+                Materialize.toast('Profile updated!', 2000);
+                $scope.authUser();
+            })
+            .error(function (data) {
+                Materialize.toast('Error: ' + data, 2000);
+            });
+        delete $scope.user.update;
     };
 });
 
@@ -112,16 +125,16 @@ pokememo.controller('pokedexController', function ($scope, $http, $window, $filt
                         data[i].keywords.push('catched');
                         data[i].progress = 1000;
                     }
-                    else{
+                    else {
                         data[i].keywords.push('unseen');
-                        data[i].progress = data[i].candy_count-data[i].candy_amount || 999;
-                        if(data[i].location === 'Unavailable') data[i].progress = 1001;
+                        data[i].progress = data[i].candy_count - data[i].candy_amount || 999;
+                        if (data[i].location === 'Unavailable') data[i].progress = 1001;
                     }
                 }
                 $scope.pokemon = data;
             })
             .error(function (data) {
-                    Materialize.toast('Error: ' + data, 2000);
+                Materialize.toast('Error: ' + data, 2000);
             });
     };
 
@@ -163,7 +176,7 @@ pokememo.controller('pokedexController', function ($scope, $http, $window, $filt
 
     $scope.updateCandy = function () {
         if ($window.localStorage['token']) {
-            $http.post('/api/pokedex/'+ $scope.modal.pokemon.id, { candy_amount: $scope.modal.candy_amount, token: $window.localStorage['token'] })
+            $http.post('/api/pokedex/' + $scope.modal.pokemon.id, { candy_amount: $scope.modal.candy_amount, token: $window.localStorage['token'] })
                 .success(function (data) {
                     $scope.getPokedex();
                     Materialize.toast($scope.modal.pokemon.candy + ' updated!', 2000);
@@ -173,6 +186,18 @@ pokememo.controller('pokedexController', function ($scope, $http, $window, $filt
                 });
         }
     };
+    $scope.envolve = function (count, amount) {
+        if (count) {
+            var times = 0;
+            while (amount >= count) {
+                times = times + Math.floor(amount / count);
+                amount = amount % count + Math.floor(amount / count);
+            }
+            return times;
+        }
+        else return 0;
+    }
+
     $scope.modal = {};
     $scope.getPokedex();
 
@@ -308,10 +333,13 @@ pokememo.controller('mapController', function ($scope, $timeout) {
         addYourLocationButton(map, currentLoc);
 
     };
-    $scope.render = false;
+    $scope.render = { map: false, spin: true };
     $timeout(function () {
-        $scope.render = true;
+        $scope.render.map = true;
     }, 1500);
+    $timeout(function () {
+        $scope.render.spin = false;
+    }, 3000);
 });
 
 pokememo.filter('spaceless', function () {
@@ -328,5 +356,14 @@ pokememo.filter('pokeidx', function () {
             return ("000" + input).slice(-3);
         }
         else return ("???");
+    }
+});
+
+pokememo.filter('teamcolor', function () {
+    return function (input) {
+        if (input === 'Instinct') return 'yellow';
+        else if (input === 'Valor') return 'red';
+        else if (input === 'Mystic') return 'blue';
+        else return 'grey';
     }
 });
