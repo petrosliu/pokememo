@@ -1,16 +1,16 @@
 <div class="row white z-depth-2 pokemon-item" ng-if="user">
-    <div class="col s3 center pokemon-name">
+    <div class="col l3 s12 center pokemon-name">
         {{user.name}}'s Pokédex
     </div>
-    <div class="col s9">
-        <div class="progress progress-striped">
-            <div class="progress-bar {{user.player.team|teamcolor}}" role="progressbar" style="width:{{((pokemon | filter:{registered:true}).length/pokemon.length*100)|limitTo:100}}%"></div>
+    <div class="col l9 s12">
+        <div class="progress progress-striped active">
+            <div class="progress-bar {{user.player.team|teamcolor}}" role="progressbar" style="width:{{((pokemon | filter:{registered:true}).length/pokemon.length*100)|progress}}%"></div>
             <div class="pull-right">{{(pokemon | filter:{registered:true}).length}}/{{pokemon.length}}&nbsp;</div>
         </div>
     </div>
 </div>
-<div class="row valign-wrapper white z-depth-2">
-    <div class="col s6" ng-init="sortBy = 'id'; kindOf = 'all'">
+<div class="row white z-depth-2">
+    <div class="col l6 s12" ng-init="sortBy = 'id';kindOf = 'all';" style="padding-top:5px;">
         <label>Sort:</label>
         <button class="btn-xs waves-effect waves-light btn btn-flat {{ (sortBy === 'id')? 'active':'' }}" ng-click="sortBy = 'id'"><i class="fa fa-sort-numeric-asc fa-fw"></i></button>
         <button class="btn-xs waves-effect waves-light btn btn-flat {{ (sortBy === 'name')? 'active':'' }}" ng-click="sortBy = 'name'"><i class="fa fa-sort-alpha-asc fa-fw"></i></button>
@@ -22,8 +22,9 @@
         <button class="btn-xs waves-effect waves-light btn btn-flat {{ (kindOf === 'unseen')? 'active':''}}" ng-click="kindOf = 'unseen';query = 'unseen';"><span class="fa-fw"><img class="pikachu-icon unseen" src="assets/images/pokemons/025.png"></span></button>
     </div>
 
-    <div class="input-group col s6 right hoverable">
-        <input id="search-input" placeholder="&#xf002; Search" type="text" ng-model="query" style="font-family:Arial, FontAwesome">
+    <div class="input-group col l6 s12 right hoverable">
+        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+        <input id="search-input" placeholder="Search" type="text" ng-model="query" style="font-family:Arial, FontAwesome">
         <div class="input-group-addon">{{(pokemon | filter:{keywords:query}).length}}</div>
     </div>
 </div>
@@ -44,10 +45,10 @@
         <div class="col s12">
             <div class="progress progress-striped" ng-click="showModel(p);">
                 <div ng-if="pokedex[p.candy]!==undefined && p.candy_count" class="progress-bar label-{{p.type[0] | lowercase}}" role="progressbar"
-                    style="width:{{pokedex[p.candy]/p.candy_count*100|limitTo:100}}%"></div>
+                    style="width:{{pokedex[p.candy]/p.candy_count*100|progress}}%"></div>
                 <div ng-if="pokedex[p.candy]!==undefined && p.candy_count" class="pull-right">{{pokedex[p.candy]}}/{{p.candy_count}}&nbsp;</div>
                 <div ng-if="pokedex[p.candy]!==undefined && !p.candy_count" class="progress-bar label-{{p.type[0] | lowercase}}" role="progressbar"
-                    style="width:{{pokedex[p.candy]*100|limitTo:100}}%"></div>
+                    style="width:{{pokedex[p.candy]*100|progress}}%"></div>
                 <div ng-if="pokedex[p.candy]!==undefined && !p.candy_count" class="pull-right">{{pokedex[p.candy]}}&nbsp;</div>
             </div>
         </div>
@@ -70,7 +71,7 @@
 <div id="pokemon-modal" class="modal bottom-sheet">
     <div class="modal-content">
         <div class="row pokemon-item center">
-            <div class="col s4">
+            <div class="col l4 s12">
                 <div class="row sprite">
                     <img src="{{modal.pokemon.img}}" class="img-responsive {{(pokedex[modal.pokemon.name])?'seen':'unseen'}}" ng-click="(pokedex[modal.pokemon.name])?deregister(modal.pokemon):register(modal.pokemon);">
                 </div>
@@ -89,9 +90,7 @@
 
             </div>
 
-            <div class="col s8">
-
-
+            <div class="col l8 s12">
                 <div class="row">
                     <div class="col s12 left-align">
                         <b>{{modal.pokemon.candy}}: {{modal.candy_amount}}</b>
@@ -99,10 +98,10 @@
                     <div class="col s12">
                         <div class="progress progress-striped">
                             <div ng-if="pokedex[modal.pokemon.candy]!==undefined && modal.pokemon.candy_count" class="progress-bar
-                        label-{{modal.pokemon.type[0] | lowercase}}" role="progressbar" style="width:{{modal.candy_amount/modal.pokemon.candy_count*100|limitTo:100}}%"></div>
+                        label-{{modal.pokemon.type[0] | lowercase}}" role="progressbar" style="width:{{modal.candy_amount/modal.pokemon.candy_count*100|progress}}%"></div>
                             <div ng-if="pokedex[modal.pokemon.candy]!==undefined && modal.pokemon.candy_count" class="pull-right">{{modal.candy_amount}}/{{modal.pokemon.candy_count}}&nbsp;</div>
                             <div ng-if="pokedex[modal.pokemon.candy]!==undefined && !modal.pokemon.candy_count" class="progress-bar
-                        label-{{modal.pokemon.type[0] | lowercase}}" role="progressbar" style="width:{{modal.candy_amount*100|limitTo:100}}%"></div>
+                        label-{{modal.pokemon.type[0] | lowercase}}" role="progressbar" style="width:{{modal.candy_amount*100|progress}}%"></div>
                             <div ng-if="pokedex[modal.pokemon.candy]!==undefined && !modal.pokemon.candy_count" class="pull-right">{{modal.candy_amount}}&nbsp;</div>
                         </div>
                     </div>

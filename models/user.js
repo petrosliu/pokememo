@@ -8,8 +8,9 @@ var userSchema = new mongoose.Schema({
     hash: String,
     salt: String,
     player: {
-        id: { type: String },
-        team: { type: String }
+        id: { type: String, default: '' },
+        team: { type: String, default: '' },
+        level: { type: Number, default: 1}
     }
 });
 

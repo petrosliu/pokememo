@@ -203,13 +203,13 @@ input.label-fairy::-webkit-slider-thumb,
 input.label-fairy +.thumb {
     background: lightcoral;
 }
-div.pokemon-item .progress {
+.progress {
     border-radius: 8px;
     margin-top: 15px;
     height: 16px;
     font-weight: bold;
     font-size: 75%;
-    background-color: #f5f5f5
+    background-color: #f5f5f5;
 }
 .btn:active,
 .btn.active {
@@ -271,9 +271,6 @@ input:focus {
 }
 .gm-style-iw a {
     color: #4272db;
-}
-.modal{
-    overflow: visible;
 }
 .modal-content {
     -webkit-box-shadow: none;

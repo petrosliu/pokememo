@@ -75,6 +75,13 @@ pokememo.controller('homeController', function ($scope, $http, $window) {
                 Materialize.toast('Error: ' + data, 2000);
             });
     };
+    $scope.newUpdate = function () {
+        $scope.user.update={player:{}};
+        $scope.user.update.username=$scope.user.username;
+        $scope.user.update.player.id=$scope.user.player.id;
+        $scope.user.update.player.team=$scope.user.player.team;
+        $scope.user.update.player.level=$scope.user.player.level;
+    };
     $scope.updateUser = function () {
         if ($scope.user.update.username === '') delete $scope.user.update.username;
         if ($scope.user.update.password === '') delete $scope.user.update.password;
@@ -311,7 +318,8 @@ pokememo.controller('mapController', function ($scope, $timeout) {
             [37.559233, -121.968424],
             [37.557470, -121.968200],
             [37.558296, -121.967140],
-            [37.557563, -121.966828]
+            [37.557563, -121.966828],
+            [37.557063, -121.968160]
         ];
         var markers = [];
 
@@ -365,5 +373,11 @@ pokememo.filter('teamcolor', function () {
         else if (input === 'Valor') return 'red';
         else if (input === 'Mystic') return 'blue';
         else return 'grey';
+    }
+});
+
+pokememo.filter('progress', function () {
+    return function (input) {
+        return Math.min(input,100);
     }
 });
