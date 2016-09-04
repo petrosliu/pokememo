@@ -18,23 +18,24 @@
     </div>
   </div>
 </div>
-<div class="row white z-depth-2 valign-wrapper" ng-if="user">
-  <div class="col s2">
-    <div style="position:absolute;margin-top:-50px;margin-left:-30px;">
-      <img ng-src="assets/images/teams/team_{{user.player.team | teamcolor}}.png" style="width:100px;height:100px;">
+<div class="row white z-depth-2" ng-if="user">
+  <div class="col s3">
+    <div style="position:absolute;margin-top:-35px;margin-left:-50px;">
+      <img ng-src="assets/images/teams/team_{{user.player.team | teamcolor}}.png" style="width:150px;height:150px;opacity:.3;">
     </div>
   </div>
-  <div class="col s2">
+  <div class="col s6 center">
     <b style="font-size:20px;">{{user.name}}</b>
   </div>
-  <div class="col s6">
+  <div class="col s3">
+    <button class="btn-xs waves-effect waves-light btn btn-flat pull-right grey-text" ng-click="removeUser();"><i class="fa fa-sign-out fa-fw"></i></button>
+    <button class="btn-xs waves-effect waves-light btn btn-flat pull-right grey-text" ng-click="newUpdate();"><i class="fa fa-pencil-square-o fa-fw"></i></button>
+  </div>
+  <div class="col s12">
     <div class="progress progress-striped active">
         <div class="progress-bar {{user.player.team|teamcolor}}" role="progressbar" style="width:{{user.player.level/40*100}}%"></div>
         <div class="pull-right">Lv.{{user.player.level}}&nbsp;</div>
     </div>
-  </div>
-  <div class="col s2">
-    <button class="waves-effect waves-light btn btn-flat pull-right" ng-click="newUpdate();">Edit</button>
   </div>
 
 </div>
@@ -59,10 +60,15 @@
         </ul>
       </div>
     </div>
-    <div class="row">
+    <div class="row valign-wrapper">
+      <div class="col s1">
+        <b>Lv.</b>
+      </div>
+      <div class="col s11">
       <p class="range-field" style="padding-top:20px;">
         <input class="label-normal" type="range" id="lv" min="1" max="40" ng-model="user.update.player.level"/>
       </p>
+      </div>
     </div>
   </div>
 

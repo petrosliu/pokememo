@@ -65,7 +65,7 @@ div.pokemon-item div.pokemon-name {
 }
 div.sprite > img {
     max-height: 80px;
-    max-width: 120px;
+    max-width: 80px;
     display: block;
     margin: 0 auto;
     cursor: pointer;

@@ -3329,8 +3329,7 @@ var pokemonSchema = new mongoose.Schema({
 });
 
 pokemonSchema.virtual('keywords').get(function () {
-    var kw = [this.name, ("000" + this.id).slice(-3), this.type, this.egg + 'km', this.location];
-    return kw;
+    return [this.name, ("000" + this.id).slice(-3), this.type, this.egg + 'km', this.location];
 });
 
 pokemonSchema.set('toObject', {

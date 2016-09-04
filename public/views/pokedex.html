@@ -10,20 +10,22 @@
     </div>
 </div>
 <div class="row white z-depth-2">
-    <div class="col l6 s12" ng-init="sortBy = 'id';kindOf = 'all';" style="padding-top:5px;">
+    <div class="col l4 m6 s12" ng-init="sortBy = 'id';" style="padding-top:5px;">
         <label>Sort:</label>
         <button class="btn-xs waves-effect waves-light btn btn-flat {{ (sortBy === 'id')? 'active':'' }}" ng-click="sortBy = 'id'"><i class="fa fa-sort-numeric-asc fa-fw"></i></button>
         <button class="btn-xs waves-effect waves-light btn btn-flat {{ (sortBy === 'name')? 'active':'' }}" ng-click="sortBy = 'name'"><i class="fa fa-sort-alpha-asc fa-fw"></i></button>
         <button class="btn-xs waves-effect waves-light btn btn-flat {{ (sortBy === 'progress')? 'active':'' }}" ng-click="sortBy = 'progress'"><i class="fa fa-tasks fa-fw"></i></button>
         <button class="btn-xs waves-effect waves-light btn btn-flat {{ (sortBy === '-egg')? 'active':'' }}" ng-click="sortBy = '-egg'"><span class="fa-fw"><img class="egg-icon" src="assets/images/pokemons/000.png"></span></button>
+    </div>
+    <div class="col l4 m6 s12" ng-init="kindOf = 'all';" style="padding-top:5px;">
         <label>Kind:</label>
         <button class="btn-xs waves-effect waves-light btn btn-flat {{ (kindOf === 'all' )? 'active':''}}" ng-click="kindOf = 'all';query = '';">All</button>
         <button class="btn-xs waves-effect waves-light btn btn-flat {{ (kindOf === 'catched')? 'active':''}}" ng-click="kindOf = 'catched';query = 'catched';"><span class="fa-fw"><img class="pikachu-icon" src="assets/images/pokemons/025.png"></span></button>
         <button class="btn-xs waves-effect waves-light btn btn-flat {{ (kindOf === 'unseen')? 'active':''}}" ng-click="kindOf = 'unseen';query = 'unseen';"><span class="fa-fw"><img class="pikachu-icon unseen" src="assets/images/pokemons/025.png"></span></button>
     </div>
 
-    <div class="input-group col l6 s12 right hoverable">
-        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+    <div class="input-group col l4 m12 s12 hoverable">
+        <div class="input-group-addon grey-text"><i class="fa fa-search"></i></div>
         <input id="search-input" placeholder="Search" type="text" ng-model="query" style="font-family:Arial, FontAwesome">
         <div class="input-group-addon">{{(pokemon | filter:{keywords:query}).length}}</div>
     </div>
