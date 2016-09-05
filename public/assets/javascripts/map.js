@@ -198,17 +198,18 @@ var addMyLocationButton = function () {
         if (navigator.geolocation) {
             Materialize.toast('Locating...', 2000);
             navigator.geolocation.getCurrentPosition(function (position) {
-                var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-                marker.setPosition(latlng);
-                clearInterval(animationInterval);
-                $('#my_location_img').css('background-position', '-144px 0px');
+                var location={lat: position.coords.latitude, lng: position.coords.longitude};
+                marker.setPosition(location);
                 marker.setMap(map);
-                marker.sightingCircle = addSightingCircle(latlng);
+                windowTransition(location,17);
+                marker.sightingCircle = addSightingCircle(location);
                 marker.addListener('click', function () {
                     if(marker.sightingCircle.getMap()) marker.sightingCircle.setMap(null);
                     else marker.sightingCircle.setMap(map);
                 });
-                windowTransition(latlng,17);
+
+                clearInterval(animationInterval);
+                $('#my_location_img').css('background-position', '-144px 0px');
                 Materialize.toast('Done.', 2000);
             });
         }
