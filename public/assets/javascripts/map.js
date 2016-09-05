@@ -25,81 +25,95 @@ var icons = {
 };
 
 var linearTween = function (t, b, c, d) {
-    return c*t/d + b;
+    return c * t / d + b;
 };
 var easeInExpo = function (t, b, c, d) {
-    return c * Math.pow( 2, 10 * (t/d - 1) ) + b;
+    return c * Math.pow(2, 10 * (t / d - 1)) + b;
 };
 var easeOutExpo = function (t, b, c, d) {
-    return c * ( -Math.pow( 2, -10 * t/d ) + 1 ) + b;
+    return c * (-Math.pow(2, -10 * t / d) + 1) + b;
 };
 var easeInOutExpo = function (t, b, c, d) {
-    t /= d/2;
-    if (t < 1) return c/2 * Math.pow( 2, 10 * (t - 1) ) + b;
+    t /= d / 2;
+    if (t < 1) return c / 2 * Math.pow(2, 10 * (t - 1)) + b;
     t--;
-    return c/2 * ( -Math.pow( 2, -10 * t) + 2 ) + b;
+    return c / 2 * (-Math.pow(2, -10 * t) + 2) + b;
 };
 
-var windowTransition = function (location, zoom) {
+var windowTransition = function (location, zoom, callback) {
     var startLat = map.getCenter().lat();
     var startLng = map.getCenter().lng();
     var startZoom = map.getZoom();
     var times = 20;
-    var t=0;
+    var t = 0;
 
     var itv = setInterval(function () {
-        if(zoom>startZoom){
-            map.setCenter({lat:easeOutExpo(t,startLat,location.lat-startLat,times),lng:easeOutExpo(t,startLng,location.lng-startLng,times)});
-            map.setZoom(Math.round(easeInExpo(t,startZoom,zoom-startZoom,times)));
+        if (zoom > startZoom) {
+            map.setCenter({ lat: easeOutExpo(t, startLat, location.lat - startLat, times), lng: easeOutExpo(t, startLng, location.lng - startLng, times) });
+            map.setZoom(Math.round(easeInExpo(t, startZoom, zoom - startZoom, times)));
         }
-        else if (zoom<startZoom){
-            map.setCenter({lat:easeInExpo(t,startLat,location.lat-startLat,times),lng:easeInExpo(t,startLng,location.lng-startLng,times)});
-            map.setZoom(Math.round(easeOutExpo(t,startZoom,zoom-startZoom,times)));
+        else if (zoom < startZoom) {
+            map.setCenter({ lat: easeInExpo(t, startLat, location.lat - startLat, times), lng: easeInExpo(t, startLng, location.lng - startLng, times) });
+            map.setZoom(Math.round(easeOutExpo(t, startZoom, zoom - startZoom, times)));
         }
-        else map.setCenter({lat:easeInOutExpo(t,startLat,location.lat-startLat,times),lng:easeInOutExpo(t,startLng,location.lng-startLng,times)});
-        
-        if (t++>=times) {
+        else map.setCenter({ lat: easeInOutExpo(t, startLat, location.lat - startLat, times), lng: easeInOutExpo(t, startLng, location.lng - startLng, times) });
+
+        if (t++ >= times) {
             map.setCenter(location);
             map.setZoom(zoom);
             window.clearInterval(itv);
+            if (callback) callback();
         }
     }, 5);
 }
 
-var openSpawnTransition = function(marker){
-    var circle=marker.spawnCircle;
-    var radius= circle.getRadius();
+var openCircleTransition = function (marker, circle, callback) {
+    var radius = circle.getRadius();
     circle.setRadius(0);
     circle.setMap(map);
-    marker.setIcon(icons.sighting_active);
     var times = 20;
-    var t=0;
+    var t = 0;
     var itv = setInterval(function () {
-        circle.setRadius(easeInOutExpo(t,0,radius,times));
-        if(t++>=times){
+        circle.setRadius(easeInOutExpo(t, 0, radius, times));
+        if (t++ >= times) {
             circle.setRadius(radius);
             window.clearInterval(itv);
+            if (callback) callback();
         }
     }, 5);
 }
 
-var closeSpawnTransition = function(marker){
-    var circle=marker.spawnCircle;
-    var radius= circle.getRadius();
+var closeCircleTransition = function (marker, circle, callback) {
+    var radius = circle.getRadius();
     var times = 20;
-    var t=0;
+    var t = 0;
     var itv = setInterval(function () {
-        circle.setRadius(easeInOutExpo(t,radius,-radius,times));
-        if(t++>=times){
+        circle.setRadius(easeInOutExpo(t, radius, -radius, times));
+        if (t++ >= times) {
             circle.setMap(null);
             circle.setRadius(radius);
-            marker.setIcon(icons.sighting);
             window.clearInterval(itv);
+            if (callback) callback();
         }
     }, 5);
 }
 
-var addSightingMarker = function (location) {
+var scanCirclesTransition = function (marker, circles, callback) {
+    circles.scan.setMap(map);
+    var t = circles.scan.getRadius();
+    var itv = setInterval(function () {
+        circles.scan.setRadius(easeInOutExpo(t, 0, circles.range.getRadius(), circles.range.getRadius()));
+        if (!circles.range.getMap() || t++ >= circles.range.getRadius()) t = 0;
+    }, 10);
+};
+
+var circleTransition = function (marker, circle, action, callback) {
+    if (action === 'open') openCircleTransition(marker, circle, callback);
+    else if (action === 'close') closeCircleTransition(marker, circle, callback);
+    else if (action === 'scan') scanCirclesTransition(marker, circle, callback);
+};
+
+var addSpawnMarker = function (location) {
     var marker = new google.maps.Marker({
         map: map,
         animation: google.maps.Animation.DROP,
@@ -109,45 +123,60 @@ var addSightingMarker = function (location) {
     marker.spawnCircle = addSpawnCircle(location);
 
     marker.addListener('dblclick', function () {
-        windowTransition(location,Math.min(map.getZoom()+2,17));
+        windowTransition(location, Math.min(map.getZoom() + 2, 17));
     });
     marker.addListener('click', function () {
-        if(marker.spawnCircle.getMap()){
-            closeSpawnTransition(marker);
+        if (marker.spawnCircle.getMap()) {
+            circleTransition(marker, marker.spawnCircle, 'close', function () {
+                marker.setIcon(icons.sighting);
+            });
         }
-        else{
-            windowTransition(location,17);
-            openSpawnTransition(marker);
+        else {
+            windowTransition(location, 17, function () {
+                marker.setIcon(icons.sighting_active);
+                circleTransition(marker, marker.spawnCircle, 'open');
+            });
         }
     });
 };
 
-var addSpawnCircle = function(location){
+var addSpawnCircle = function (location) {
     var circle = new google.maps.Circle({
-      strokeColor: '#FFFFFF',
-      strokeOpacity: 0.7,
-      strokeWeight: 2,
-      fillColor: '#FFBBBB',
-      fillOpacity: 0.2,
-      map: null,
-      center: location,
-      radius: 200
+        strokeColor: '#FFFFFF',
+        strokeOpacity: 0.7,
+        strokeWeight: 2,
+        fillColor: '#FFBBBB',
+        fillOpacity: 0.2,
+        map: null,
+        center: location,
+        radius: 200
     });
     return circle;
 }
 
-var addSightingCircle = function(location){
-    var circle = new google.maps.Circle({
-      strokeColor: '#FFFFFF',
-      strokeOpacity: 0.7,
-      strokeWeight: 2,
-      fillColor: '#BBBBFF',
-      fillOpacity: 0.2,
-      map: map,
-      center: location,
-      radius: 200
+var addSightingCircles = function (location) {
+    var circles = {};
+    circles.scan = new google.maps.Circle({
+        strokeColor: '#FFFFFF',
+        strokeOpacity: 0,
+        strokeWeight: 0,
+        fillColor: '#BBBBFF',
+        fillOpacity: 0.2,
+        map: null,
+        center: location,
+        radius: 200
     });
-    return circle;
+    circles.range = new google.maps.Circle({
+        strokeColor: '#FFFFFF',
+        strokeOpacity: 0.7,
+        strokeWeight: 2,
+        fillColor: '#FFFFFF',
+        fillOpacity: 0,
+        map: null,
+        center: location,
+        radius: 200
+    });
+    return circles;
 }
 
 var addMyLocationButton = function () {
@@ -197,15 +226,24 @@ var addMyLocationButton = function () {
         }, 500);
         if (navigator.geolocation) {
             Materialize.toast('Locating...', 2000);
+
             navigator.geolocation.getCurrentPosition(function (position) {
-                var location={lat: position.coords.latitude, lng: position.coords.longitude};
+                var location = { lat: position.coords.latitude, lng: position.coords.longitude };
                 marker.setPosition(location);
                 marker.setMap(map);
-                windowTransition(location,17);
-                marker.sightingCircle = addSightingCircle(location);
+                marker.sightingCircles = addSightingCircles(location);
+                windowTransition(location, 17, function () {
+                    circleTransition(marker, marker.sightingCircles.range, 'open', function () {
+                        circleTransition(marker, marker.sightingCircles, 'scan');
+                    });
+                });
                 marker.addListener('click', function () {
-                    if(marker.sightingCircle.getMap()) marker.sightingCircle.setMap(null);
-                    else marker.sightingCircle.setMap(map);
+                    if (marker.sightingCircles.range.getMap()) {
+                        circleTransition(marker, marker.sightingCircles.range, 'close');
+                    }
+                    else {
+                        circleTransition(marker, marker.sightingCircles.range, 'open');
+                    }
                 });
 
                 clearInterval(animationInterval);
@@ -263,7 +301,7 @@ var mapInit = function () {
     ];
 
     for (var i = 0; i < locations.length; i++) {
-        addSightingMarker({lat: locations[i][0], lng: locations[i][1]});
+        addSpawnMarker({ lat: locations[i][0], lng: locations[i][1] });
     }
 
 
