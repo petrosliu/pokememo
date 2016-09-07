@@ -1,4 +1,5 @@
 var map = {};
+var spawnMarkers = [];
 
 var icons = {
     'sighting': {
@@ -113,7 +114,8 @@ var circleTransition = function (marker, circle, action, callback) {
     else if (action === 'scan') scanCirclesTransition(marker, circle, callback);
 };
 
-var addSpawnMarker = function (location) {
+var addSpawnMarker = function (spawn) {
+    var location = { lat: spawn.latitude, lng: spawn.longitude };
     var marker = new google.maps.Marker({
         map: map,
         animation: google.maps.Animation.DROP,
@@ -138,7 +140,15 @@ var addSpawnMarker = function (location) {
             });
         }
     });
+    spawnMarkers.push(marker);
 };
+
+var removeSpawnMarker = function () {
+    for (var i = 0; i < spawnMarkers.length; i++) {
+        spawnMarkers[i].setMap(null);
+    }
+    spawnMarkers = [];
+}
 
 var addSpawnCircle = function (location) {
     var circle = new google.maps.Circle({
@@ -231,6 +241,8 @@ var addMyLocationButton = function () {
                 var location = { lat: position.coords.latitude, lng: position.coords.longitude };
                 marker.setPosition(location);
                 marker.setMap(map);
+                if (marker.sightingCircles.range) marker.sightingCircles.range.setMap(null);
+                if (marker.sightingCircles.scan) marker.sightingCircles.scan.setMap(null);
                 marker.sightingCircles = addSightingCircles(location);
                 windowTransition(location, 17, function () {
                     circleTransition(marker, marker.sightingCircles.range, 'open', function () {
@@ -289,21 +301,5 @@ var mapInit = function () {
     var mapElement = document.getElementById('map');
     map = new google.maps.Map(mapElement, mapOptions);
     addMyLocationButton();
-
-
-
-    var locations = [
-        [37.559233, -121.968424],
-        [37.557470, -121.968200],
-        [37.558296, -121.967140],
-        [37.557563, -121.966828],
-        [37.557063, -121.968160]
-    ];
-
-    for (var i = 0; i < locations.length; i++) {
-        addSpawnMarker({ lat: locations[i][0], lng: locations[i][1] });
-    }
-
-
     return map;
 };

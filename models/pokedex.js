@@ -2,10 +2,10 @@ var mongoose = require('./mongodb');
 
 
 var pokedexSchema = new mongoose.Schema({
-    user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
-    pokemon: String,
+    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    pokemon: Number,
     candy: String,
-    candy_amount: { type: Number, min: 0, default: 0 },
+    candy_amount: { type: Number, min: 0, default: 0 }
 });
 
 pokedexSchema.set('toObject', {
@@ -17,23 +17,22 @@ pokedexSchema.set('toJSON', {
 
 var PokedexDB = mongoose.model('Pokedex', pokedexSchema);
 
-var getPokedex = function(user, callback){
-    PokedexDB.find({user:user},function(err,pokedex){
-        if(err) callback(err);
-        else callback(err,pokedex);
+var getPokedex = function (user, callback) {
+    PokedexDB.find({ user: user }, function (err, pokedex) {
+        if (err) callback(err);
+        else callback(err, pokedex);
     });
-
 };
 
-var registerPokedex = function(user, pokemon, callback){
-    PokedexDB.findOne({user:user,pokemon:pokemon.name},function(err,pokedex){
-        if(!pokedex){
+var registerPokedex = function (user, pokemon, callback) {
+    PokedexDB.findOne({ user: user, pokemon: pokemon.id }, function (err, pokedex) {
+        if (!pokedex) {
             var pokedex = new PokedexDB({
                 user: user,
-                pokemon: pokemon.name,
+                pokemon: pokemon.id,
                 candy: pokemon.candy
             });
-            pokedex.save(function(err){
+            pokedex.save(function (err) {
                 callback(err);
             });
         }
@@ -41,17 +40,17 @@ var registerPokedex = function(user, pokemon, callback){
     });
 };
 
-var deregisterPokedex = function(user, pokemon, callback){
+var deregisterPokedex = function (user, pokemon, callback) {
     PokedexDB.remove({
-        user:user,
-        pokemon:pokemon.name
-    }, function(err){
+        user: user,
+        pokemon: pokemon.id
+    }, function (err) {
         callback(err);
     });
 };
 
-var updatePokedex = function(user, candy, candy_amount, callback){
-    PokedexDB.update({user:user,candy:candy},{candy_amount:candy_amount},{multi:true},function(err,num){
+var updatePokedex = function (user, candy, candy_amount, callback) {
+    PokedexDB.update({ user: user, candy: candy }, { candy_amount: candy_amount }, { multi: true }, function (err, num) {
         callback(err);
     });
 };

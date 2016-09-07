@@ -76,11 +76,11 @@ pokememo.controller('homeController', function ($scope, $http, $window) {
             });
     };
     $scope.newUpdate = function () {
-        $scope.user.update={player:{}};
-        $scope.user.update.username=$scope.user.username;
-        $scope.user.update.player.id=$scope.user.player.id;
-        $scope.user.update.player.team=$scope.user.player.team;
-        $scope.user.update.player.level=$scope.user.player.level;
+        $scope.user.update = { player: {} };
+        $scope.user.update.username = $scope.user.username;
+        $scope.user.update.player.id = $scope.user.player.id;
+        $scope.user.update.player.team = $scope.user.player.team;
+        $scope.user.update.player.level = $scope.user.player.level;
     };
     $scope.updateUser = function () {
         if ($scope.user.update.username === '') delete $scope.user.update.username;
@@ -126,8 +126,8 @@ pokememo.controller('pokedexController', function ($scope, $http, $window, $filt
         $http.get('/api/pokemons')
             .success(function (data) {
                 for (var i = 0; i < data.length; i++) {
-                    data[i].registered = ($scope.pokedex[data[i].name] === true);
-                    data[i].candy_amount = $scope.pokedex[data[i].candy] || 0;
+                    data[i].registered = ($scope.pokedex[data[i].id] === true);
+                    data[i].candy_amount = +$scope.pokedex[data[i].candy] || 0;
                     if (data[i].registered) {
                         data[i].keywords.push('catched');
                         data[i].progress = 1000;
@@ -174,7 +174,7 @@ pokememo.controller('pokedexController', function ($scope, $http, $window, $filt
     };
 
     $scope.showModel = function (pokemon) {
-        if ($scope.pokedex[pokemon.name] || $scope.pokedex[pokemon.candy] !== undefined) {
+        if ($scope.pokedex[pokemon.id] || $scope.pokedex[pokemon.candy] !== undefined) {
             $scope.modal.pokemon = pokemon;
             $scope.modal.candy_amount = $scope.pokedex[pokemon.candy];
             $('#pokemon-modal').openModal();
@@ -207,19 +207,36 @@ pokememo.controller('pokedexController', function ($scope, $http, $window, $filt
 
     $scope.modal = {};
     $scope.getPokedex();
-
 });
 
-pokememo.controller('mapController', function ($scope, $timeout) {
-    $scope.render = { map: false, spin: true };
-    $timeout(function () {
-        $scope.render.map = true;
-    }, 1500);
-    $timeout(function () {
-        $scope.render.spin = false;
-    }, 3000);
+pokememo.controller('mapController', function ($scope, $timeout, $http, $window) {
+    var getSpawns = function (latTop, latBottom, lngLeft, lngRight) {
 
-    $scope.mapInit = mapInit;
+    };
+    var getMySpawns = function () {
+        if ($window.localStorage['token']) {
+            $http.get('api/spawns', {
+                params: { token: $window.localStorage['token'] }
+            })
+                .success(function (data) {
+                    $scope.mySpawns = data;
+                    $scope.render.map = true;
+                })
+                .error(function (data) {
+                    Materialize.toast('Error: ' + data, 2000);
+                });
+        }
+    };
+
+    $scope.render = { map: false, spin: true };
+    getMySpawns();
+    $scope.mapInit = function () {
+        $scope.map = mapInit();
+        for (var i = 0; i < $scope.mySpawns.length; i++) addSpawnMarker($scope.mySpawns[i]);
+        $timeout(function () {
+            $scope.render.spin = false;
+        }, 1500);
+    }
 });
 
 pokememo.filter('spaceless', function () {
@@ -250,6 +267,6 @@ pokememo.filter('teamcolor', function () {
 
 pokememo.filter('progress', function () {
     return function (input) {
-        return Math.min(input,100);
+        return Math.min(input, 100);
     }
 });

@@ -20,10 +20,11 @@ console.log("App listening on port %d", config.PORT || 8080);
 var Pokemon = require('./models/pokemon');
 var User = require('./models/user');
 var Pokedex = require('./models/pokedex');
+var Spawn = require('./models/spawn');
 
 // ----- define routes
 app.get('/api/pokemons', function (req, res) {
-  Pokemon.getAll(function (err, pokemons) {
+  Pokemon.get(function (err, pokemons) {
     if (err) { res.send(err); }
     else res.json(pokemons);
   });
@@ -216,8 +217,6 @@ app.post('/api/pokedex/:id', function (req, res) {
         Pokemon.get(req.params.id, function (err, pokemon) {
           if (err) res.send(err);
           else {
-            console.log(pokemon.candy);
-            console.log(req.body.candy_amount);
             Pokedex.update(user, pokemon.candy, req.body.candy_amount, function (err) {
               if (err) res.send(err);
               else res.json({
@@ -226,6 +225,49 @@ app.post('/api/pokedex/:id', function (req, res) {
               });
             });
           }
+        });
+      }
+    });
+  } else {
+    return res.status(403).send({
+      success: false,
+      message: 'No token provided.'
+    });
+  }
+});
+
+app.get('/api/spawns', function (req, res) {
+  var token = req.body.token || req.query.token || req.headers['x-access-token'];
+  if (token) {
+    User.auth(token, function (err, user) {
+      if (err) res.send(err);
+      else {
+        Spawn.get(user, function (err, spawns) {
+          if (err) res.send(err);
+          else res.json(spawns);
+        });
+      }
+    });
+  } else {
+    Spawn.get(function (err, spawns) {
+      if (err) res.send(err);
+      else res.json(spawns);
+    });
+  }
+});
+
+app.post('/api/spawns', function (req, res) {
+  var token = req.body.token || req.query.token || req.headers['x-access-token'];
+  if (token) {
+    User.auth(token, function (err, user) {
+      if (err) res.send(err);
+      else {
+        Spawn.set(user, req.body.latitude, req.body.longitude, req.body.pokemon, function (err) {
+          if (err) res.send(err);
+          else res.json({
+            success: true,
+            message: 'Spawn updated.'
+          });
         });
       }
     });

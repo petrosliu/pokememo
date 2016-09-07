@@ -33,7 +33,7 @@
 
 <div class="row pokemon-item valign-wrapper white z-depth-2" ng-repeat="p in pokemon | filter:{keywords:query} | orderBy:sortBy track by p.id">
     <div class="col s3 sprite">
-        <img src="{{p.img}}" class="img-responsive {{(pokedex[p.name])?'seen':'unseen'}}" ng-click="(pokedex[p.name])?deregister(p):register(p);">
+        <img src="{{p.img}}" class="img-responsive {{(p.registered)?'seen':'unseen'}}" ng-click="(p.registered)?deregister(p):register(p);">
     </div>
     <div class="col s8">
         <div class="col s12 pokemon-name">
@@ -46,12 +46,12 @@
         </div>
         <div class="col s12">
             <div class="progress progress-striped" ng-click="showModel(p);">
-                <div ng-if="pokedex[p.candy]!==undefined && p.candy_count" class="progress-bar label-{{p.type[0] | lowercase}}" role="progressbar"
-                    style="width:{{pokedex[p.candy]/p.candy_count*100|progress}}%"></div>
-                <div ng-if="pokedex[p.candy]!==undefined && p.candy_count" class="pull-right">{{pokedex[p.candy]}}/{{p.candy_count}}&nbsp;</div>
-                <div ng-if="pokedex[p.candy]!==undefined && !p.candy_count" class="progress-bar label-{{p.type[0] | lowercase}}" role="progressbar"
-                    style="width:{{pokedex[p.candy]*100|progress}}%"></div>
-                <div ng-if="pokedex[p.candy]!==undefined && !p.candy_count" class="pull-right">{{pokedex[p.candy]}}&nbsp;</div>
+                <div ng-if="p.candy_amount!==undefined && p.candy_count" class="progress-bar label-{{p.type[0] | lowercase}}" role="progressbar"
+                    style="width:{{p.candy_amount/p.candy_count*100|progress}}%"></div>
+                <div ng-if="p.candy_amount!==undefined && p.candy_count" class="pull-right">{{p.candy_amount}}/{{p.candy_count}}&nbsp;</div>
+                <div ng-if="p.candy_amount!==undefined && !p.candy_count" class="progress-bar label-{{p.type[0] | lowercase}}" role="progressbar"
+                    style="width:{{p.candy_amount*100|progress}}%"></div>
+                <div ng-if="p.candy_amount!==undefined && !p.candy_count" class="pull-right">{{p.candy_amount}}&nbsp;</div>
             </div>
         </div>
     </div>
@@ -75,7 +75,7 @@
         <div class="row pokemon-item center">
             <div class="col l4 s12">
                 <div class="row sprite">
-                    <img src="{{modal.pokemon.img}}" class="img-responsive {{(pokedex[modal.pokemon.name])?'seen':'unseen'}}" ng-click="(pokedex[modal.pokemon.name])?deregister(modal.pokemon):register(modal.pokemon);">
+                    <img src="{{modal.pokemon.img}}" class="img-responsive {{(modal.pokemon.registered)?'seen':'unseen'}}" ng-click="(modal.pokemon.registered)?deregister(modal.pokemon):register(modal.pokemon);">
                 </div>
                 <div class="row">
                     <div class="pokemon-name">
@@ -99,16 +99,16 @@
                     </div>
                     <div class="col s12">
                         <div class="progress progress-striped">
-                            <div ng-if="pokedex[modal.pokemon.candy]!==undefined && modal.pokemon.candy_count" class="progress-bar
+                            <div ng-if="modal.pokemon.candy_amount!==undefined && modal.pokemon.candy_count" class="progress-bar
                         label-{{modal.pokemon.type[0] | lowercase}}" role="progressbar" style="width:{{modal.candy_amount/modal.pokemon.candy_count*100|progress}}%"></div>
-                            <div ng-if="pokedex[modal.pokemon.candy]!==undefined && modal.pokemon.candy_count" class="pull-right">{{modal.candy_amount}}/{{modal.pokemon.candy_count}}&nbsp;</div>
-                            <div ng-if="pokedex[modal.pokemon.candy]!==undefined && !modal.pokemon.candy_count" class="progress-bar
+                            <div ng-if="modal.pokemon.candy_amount!==undefined && modal.pokemon.candy_count" class="pull-right">{{modal.candy_amount}}/{{modal.pokemon.candy_count}}&nbsp;</div>
+                            <div ng-if="modal.pokemon.candy_amount!==undefined && !modal.pokemon.candy_count" class="progress-bar
                         label-{{modal.pokemon.type[0] | lowercase}}" role="progressbar" style="width:{{modal.candy_amount*100|progress}}%"></div>
-                            <div ng-if="pokedex[modal.pokemon.candy]!==undefined && !modal.pokemon.candy_count" class="pull-right">{{modal.candy_amount}}&nbsp;</div>
+                            <div ng-if="modal.pokemon.candy_amount!==undefined && !modal.pokemon.candy_count" class="pull-right">{{modal.candy_amount}}&nbsp;</div>
                         </div>
                     </div>
                     <div class="col s12">
-                        <p ng-if="pokedex[modal.pokemon.candy]!==undefined" class="range-field" style="padding-top:20px;">
+                        <p ng-if="modal.pokemon.candy_amount!==undefined" class="range-field" style="padding-top:20px;">
                             <input class="label-{{modal.pokemon.type[0]|lowercase}}" type="range" id="candy" min="0" max="{{modal.pokemon.candy_count||200}}"
                                 ng-model="modal.candy_amount" ng-mouseup="updateCandy();" />
                         </p>
@@ -117,8 +117,8 @@
                         <button ng-if="modal.pokemon.candy_count" class="waves-effect waves-light btn btn-flat {{modal.candy_amount<modal.pokemon.candy_count?'disabled':''}}"
                             ng-click="modal.candy_amount=modal.candy_amount-modal.pokemon.candy_count+1;updateCandy();register(modal.pokemon);">
                             Envolve <span ng-if="envolve(modal.pokemon.candy_count,modal.candy_amount)" class="label label-{{modal.pokemon.type[0] | lowercase}}">{{envolve(modal.pokemon.candy_count,modal.candy_amount)}}</span></button>
-                        <button class="waves-effect waves-light btn btn-flat" ng-click="modal.candy_amount=modal.candy_amount+3;updateCandy();">Catch</button>
-                        <button class="waves-effect waves-light btn btn-flat" ng-click="modal.candy_amount=modal.candy_amount+1;updateCandy();">Transfer</button>
+                        <button class="waves-effect waves-light btn btn-flat" ng-click="modal.candy_amount=+modal.candy_amount+3;updateCandy();">Catch</button>
+                        <button class="waves-effect waves-light btn btn-flat" ng-click="modal.candy_amount=+modal.candy_amount+1;updateCandy();">Transfer</button>
                     </div>
                 </div>
 

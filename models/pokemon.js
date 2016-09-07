@@ -3395,19 +3395,22 @@ PokemonDB.create(pokemon, function (err) {
     }
 });
 
-var getPokemon = function (id, callback) {
-    PokemonDB.findOne({ 'id': id }, function (err, pokemon) {
-        if (err) callback(err);
-        else callback(null, pokemon);
-    });
-};
-
-var getAllPokemons = function (callback) {
-    PokemonDB.find(function (err, pokemon) {
-        if (err) callback(err);
-        else callback(null, pokemon);
-    });
+var getPokemon = function () {
+    if (arguments.length === 1) {
+        var callback = arguments[0];
+        PokemonDB.find(function (err, pokemon) {
+            if (err) callback(err);
+            else callback(null, pokemon);
+        });
+    }
+    else if (arguments.length === 2) {
+        var id = arguments[0];
+        var callback = arguments[1];
+        PokemonDB.findOne({ 'id': id }, function (err, pokemon) {
+            if (err) callback(err);
+            else callback(null, pokemon);
+        });
+    }
 };
 
 module.exports.get = getPokemon;
-module.exports.getAll = getAllPokemons;

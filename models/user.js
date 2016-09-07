@@ -10,7 +10,7 @@ var userSchema = new mongoose.Schema({
     player: {
         id: { type: String, default: '' },
         team: { type: String, default: '' },
-        level: { type: Number, default: 1}
+        level: { type: Number, default: 1 }
     }
 });
 
@@ -49,8 +49,9 @@ var UserDB = mongoose.model('User', userSchema);
 var getUser = function (username, callback) {
     UserDB.findOne({ username: username }, function (err, user) {
         if (err) callback(err);
+        if (user) callback(err, user);
         else {
-            callback(err, user);
+            callback('User not found.');
         }
     });
 };
