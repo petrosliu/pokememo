@@ -241,8 +241,10 @@ var addMyLocationButton = function () {
                 var location = { lat: position.coords.latitude, lng: position.coords.longitude };
                 marker.setPosition(location);
                 marker.setMap(map);
-                if (marker.sightingCircles.range) marker.sightingCircles.range.setMap(null);
-                if (marker.sightingCircles.scan) marker.sightingCircles.scan.setMap(null);
+                if(marker.sightingCircles){
+                    if (marker.sightingCircles.range) marker.sightingCircles.range.setMap(null);
+                    if (marker.sightingCircles.scan) marker.sightingCircles.scan.setMap(null);
+                }
                 marker.sightingCircles = addSightingCircles(location);
                 windowTransition(location, 17, function () {
                     circleTransition(marker, marker.sightingCircles.range, 'open', function () {
