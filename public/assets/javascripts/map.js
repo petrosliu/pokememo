@@ -65,14 +65,14 @@ var windowTransition = function (location, zoom, callback) {
 
     var itv = setInterval(function () {
         if (zoom > startZoom) {
-            map.setCenter({ lat: easeOutExpo(t, startLat, location.lat - startLat, times), lng: easeOutExpo(t, startLng, location.lng - startLng, times) });
+            map.setCenter({ lat: easeOutExpo(t, startLat, location.lat() - startLat, times), lng: easeOutExpo(t, startLng, location.lng() - startLng, times) });
             map.setZoom(Math.round(easeInExpo(t, startZoom, zoom - startZoom, times)));
         }
         else if (zoom < startZoom) {
-            map.setCenter({ lat: easeInExpo(t, startLat, location.lat - startLat, times), lng: easeInExpo(t, startLng, location.lng - startLng, times) });
+            map.setCenter({ lat: easeInExpo(t, startLat, location.lat() - startLat, times), lng: easeInExpo(t, startLng, location.lng() - startLng, times) });
             map.setZoom(Math.round(easeOutExpo(t, startZoom, zoom - startZoom, times)));
         }
-        else map.setCenter({ lat: easeInOutExpo(t, startLat, location.lat - startLat, times), lng: easeInOutExpo(t, startLng, location.lng - startLng, times) });
+        else map.setCenter({ lat: easeInOutExpo(t, startLat, location.lat() - startLat, times), lng: easeInOutExpo(t, startLng, location.lng() - startLng, times) });
 
         if (t++ >= times) {
             map.setCenter(location);
@@ -180,7 +180,7 @@ var addSpawnMarkers = function (spawns) {
 };
 
 var updateSpawnMarkers = function () {
-    var locations = []
+    var locations = [];
     for (var i = 0; i < spawnMarkers.length; i++) {
         locations.push(spawnMarkers[i].getPosition());
         spawnMarkers[i].setMap(null);
@@ -286,7 +286,7 @@ var addMyLocationButton = function () {
             Materialize.toast('Locating...', 2000);
 
             navigator.geolocation.getCurrentPosition(function (position) {
-                var location = { lat: position.coords.latitude, lng: position.coords.longitude };
+                var location = new google.maps.LatLng({ lat: position.coords.latitude, lng: position.coords.longitude });
                 myLocationMarker.setPosition(location);
                 myLocationMarker.setMap(map);
                 if (myLocationMarker.sightingCircles) {
