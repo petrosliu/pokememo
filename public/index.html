@@ -30,7 +30,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-animate.min.js"></script>
     <script src="https://use.fontawesome.com/4d4ce8ea89.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
-    <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDKpjawI069owLU8QFpMeqInJAYBgtBueQ&signed_in=true&extension=.js'></script>
+    <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDKpjawI069owLU8QFpMeqInJAYBgtBueQ&signed_in=true&extension=.js&libraries=drawing,geometry'></script>
     <script src="assets/javascripts/map.js"></script>
     <script src="app.js"></script>
 
@@ -44,7 +44,7 @@
     <div class="navbar-fixed">
         <nav>
             <div class="nav-wrapper" style="background-color:#E7D57F;">
-                <a class="brand-logo center dropdown-button" data-hover="true" data-activates='dropdown' onclick="$('.dropdown-button').dropdown('open');"><img class="responsive-img" src="/assets/favicons/1024.png" style="height:100px;"></a>
+                <a class="brand-logo center dropdown-button" data-hover="true" data-activates='dropdown' onclick="$('.dropdown-button').dropdown('open');"><img class="responsive-img" src="/assets/favicons/128.png" style="height:100px;"></a>
                 <ul id='dropdown' class='dropdown-content'>
                     <li><a href="#!" onclick="$('.dropdown-button').dropdown('close');">Home</a></li>
                     <li><a href="#pokedex" onclick="$('.dropdown-button').dropdown('close');">Pokédex</a></li>
@@ -63,9 +63,6 @@
     <script>
         $(document).ready(function() {
             $('.landing-bg').css('background-image','url(' + randombgurl() + ')');
-            setTimeout(function() {
-                $('.landing-bg').css('background-image','url(' + randombgurl() + ')');
-            }, 30000);
             $(".button-collapse").sideNav();
         });
 

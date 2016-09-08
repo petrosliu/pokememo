@@ -5,7 +5,7 @@
 </div>
 
 <div class="row white z-depth-2" ng-if="!user">
-  <div class="col s12 l6 offset-l3">
+  <form class="col s12 l6 offset-l3">
     <div class="row hoverable">
       <input id="username" placeholder="Username" type="text" class="validate center" ng-model="logform.username">
     </div>
@@ -14,9 +14,9 @@
     </div>
     <div class="row center">
       <button class="waves-effect waves-light btn btn-flat" type="submit" ng-click="login()">Log in</button>
-      <button class="waves-effect waves-light btn btn-flat" type="submit" ng-click="signup()">Sign up</button>
+      <button class="waves-effect waves-light btn btn-flat" ng-click="signup()">Sign up</button>
     </div>
-  </div>
+  </form>
 </div>
 <div class="row white z-depth-2" ng-if="user">
   <div class="col s3">
@@ -51,7 +51,7 @@
     <div class="row hoverable">
       <input id="name" placeholder="Player ID" type="text" class="center" ng-model="user.update.player.id">
 
-      <div class="fixed-action-btn horizontal" style="bottom:50px;right:-25px;position:absolute;">
+      <div class="fixed-action-btn horizontal" style="bottom:100px;right:-25px;position:absolute;">
         <a class="btn-floating btn-large white"><img ng-src="assets/images/teams/team_{{user.update.player.team | teamcolor}}.png" style="width:40px;"></a>
         <ul>
           <li ng-repeat="t in ['','Instinct','Valor','Mystic']">
@@ -70,14 +70,9 @@
       </p>
       </div>
     </div>
-  </div>
-
-  <div class="input-field col s12 l6 offset-l3">
-
     <div class="row center">
       <button class="waves-effect waves-light btn btn-flat" type="submit" ng-click="updateUser();">Save</button>
-      <button class="waves-effect waves-light btn btn-flat" type="submit" ng-click="user.update=null;">Cancel</button>
-
+      <button class="waves-effect waves-light btn btn-flat" ng-click="user.update=null;">Cancel</button>
     </div>
   </div>
 </div>

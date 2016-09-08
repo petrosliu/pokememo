@@ -220,11 +220,18 @@ pokememo.controller('mapController', function ($scope, $timeout, $http, $window)
             })
                 .success(function (data) {
                     $scope.mySpawns = data;
-                    $scope.render.map = true;
+                    $timeout(function () {
+                        $scope.render.map = true;
+                    }, 1500);
                 })
                 .error(function (data) {
                     Materialize.toast('Error: ' + data, 2000);
                 });
+        }
+        else {
+            $timeout(function () {
+                $scope.render.map = true;
+            }, 1500);
         }
     };
 
@@ -232,7 +239,7 @@ pokememo.controller('mapController', function ($scope, $timeout, $http, $window)
     getMySpawns();
     $scope.mapInit = function () {
         $scope.map = mapInit();
-        for (var i = 0; i < $scope.mySpawns.length; i++) addSpawnMarker($scope.mySpawns[i]);
+        addSpawnMarkers($scope.mySpawns);
         $timeout(function () {
             $scope.render.spin = false;
         }, 1500);

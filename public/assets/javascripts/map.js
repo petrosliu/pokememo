@@ -1,5 +1,6 @@
 var map = {};
 var spawnMarkers = [];
+var myLocationMarker = {};
 
 var icons = {
     'sighting': {
@@ -11,6 +12,20 @@ var icons = {
     },
     'sighting_active': {
         url: '/assets/images/map/marker_active.png',
+        size: new google.maps.Size(64, 64),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(16, 16),
+        scaledSize: new google.maps.Size(32, 32)
+    },
+    'sighting_near': {
+        url: '/assets/images/map/marker_near.png',
+        size: new google.maps.Size(64, 76),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(16, 38),
+        scaledSize: new google.maps.Size(32, 38)
+    },
+    'sighting_near_active': {
+        url: '/assets/images/map/marker_near_active.png',
         size: new google.maps.Size(64, 64),
         origin: new google.maps.Point(0, 0),
         anchor: new google.maps.Point(16, 16),
@@ -105,7 +120,7 @@ var scanCirclesTransition = function (marker, circles, callback) {
     var itv = setInterval(function () {
         circles.scan.setRadius(easeInOutExpo(t, 0, circles.range.getRadius(), circles.range.getRadius()));
         if (!circles.range.getMap() || t++ >= circles.range.getRadius()) t = 0;
-    }, 10);
+    }, 50);
 };
 
 var circleTransition = function (marker, circle, action, callback) {
@@ -114,14 +129,16 @@ var circleTransition = function (marker, circle, action, callback) {
     else if (action === 'scan') scanCirclesTransition(marker, circle, callback);
 };
 
-var addSpawnMarker = function (spawn) {
-    var location = { lat: spawn.latitude, lng: spawn.longitude };
+var addSpawnMarker = function (location) {
     var marker = new google.maps.Marker({
         map: map,
         animation: google.maps.Animation.DROP,
         position: location,
         icon: icons.sighting
     });
+    if (myLocationMarker && google.maps.geometry.spherical.computeDistanceBetween(myLocationMarker.getPosition(), location) < 200) {
+        marker.setIcon(icons.sighting_near);
+    }
     marker.spawnCircle = addSpawnCircle(location);
 
     marker.addListener('dblclick', function () {
@@ -130,12 +147,22 @@ var addSpawnMarker = function (spawn) {
     marker.addListener('click', function () {
         if (marker.spawnCircle.getMap()) {
             circleTransition(marker, marker.spawnCircle, 'close', function () {
-                marker.setIcon(icons.sighting);
+                if (myLocationMarker && google.maps.geometry.spherical.computeDistanceBetween(myLocationMarker.getPosition(), location) < 200) {
+                    marker.setIcon(icons.sighting_near);
+                }
+                else {
+                    marker.setIcon(icons.sighting);
+                }
             });
         }
         else {
             windowTransition(location, 17, function () {
-                marker.setIcon(icons.sighting_active);
+                if (myLocationMarker && google.maps.geometry.spherical.computeDistanceBetween(myLocationMarker.getPosition(), location) < 200) {
+                    marker.setIcon(icons.sighting_near_active);
+                }
+                else {
+                    marker.setIcon(icons.sighting_active);
+                }
                 circleTransition(marker, marker.spawnCircle, 'open');
             });
         }
@@ -143,7 +170,28 @@ var addSpawnMarker = function (spawn) {
     spawnMarkers.push(marker);
 };
 
-var removeSpawnMarker = function () {
+var addSpawnMarkers = function (spawns) {
+    if (spawns) {
+        for (var i = 0; i < spawns.length; i++) {
+            var location = new google.maps.LatLng({ lat: spawns[i].latitude, lng: spawns[i].longitude });
+            addSpawnMarker(location);
+        }
+    }
+};
+
+var updateSpawnMarkers = function () {
+    var locations = []
+    for (var i = 0; i < spawnMarkers.length; i++) {
+        locations.push(spawnMarkers[i].getPosition());
+        spawnMarkers[i].setMap(null);
+    }
+    spawnMarkers = [];
+    for (var i = 0; i < locations.length; i++) {
+        addSpawnMarker(locations[i]);
+    }
+}
+
+var removeSpawnMarkers = function () {
     for (var i = 0; i < spawnMarkers.length; i++) {
         spawnMarkers[i].setMap(null);
     }
@@ -190,7 +238,7 @@ var addSightingCircles = function (location) {
 }
 
 var addMyLocationButton = function () {
-    var marker = new google.maps.Marker({
+    myLocationMarker = new google.maps.Marker({
         animation: google.maps.Animation.DROP,
         position: map.getCenter(),
         icon: icons.myLocation
@@ -239,24 +287,25 @@ var addMyLocationButton = function () {
 
             navigator.geolocation.getCurrentPosition(function (position) {
                 var location = { lat: position.coords.latitude, lng: position.coords.longitude };
-                marker.setPosition(location);
-                marker.setMap(map);
-                if(marker.sightingCircles){
-                    if (marker.sightingCircles.range) marker.sightingCircles.range.setMap(null);
-                    if (marker.sightingCircles.scan) marker.sightingCircles.scan.setMap(null);
+                myLocationMarker.setPosition(location);
+                myLocationMarker.setMap(map);
+                if (myLocationMarker.sightingCircles) {
+                    if (myLocationMarker.sightingCircles.range) myLocationMarker.sightingCircles.range.setMap(null);
+                    if (myLocationMarker.sightingCircles.scan) myLocationMarker.sightingCircles.scan.setMap(null);
                 }
-                marker.sightingCircles = addSightingCircles(location);
+                myLocationMarker.sightingCircles = addSightingCircles(location);
                 windowTransition(location, 17, function () {
-                    circleTransition(marker, marker.sightingCircles.range, 'open', function () {
-                        circleTransition(marker, marker.sightingCircles, 'scan');
+                    circleTransition(myLocationMarker, myLocationMarker.sightingCircles.range, 'open', function () {
+                        circleTransition(myLocationMarker, myLocationMarker.sightingCircles, 'scan');
+                        updateSpawnMarkers();
                     });
                 });
-                marker.addListener('click', function () {
-                    if (marker.sightingCircles.range.getMap()) {
-                        circleTransition(marker, marker.sightingCircles.range, 'close');
+                myLocationMarker.addListener('click', function () {
+                    if (myLocationMarker.sightingCircles.range.getMap()) {
+                        circleTransition(myLocationMarker, myLocationMarker.sightingCircles.range, 'close');
                     }
                     else {
-                        circleTransition(marker, marker.sightingCircles.range, 'open');
+                        circleTransition(myLocationMarker, myLocationMarker.sightingCircles.range, 'open');
                     }
                 });
 
