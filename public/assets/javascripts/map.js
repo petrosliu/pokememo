@@ -179,11 +179,12 @@ var addSpawnMarkers = function (spawns) {
 };
 
 var updateSpawnMarkers = function () {
-    for (var i = 0; i < spawnMarkers.length; i++) {
+    var length=spawnMarkers.length;
+    for (var i = 0; i < length; i++) {
         addSpawnMarker(spawnMarkers[i].getPosition());
         spawnMarkers[i].setMap(null);
     }
-    spawnMarkers.slice(spawnMarkers.length/2);
+    spawnMarkers.slice(length);
 }
 
 var removeSpawnMarkers = function () {
