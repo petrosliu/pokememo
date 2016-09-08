@@ -290,11 +290,9 @@ var addMyLocationButton = function () {
                 if (myLocationMarker.sightingCircles) {
                     if (myLocationMarker.sightingCircles.range){
                         myLocationMarker.sightingCircles.range.setMap(null);
-                        myLocationMarker.sightingCircles.range=null;
                     }
                     if (myLocationMarker.sightingCircles.scan){
                         myLocationMarker.sightingCircles.scan.setMap(null);
-                        myLocationMarker.sightingCircles.scan=null;
                     }
                 }
                 myLocationMarker.sightingCircles = addSightingCircles(location);
