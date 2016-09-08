@@ -185,7 +185,7 @@ var updateSpawnMarkers = function () {
         spawnMarkers[i].setMap(null);
         spawnMarkers[i]=null;
     }
-    spawnMarkers.slice(length);
+    spawnMarkers = spawnMarkers.slice(length);
 }
 
 var removeSpawnMarkers = function () {
