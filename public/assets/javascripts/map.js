@@ -183,6 +183,7 @@ var updateSpawnMarkers = function () {
     for (var i = 0; i < length; i++) {
         addSpawnMarker(spawnMarkers[i].getPosition());
         spawnMarkers[i].setMap(null);
+        spawnMarkers[i]=null;
     }
     spawnMarkers.slice(length);
 }
@@ -190,6 +191,7 @@ var updateSpawnMarkers = function () {
 var removeSpawnMarkers = function () {
     for (var i = 0; i < spawnMarkers.length; i++) {
         spawnMarkers[i].setMap(null);
+        spawnMarkers[i]=null;
     }
     spawnMarkers = [];
 }
@@ -286,8 +288,14 @@ var addMyLocationButton = function () {
                 myLocationMarker.setPosition(location);
                 myLocationMarker.setMap(map);
                 if (myLocationMarker.sightingCircles) {
-                    if (myLocationMarker.sightingCircles.range) myLocationMarker.sightingCircles.range.setMap(null);
-                    if (myLocationMarker.sightingCircles.scan) myLocationMarker.sightingCircles.scan.setMap(null);
+                    if (myLocationMarker.sightingCircles.range){
+                        myLocationMarker.sightingCircles.range.setMap(null);
+                        myLocationMarker.sightingCircles.range=null;
+                    }
+                    if (myLocationMarker.sightingCircles.scan){
+                        myLocationMarker.sightingCircles.scan.setMap(null);
+                        myLocationMarker.sightingCircles.scan=null;
+                    }
                 }
                 myLocationMarker.sightingCircles = addSightingCircles(location);
                 windowTransition(location, 17, function () {
