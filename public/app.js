@@ -222,7 +222,7 @@ pokememo.controller('mapController', function ($scope, $timeout, $http, $window)
                     $scope.mySpawns = data;
                     $timeout(function () {
                         $scope.render.map = true;
-                    }, 1500);
+                    }, 1000);
                 })
                 .error(function (data) {
                     Materialize.toast('Error: ' + data, 2000);

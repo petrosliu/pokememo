@@ -132,7 +132,6 @@ var circleTransition = function (marker, circle, action, callback) {
 var addSpawnMarker = function (location) {
     var marker = new google.maps.Marker({
         map: map,
-        animation: google.maps.Animation.DROP,
         position: location,
         icon: icons.sighting
     });
@@ -180,15 +179,11 @@ var addSpawnMarkers = function (spawns) {
 };
 
 var updateSpawnMarkers = function () {
-    var locations = [];
     for (var i = 0; i < spawnMarkers.length; i++) {
-        locations.push(spawnMarkers[i].getPosition());
+        addSpawnMarker(spawnMarkers[i].getPosition());
         spawnMarkers[i].setMap(null);
     }
-    spawnMarkers = [];
-    for (var i = 0; i < locations.length; i++) {
-        addSpawnMarker(locations[i]);
-    }
+    spawnMarkers.slice(spawnMarkers.length/2);
 }
 
 var removeSpawnMarkers = function () {
