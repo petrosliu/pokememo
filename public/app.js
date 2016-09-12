@@ -34,7 +34,7 @@ pokememo.controller('mainController', function ($scope, $http, $window) {
     }
     $scope.authUser = function () {
         if ($window.localStorage['token']) {
-            $http.get('api/users', {
+            $http.get('/api/users', {
                 params: { token: $window.localStorage['token'] }
             })
                 .success(function (data) {
