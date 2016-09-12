@@ -146,7 +146,7 @@ pokememo.controller('pokedexController', function ($scope, $http, $window, $filt
     };
 
     $scope.register = function (pokemon) {
-        if ($window.localStorage['token']) {
+        if ($window.localStorage['token'] && !$scope.pokedex[pokemon.id]) {
             $http.post('/api/pokedex', { pokemon: pokemon.id, token: $window.localStorage['token'] })
                 .success(function (data) {
                     $scope.getPokedex();
@@ -158,7 +158,7 @@ pokememo.controller('pokedexController', function ($scope, $http, $window, $filt
         }
     };
     $scope.deregister = function (pokemon) {
-        if ($window.localStorage['token']) {
+        if ($window.localStorage['token'] && $scope.pokedex[pokemon.id]) {
             if ($window.confirm("Please confirm deregister?")) {
                 $http.delete('/api/pokedex/' + pokemon.id, { params: { token: $window.localStorage['token'] } })
                     .success(function (data) {
