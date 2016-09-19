@@ -129,12 +129,14 @@ var circleTransition = function (marker, circle, action, callback) {
     else if (action === 'scan') scanCirclesTransition(marker, circle, callback);
 };
 
-var addSpawnMarker = function (location) {
+var addSpawnMarker = function (location,info) {
     var marker = new google.maps.Marker({
         map: map,
         position: location,
-        icon: icons.sighting
+        icon: icons.sighting,
+        anchorPoint: new google.maps.Point(0,-16)
     });
+    marker._pkmm_info=info;
     if (myLocationMarker && google.maps.geometry.spherical.computeDistanceBetween(myLocationMarker.getPosition(), location) < 200) {
         marker.setIcon(icons.sighting_near);
     }
@@ -145,6 +147,7 @@ var addSpawnMarker = function (location) {
     });
     marker.addListener('click', function () {
         if (marker.spawnCircle.getMap()) {
+            marker._pkmm_info.close();
             circleTransition(marker, marker.spawnCircle, 'close', function () {
                 if (myLocationMarker && google.maps.geometry.spherical.computeDistanceBetween(myLocationMarker.getPosition(), location) < 200) {
                     marker.setIcon(icons.sighting_near);
@@ -153,6 +156,7 @@ var addSpawnMarker = function (location) {
                     marker.setIcon(icons.sighting);
                 }
             });
+            
         }
         else {
             windowTransition(location, 17, function () {
@@ -163,17 +167,28 @@ var addSpawnMarker = function (location) {
                     marker.setIcon(icons.sighting_active);
                 }
                 circleTransition(marker, marker.spawnCircle, 'open');
+                marker._pkmm_info.open(map, marker);
             });
         }
     });
     spawnMarkers.push(marker);
 };
 
+var createInfoElement = function(spawn){
+    var element=
+    '<div>' +
+        '<p>lat:' + spawn.latitude + ', lng:' + spawn.longitude + '</p>' +
+        '<p>' + spawn.pokemons.join(', ')+'</p>' +
+    '</div>';
+    return element;
+}
+
 var addSpawnMarkers = function (spawns) {
     if (spawns) {
         for (var i = 0; i < spawns.length; i++) {
             var location = new google.maps.LatLng({ lat: spawns[i].latitude, lng: spawns[i].longitude });
-            addSpawnMarker(location);
+            var info = new google.maps.InfoWindow({ content: createInfoElement(spawns[i])});
+            addSpawnMarker(location,info);
         }
     }
 };
@@ -181,7 +196,7 @@ var addSpawnMarkers = function (spawns) {
 var updateSpawnMarkers = function () {
     var length=spawnMarkers.length;
     for (var i = 0; i < length; i++) {
-        addSpawnMarker(spawnMarkers[i].getPosition());
+        addSpawnMarker(spawnMarkers[i].getPosition(),spawnMarkers[i]._pkmm_info);
         spawnMarkers[i].setMap(null);
         spawnMarkers[i]=null;
     }
@@ -287,27 +302,27 @@ var addMyLocationButton = function () {
                 var location = new google.maps.LatLng({ lat: position.coords.latitude, lng: position.coords.longitude });
                 myLocationMarker.setPosition(location);
                 myLocationMarker.setMap(map);
-                if (myLocationMarker.sightingCircles) {
-                    if (myLocationMarker.sightingCircles.range){
-                        myLocationMarker.sightingCircles.range.setMap(null);
+                if (myLocationMarker._pkmm_sightingCircles) {
+                    if (myLocationMarker._pkmm_sightingCircles.range){
+                        myLocationMarker._pkmm_sightingCircles.range.setMap(null);
                     }
-                    if (myLocationMarker.sightingCircles.scan){
-                        myLocationMarker.sightingCircles.scan.setMap(null);
+                    if (myLocationMarker._pkmm_sightingCircles.scan){
+                        myLocationMarker._pkmm_sightingCircles.scan.setMap(null);
                     }
                 }
-                myLocationMarker.sightingCircles = addSightingCircles(location);
+                myLocationMarker._pkmm_sightingCircles = addSightingCircles(location);
                 windowTransition(location, 17, function () {
-                    circleTransition(myLocationMarker, myLocationMarker.sightingCircles.range, 'open', function () {
-                        circleTransition(myLocationMarker, myLocationMarker.sightingCircles, 'scan');
+                    circleTransition(myLocationMarker, myLocationMarker._pkmm_sightingCircles.range, 'open', function () {
+                        circleTransition(myLocationMarker, myLocationMarker._pkmm_sightingCircles, 'scan');
                         updateSpawnMarkers();
                     });
                 });
                 myLocationMarker.addListener('click', function () {
-                    if (myLocationMarker.sightingCircles.range.getMap()) {
-                        circleTransition(myLocationMarker, myLocationMarker.sightingCircles.range, 'close');
+                    if (myLocationMarker._pkmm_sightingCircles.range.getMap()) {
+                        circleTransition(myLocationMarker, myLocationMarker._pkmm_sightingCircles.range, 'close');
                     }
                     else {
-                        circleTransition(myLocationMarker, myLocationMarker.sightingCircles.range, 'open');
+                        circleTransition(myLocationMarker, myLocationMarker._pkmm_sightingCircles.range, 'open');
                     }
                 });
 
