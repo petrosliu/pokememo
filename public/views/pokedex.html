@@ -94,6 +94,14 @@
 
             <div class="col l8 s12">
                 <div class="row">
+                    <div class="col s12">
+                        <button ng-if="modal.pokemon.candy_count" class="waves-effect waves-light btn btn-flat {{modal.candy_amount<modal.pokemon.candy_count?'disabled':''}}"
+                            ng-click="modal.candy_amount=modal.candy_amount-modal.pokemon.candy_count+1;updateCandy();register(modal.pokemon);">
+                            Envolve <span ng-if="envolve(modal.pokemon.candy_count,modal.candy_amount)" class="label label-{{modal.pokemon.type[0] | lowercase}}">{{envolve(modal.pokemon.candy_count,modal.candy_amount)}}</span></button>
+                        <button class="waves-effect waves-light btn btn-flat" ng-click="modal.candy_amount=+modal.candy_amount+3;updateCandy();">Catch</button>
+                        <button class="waves-effect waves-light btn btn-flat" ng-click="modal.candy_amount=+modal.candy_amount+1;updateCandy();">Transfer</button>
+                        <button class="waves-effect waves-light btn btn-flat" ng-click="modal.candy_amount=+modal.candy_amount+1;updateCandy();">Find</button>
+                    </div>
                     <div class="col s12 left-align">
                         <b>{{modal.pokemon.candy}}: {{modal.candy_amount}}</b>
                     </div>
@@ -112,13 +120,6 @@
                             <input class="label-{{modal.pokemon.type[0]|lowercase}}" type="range" id="candy" min="0" max="{{modal.pokemon.candy_count||200}}"
                                 ng-model="modal.candy_amount" ng-mouseup="updateCandy();" />
                         </p>
-                    </div>
-                    <div class="col s12">
-                        <button ng-if="modal.pokemon.candy_count" class="waves-effect waves-light btn btn-flat {{modal.candy_amount<modal.pokemon.candy_count?'disabled':''}}"
-                            ng-click="modal.candy_amount=modal.candy_amount-modal.pokemon.candy_count+1;updateCandy();register(modal.pokemon);">
-                            Envolve <span ng-if="envolve(modal.pokemon.candy_count,modal.candy_amount)" class="label label-{{modal.pokemon.type[0] | lowercase}}">{{envolve(modal.pokemon.candy_count,modal.candy_amount)}}</span></button>
-                        <button class="waves-effect waves-light btn btn-flat" ng-click="modal.candy_amount=+modal.candy_amount+3;updateCandy();">Catch</button>
-                        <button class="waves-effect waves-light btn btn-flat" ng-click="modal.candy_amount=+modal.candy_amount+1;updateCandy();">Transfer</button>
                     </div>
                 </div>
 
@@ -140,8 +141,10 @@
                         <div class="pull-left" ng-repeat="type in modal.pokemon.weaknesses">&nbsp;<span class="label label-{{type | lowercase}}">{{type}}</span></div>
                     </div>
                 </div>
-
             </div>
+        </div>
+        <div class="row close-modal center" onclick="$('#pokemon-modal').closeModal();">
+            <i class="fa fa-chevron-down fa-fw center"></i>
         </div>
     </div>
 </div>
