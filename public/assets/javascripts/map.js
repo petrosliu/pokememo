@@ -3,6 +3,7 @@ var spawnMarkers = [];
 var myLocationMarker = {};
 var _pkmm_pokemons = {};
 var geocoder = {};
+var DistanceMatrixService = {};
 
 var icons = {
     'sighting': {
@@ -202,8 +203,28 @@ var geocodeLatLng = function (latitude, longitude, callback) {
       callback('Geocoder failed due to: ' + status, null);
     }
   });
-}
+};
 
+var getDistance = function(origin, destination, callback){
+    DistanceMatrixService = new google.maps.DistanceMatrixService();
+    DistanceMatrixService.getDistanceMatrix(
+    {
+        origins: [origin],
+        destinations: [destination],
+        travelMode: 'WALKING',
+        unitSystem: UnitSystem
+    }, function(response, status){
+        if (status == 'OK') {
+            var res={};
+            res.origin = response.originAddresses[0];
+            res.destination = response.destinationAddresses[0];
+            res.distance = response.rows[0].elements[0].distance.text;
+            res.duration = response.rows[0].elements[0].duration.text;
+            callback(null,res);
+        }
+        else callback('err',null);
+    });
+};
 var addSpawnMarkers = function (spawns) {
     if (spawns) {
         for (var i = 0; i < spawns.length; i++) {
@@ -349,7 +370,7 @@ var addMyLocationButton = function () {
 
                 clearInterval(animationInterval);
                 $('#my_location_img').css('background-position', '-144px 0px');
-                Materialize.toast('Done.', 2000);
+                Materialize.toast('Gotcha!', 2000);
             });
         }
         else {

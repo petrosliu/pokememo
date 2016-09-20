@@ -23,7 +23,10 @@
 <body ng-controller="spawnController" class="animated fadeIn">
   <div class="container">
     <div class="row">
-      <div class="col-sm-12"><b style="text-align:center">{{address}}</b></div>
+      <div class="col-sm-12">
+        <b class="pull-left">{{address}}</b>
+        <b class="pull-right" ng-if="distance">{{distance.duration}}|{{distance.distance}}</b>
+      </div>
     </div>
     <div class="row">
       <div class="col-sm-12" class="center" style="overflow-x:auto;display:block;overflow-y:hidden;white-space:nowrap;">
