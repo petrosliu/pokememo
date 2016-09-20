@@ -7,7 +7,6 @@ var pokememo = angular.module('pokememo', ['ngRoute', 'ngAnimate']);
 // set our routing for this application
 // each route will pull in a different controller
 pokememo.config(function ($routeProvider) {
-
     $routeProvider
         .when('/', {
             templateUrl: 'views/home.html',
@@ -27,6 +26,53 @@ pokememo.config(function ($routeProvider) {
 
 // CONTROLLERS ============================================
 pokememo.controller('mainController', function ($scope, $http, $window) {
+    $scope.getPokedex = function () {
+        if ($window.localStorage['token']) {
+            $http.get('/api/pokedex', {
+                params: { token: $window.localStorage['token'] }
+            })
+                .success(function (data) {
+                    var pokedex = {};
+                    for (var i = 0; i < data.length; i++) {
+                        pokedex[data[i].pokemon] = true;
+                        pokedex[data[i].candy] = data[i].candy_amount;
+                    }
+                    $scope.pokedex = pokedex;
+                    $scope.getPokemon();
+                })
+                .error(function (data) {
+                    Materialize.toast('Error: ' + data, 2000);
+                });
+        }
+        else {
+            $scope.pokedex = {};
+            $scope.getPokemon();
+        }
+    };
+
+    $scope.getPokemon = function () {
+        $http.get('/api/pokemons')
+            .success(function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    data[i].registered = ($scope.pokedex[data[i].id] === true);
+                    data[i].candy_amount = +$scope.pokedex[data[i].candy] || 0;
+                    if (data[i].registered) {
+                        data[i].keywords.push('catched');
+                        data[i].progress = 1000;
+                    }
+                    else {
+                        data[i].keywords.push('unseen');
+                        data[i].progress = data[i].candy_count - data[i].candy_amount || 999;
+                        if (data[i].location === 'Unavailable') data[i].progress = 1001;
+                    }
+                }
+                $scope.pokemon = data;
+            })
+            .error(function (data) {
+                Materialize.toast('Error: ' + data, 2000);
+            });
+    };
+
     $scope.removeUser = function () {
         delete $window.localStorage['token'];
         delete $scope.user;
@@ -50,6 +96,7 @@ pokememo.controller('mainController', function ($scope, $http, $window) {
     };
 
     $scope.authUser();
+    $scope.getPokedex();
 });
 
 pokememo.controller('homeController', function ($scope, $http, $window) {
@@ -98,53 +145,6 @@ pokememo.controller('homeController', function ($scope, $http, $window) {
 });
 
 pokememo.controller('pokedexController', function ($scope, $http, $window, $filter) {
-    $scope.getPokedex = function () {
-        if ($window.localStorage['token']) {
-            $http.get('/api/pokedex', {
-                params: { token: $window.localStorage['token'] }
-            })
-                .success(function (data) {
-                    var pokedex = {};
-                    for (var i = 0; i < data.length; i++) {
-                        pokedex[data[i].pokemon] = true;
-                        pokedex[data[i].candy] = data[i].candy_amount;
-                    }
-                    $scope.pokedex = pokedex;
-                    $scope.getPokemon();
-                })
-                .error(function (data) {
-                    Materialize.toast('Error: ' + data, 2000);
-                });
-        }
-        else {
-            $scope.pokedex = {};
-            $scope.getPokemon();
-        }
-    };
-
-    $scope.getPokemon = function () {
-        $http.get('/api/pokemons')
-            .success(function (data) {
-                for (var i = 0; i < data.length; i++) {
-                    data[i].registered = ($scope.pokedex[data[i].id] === true);
-                    data[i].candy_amount = +$scope.pokedex[data[i].candy] || 0;
-                    if (data[i].registered) {
-                        data[i].keywords.push('catched');
-                        data[i].progress = 1000;
-                    }
-                    else {
-                        data[i].keywords.push('unseen');
-                        data[i].progress = data[i].candy_count - data[i].candy_amount || 999;
-                        if (data[i].location === 'Unavailable') data[i].progress = 1001;
-                    }
-                }
-                $scope.pokemon = data;
-            })
-            .error(function (data) {
-                Materialize.toast('Error: ' + data, 2000);
-            });
-    };
-
     $scope.register = function (pokemon) {
         if ($window.localStorage['token'] && !$scope.pokedex[pokemon.id]) {
             $http.post('/api/pokedex', { pokemon: pokemon.id, token: $window.localStorage['token'] })
@@ -234,8 +234,8 @@ pokememo.controller('mapController', function ($scope, $timeout, $http, $window)
             }, 1500);
         }
     };
-
     $scope.render = { map: false, spin: true };
+    $scope.getPokedex();
     getMySpawns();
     $scope.mapInit = function () {
         $scope.map = mapInit();
@@ -244,6 +244,47 @@ pokememo.controller('mapController', function ($scope, $timeout, $http, $window)
             $scope.render.spin = false;
         }, 1500);
     }
+});
+
+pokememo.controller('spawnController', function ($scope, $http, $location) {
+    $scope.getPokemonById = function(id){
+        $http.get('/api/pokemons/'+id)
+            .success(function (data) {
+                 $scope.info.data.push(data);
+            })
+            .error(function (data) {
+                console.log(data);
+            });
+    };
+
+    $scope.info=$location.search();
+    if(window.self === window.top||$scope.info.latitude===undefined||$scope.info.longitude===undefined) location.pathname='/';
+    $scope.address = 'Latitude: ' + $scope.info.latitude + ', Longitude: ' + $scope.info.longitude;
+    $http.get('https://maps.googleapis.com/maps/api/geocode/json?latlng='+$scope.info.latitude+','+$scope.info.longitude+'&key=AIzaSyDKpjawI069owLU8QFpMeqInJAYBgtBueQ')
+        .success(function (data) {
+            if(data.formatted_address) $scope.address = 'Address: ' + data.formatted_address;
+        });
+
+    if($scope.info.pokemons)$scope.info.pokemons=$scope.info.pokemons.split(',');
+    else $scope.info.pokemons=[];
+    $scope.info.data=[];
+    for(var i=0;i<$scope.info.pokemons.length;i++){
+        $scope.getPokemonById($scope.info.pokemons[i]);
+    }
+    $scope.addSpawnBtn='assets/images/map/addspawn.svg';
+    $scope.addSpawnBtnFunc = function(){
+        if($scope.addSpawnId){
+        $http.get('/api/pokemons/'+$scope.addSpawnId)
+            .success(function (data) {
+                if(data) $scope.addSpawnBtn = data.img;
+                else $scope.addSpawnBtn ='assets/images/map/addspawn.svg';
+            })
+            .error(function (data) {
+                $scope.addSpawnBtn ='assets/images/map/addspawn.svg';
+            });
+        }
+        else $scope.addSpawnBtn ='assets/images/map/addspawn.svg';
+    };
 });
 
 pokememo.filter('spaceless', function () {

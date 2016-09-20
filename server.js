@@ -281,7 +281,10 @@ app.post('/api/spawns', function (req, res) {
 
 // get the index.html
 app.get('/', function (req, res) {
-  res.sendfile('index.html');
+  res.sendfile('public/index.html');
+});
+app.get('/spawn', function (req, res) {
+  res.sendfile('public/views/spawn.html');
 });
 app.get('*', function (req, res) {
   res.redirect('/');

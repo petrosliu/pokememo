@@ -1,6 +1,7 @@
 var map = {};
 var spawnMarkers = [];
 var myLocationMarker = {};
+var _pkmm_pokemons = {};
 
 var icons = {
     'sighting': {
@@ -174,20 +175,24 @@ var addSpawnMarker = function (location,info) {
     spawnMarkers.push(marker);
 };
 
-var createInfoElement = function(spawn){
-    var element=
-    '<div>' +
-        '<p>lat:' + spawn.latitude + ', lng:' + spawn.longitude + '</p>' +
-        '<p>' + spawn.pokemons.join(', ')+'</p>' +
-    '</div>';
-    return element;
+var getPokemons = function (pokemons){
+    for(var i=0;i<pokemons.length;i++){
+        _pkmm_pokemons[pokemons[i].id]=pokemons[i];
+    }
+}
+
+var createInfoElement = function(latitude,longitude,pokemons) {
+    var infoDiv = document.createElement('iframe');
+    infoDiv.src="/spawn#?latitude="+latitude+'&longitude='+longitude+'&pokemons='+pokemons;
+    infoDiv.style.border="none";
+    return infoDiv;
 }
 
 var addSpawnMarkers = function (spawns) {
     if (spawns) {
         for (var i = 0; i < spawns.length; i++) {
             var location = new google.maps.LatLng({ lat: spawns[i].latitude, lng: spawns[i].longitude });
-            var info = new google.maps.InfoWindow({ content: createInfoElement(spawns[i])});
+            var info = new google.maps.InfoWindow({ content: createInfoElement(spawns[i].latitude,spawns[i].longitude,spawns[i].pokemons)});
             addSpawnMarker(location,info);
         }
     }
