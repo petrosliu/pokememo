@@ -279,7 +279,10 @@ pokememo.controller('spawnController', function ($scope, $http, $location) {
         navigator.geolocation.getCurrentPosition(function (position) {
             getDistance({lat:position.coords.latitude,lng:position.coords.longitude},{lat:+$scope.info.latitude,lng:+$scope.info.longitude},function(err,res){
                 if(err) console.log(err);
-                else $scope.distance = res;
+                else {
+                    $scope.distance = res;
+                    $scope.$apply();
+                }
             });
         });
     }
