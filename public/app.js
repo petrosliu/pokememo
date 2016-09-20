@@ -274,7 +274,7 @@ pokememo.controller('spawnController', function ($scope, $http, $location) {
     for(var i=0;i<$scope.info.pokemons.length;i++){
         $scope.getPokemonById($scope.info.pokemons[i]);
     }
-
+    $scope.distance = {'distance':'---','duration':'---'};
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
             getDistance({lat:position.coords.latitude,lng:position.coords.longitude},{lat:+$scope.info.latitude,lng:+$scope.info.longitude},function(err,res){
