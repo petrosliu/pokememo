@@ -246,7 +246,7 @@ pokememo.controller('mapController', function ($scope, $timeout, $http, $window)
     }
 });
 
-pokememo.controller('spawnController', function ($scope, $http, $location) {
+pokememo.controller('spawnController', function ($scope, $http, $location, $window) {
     $scope.getPokemonById = function(id){
         $http.get('/api/pokemons/'+id)
             .success(function (data) {
@@ -255,6 +255,30 @@ pokememo.controller('spawnController', function ($scope, $http, $location) {
             .error(function (data) {
                 console.log(data);
             });
+    };
+
+    $scope.addSpawn = function(keyEvent){
+        if (keyEvent.which === 13){
+            if($scope.addSpawnId){
+                $http.get('/api/pokemons/'+$scope.addSpawnId)
+                    .success(function (p) {
+                        console.log(p);
+                        if(p){
+                            $http.post('/api/spawns', { pokemon: p.id, latitude: $scope.info.latitude, longitude: $scope.info.longitude, token: $window.localStorage['token'] })
+                                .success(function (data) {
+                                    console.log(data);
+                                })
+                                .error(function (data) {
+                                    
+                                });
+                        }
+                    })
+                    .error(function (data) {
+                        
+                    });
+            }
+            $scope.addSpawnId="";
+        }
     };
 
     $scope.info=$location.search();
@@ -293,14 +317,14 @@ pokememo.controller('spawnController', function ($scope, $http, $location) {
     $scope.addSpawnBtn='assets/images/map/addspawn.svg';
     $scope.addSpawnBtnFunc = function(){
         if($scope.addSpawnId){
-        $http.get('/api/pokemons/'+$scope.addSpawnId)
-            .success(function (data) {
-                if(data) $scope.addSpawnBtn = data.img;
-                else $scope.addSpawnBtn ='assets/images/map/addspawn.svg';
-            })
-            .error(function (data) {
-                $scope.addSpawnBtn ='assets/images/map/addspawn.svg';
-            });
+            $http.get('/api/pokemons/'+$scope.addSpawnId)
+                .success(function (data) {
+                    if(data) $scope.addSpawnBtn = data.img;
+                    else $scope.addSpawnBtn ='assets/images/map/addspawn.svg';
+                })
+                .error(function (data) {
+                    $scope.addSpawnBtn ='assets/images/map/addspawn.svg';
+                });
         }
         else $scope.addSpawnBtn ='assets/images/map/addspawn.svg';
     };
