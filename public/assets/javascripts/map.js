@@ -2,6 +2,7 @@ var map = {};
 var spawnMarkers = [];
 var myLocationMarker = {};
 var _pkmm_pokemons = {};
+var geocoder = {};
 
 var icons = {
     'sighting': {
@@ -186,6 +187,21 @@ var createInfoElement = function(latitude,longitude,pokemons) {
     infoDiv.src="/spawn#?latitude="+latitude+'&longitude='+longitude+'&pokemons='+pokemons;
     infoDiv.style.border="none";
     return infoDiv;
+}
+
+var geocodeLatLng = function (latitude, longitude, callback) {
+  geocoder = new google.maps.Geocoder;
+  geocoder.geocode({'location': {lat: +latitude, lng: +longitude}}, function(results, status) {
+    if (status === 'OK') {
+      if (results[0]) {
+          callback(null, results[0]);
+      } else {
+        callback('No results found', null);
+      }
+    } else {
+      callback('Geocoder failed due to: ' + status, null);
+    }
+  });
 }
 
 var addSpawnMarkers = function (spawns) {

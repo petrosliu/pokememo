@@ -260,10 +260,13 @@ pokememo.controller('spawnController', function ($scope, $http, $location) {
     $scope.info=$location.search();
     if(window.self === window.top||$scope.info.latitude===undefined||$scope.info.longitude===undefined) location.pathname='/';
     $scope.address = 'Latitude: ' + $scope.info.latitude + ', Longitude: ' + $scope.info.longitude;
-    $http.get('https://maps.googleapis.com/maps/api/geocode/json?latlng='+$scope.info.latitude+','+$scope.info.longitude+'&key=AIzaSyDKpjawI069owLU8QFpMeqInJAYBgtBueQ')
-        .success(function (data) {
-            if(data.formatted_address) $scope.address = 'Address: ' + data.formatted_address;
-        });
+    geocodeLatLng($scope.info.latitude,$scope.info.longitude,function(err,geoinfo){
+        if(err) console.log(err);
+        else {
+            $scope.address = 'Address: ' + geoinfo.formatted_address;
+            $scope.$apply();
+        }
+    });
 
     if($scope.info.pokemons)$scope.info.pokemons=$scope.info.pokemons.split(',');
     else $scope.info.pokemons=[];
