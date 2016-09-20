@@ -211,8 +211,7 @@ var getDistance = function(origin, destination, callback){
     {
         origins: [origin],
         destinations: [destination],
-        travelMode: 'WALKING',
-        unitSystem: UnitSystem
+        travelMode: 'WALKING'
     }, function(response, status){
         if (status == 'OK') {
             var res={};
