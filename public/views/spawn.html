@@ -25,7 +25,8 @@
     <div class="row">
       <div class="col-sm-12">
         <b class="pull-left">{{address}}</b>
-        <b class="pull-right"><i class="fa fa-road fa-fw"></i> {{distance.duration}} | <i class="fa fa-clock-o fa-fw"></i> {{distance.distance}}</b>
+        <b class="pull-right" style="cursor:pointer;"ng-if="!distance" ng-click="getETA();">ETA</b>
+        <b class="pull-right" ng-if="distance"><i class="fa fa-road fa-fw"></i> {{distance.distance}} | <i class="fa fa-clock-o fa-fw"></i> {{distance.duration}}</b>
       </div>
     </div>
     <div class="row">
