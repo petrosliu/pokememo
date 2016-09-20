@@ -43,6 +43,15 @@ var getSpawn = function () {
             else callback(err, spawns);
         });
     }
+    else if (arguments.length === 3) {
+        var lat = arguments[0];
+        var lng = arguments[1];
+        var callback = arguments[2];
+        SpawnDB.findOne({ latitude: lat, longitude: lng }, function (err, spawns) {
+            if (err) callback(err);
+            else callback(err, spawns);
+        });
+    }
 };
 
 var setSpawn = function (user, latitude, longitude, pokemon, callback) {

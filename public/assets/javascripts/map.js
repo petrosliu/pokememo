@@ -1,9 +1,10 @@
-var map = {};
+var map = null;
 var spawnMarkers = [];
-var myLocationMarker = {};
-var _pkmm_pokemons = {};
-var geocoder = {};
-var DistanceMatrixService = {};
+var myLocationMarker = null;
+var _pkmm_pokemons = null;
+var geocoder = null;
+var DistanceMatrixService = null;
+var newSpawnMarker = null;
 
 var icons = {
     'sighting': {
@@ -149,6 +150,7 @@ var addSpawnMarker = function (location,info) {
         windowTransition(location, Math.min(map.getZoom() + 2, 17));
     });
     marker.addListener('click', function () {
+        removeNewSpawnMarker();
         if (marker.spawnCircle.getMap()) {
             marker._pkmm_info.close();
             circleTransition(marker, marker.spawnCircle, 'close', function () {
@@ -183,11 +185,11 @@ var getPokemons = function (pokemons){
     }
 }
 
-var createInfoElement = function(latitude,longitude,pokemons) {
+var createInfoElement = function(latitude,longitude) {
     var infoDiv = document.createElement('iframe');
-    infoDiv.src="/spawn#?latitude="+latitude+'&longitude='+longitude+'&pokemons='+pokemons;
+    infoDiv.src="/spawn#?latitude="+latitude+'&longitude='+longitude;
     infoDiv.style.border="none";
-    return infoDiv;
+    return new google.maps.InfoWindow({ content: infoDiv, maxWidth:300});
 }
 
 var geocodeLatLng = function (latitude, longitude, callback) {
@@ -228,11 +230,43 @@ var addSpawnMarkers = function (spawns) {
     if (spawns) {
         for (var i = 0; i < spawns.length; i++) {
             var location = new google.maps.LatLng({ lat: spawns[i].latitude, lng: spawns[i].longitude });
-            var info = new google.maps.InfoWindow({ content: createInfoElement(spawns[i].latitude,spawns[i].longitude,spawns[i].pokemons)});
+            var info = createInfoElement(spawns[i].latitude,spawns[i].longitude);
             addSpawnMarker(location,info);
         }
     }
 };
+var addNewSpawnMarker = function(latitude, longitude){
+    removeNewSpawnMarker();
+    var location =new google.maps.LatLng({ lat: latitude, lng: longitude });
+    newSpawnMarker = new google.maps.Marker({
+        map: map,
+        position: location,
+        icon: icons.sighting_active,
+        anchorPoint: new google.maps.Point(0,-16)
+    });
+    newSpawnMarker._pkmm_info = createInfoElement(latitude,longitude);
+    newSpawnMarker._pkmm_info.open(map, newSpawnMarker);
+
+    if (myLocationMarker && google.maps.geometry.spherical.computeDistanceBetween(myLocationMarker.getPosition(), location) < 200) {
+        newSpawnMarker.setIcon(icons.sighting_near);
+    }
+    newSpawnMarker.addListener('click', function () {
+        newSpawnMarker._pkmm_info.open(map, newSpawnMarker);
+    });
+    google.maps.event.addListener(newSpawnMarker._pkmm_info ,'closeclick',function(){
+        removeNewSpawnMarker();
+    });
+}
+
+var removeNewSpawnMarker = function() {
+    if(newSpawnMarker){
+        newSpawnMarker._pkmm_info.close();
+        newSpawnMarker._pkmm_info.setMap(null);
+        newSpawnMarker._pkmm_info=null;
+        newSpawnMarker.setMap(null);
+        newSpawnMarker=null;
+    }
+}
 
 var updateSpawnMarkers = function () {
     var length=spawnMarkers.length;
@@ -410,5 +444,11 @@ var mapInit = function () {
     var mapElement = document.getElementById('map');
     map = new google.maps.Map(mapElement, mapOptions);
     addMyLocationButton();
+
+
+    google.maps.event.addListener(map, "click", function(event){
+        addNewSpawnMarker(event.latLng.lat(),event.latLng.lng());
+    });
+
     return map;
 };

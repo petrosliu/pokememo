@@ -257,47 +257,50 @@ pokememo.controller('spawnController', function ($scope, $http, $location, $wind
             });
     };
 
-    $scope.addSpawn = function(keyEvent){
+    $scope.getSighting = function(){
+            $http.get('/api/spawns/'+$scope.info.latitude+'/'+$scope.info.longitude)
+                        .success(function (data) {
+                            if(data){
+                                $scope.info.pokemons=data.pokemons;
+                                $scope.info.data=[];
+                                for(var i=0;i<$scope.info.pokemons.length;i++){
+                                    $scope.getPokemonById($scope.info.pokemons[i]);
+                                }
+                            }
+                            else{
+                                $scope.info.pokemons=null;
+                                $scope.info.data=null;
+                            }
+                        })
+                        .error(function (data) {
+                            $scope.info.pokemons=null;
+                            $scope.info.data=null;
+                        });
+        };
+
+    $scope.addSighting = function(keyEvent){
         if (keyEvent.which === 13){
-            if($scope.addSpawnId){
-                $http.get('/api/pokemons/'+$scope.addSpawnId)
+            if($scope.addSighting.id){
+                $http.get('/api/pokemons/'+$scope.addSighting.id)
                     .success(function (p) {
-                        console.log(p);
                         if(p){
                             $http.post('/api/spawns', { pokemon: p.id, latitude: $scope.info.latitude, longitude: $scope.info.longitude, token: $window.localStorage['token'] })
                                 .success(function (data) {
-                                    console.log(data);
-                                })
-                                .error(function (data) {
-                                    
+                                    $scope.getSighting();
                                 });
                         }
-                    })
-                    .error(function (data) {
-                        
                     });
             }
-            $scope.addSpawnId="";
+            $scope.addSighting.id="";
+            $scope.addSightingBtnFunc("");
         }
     };
-
-    $scope.info=$location.search();
-    if(window.self === window.top||$scope.info.latitude===undefined||$scope.info.longitude===undefined) location.pathname='/';
-    $scope.address = 'Latitude: ' + $scope.info.latitude + ', Longitude: ' + $scope.info.longitude;
-    geocodeLatLng($scope.info.latitude,$scope.info.longitude,function(err,geoinfo){
-        if(err) console.log(err);
-        else {
-            $scope.address = 'Address: ' + geoinfo.formatted_address;
-            $scope.$apply();
-        }
-    });
-
-    if($scope.info.pokemons)$scope.info.pokemons=$scope.info.pokemons.split(',');
-    else $scope.info.pokemons=[];
-    $scope.info.data=[];
-    for(var i=0;i<$scope.info.pokemons.length;i++){
-        $scope.getPokemonById($scope.info.pokemons[i]);
-    }
+    $scope.addSpawn = function(){
+        $http.post('/api/spawns', { latitude: $scope.info.latitude, longitude: $scope.info.longitude, token: $window.localStorage['token'] })
+            .success(function (data) {
+                $scope.getSighting();
+            });
+    };
     $scope.getETA = function(){
         $scope.distance = {'distance':'---','duration':'---'};
         if (navigator.geolocation) {
@@ -306,27 +309,36 @@ pokememo.controller('spawnController', function ($scope, $http, $location, $wind
                     if(err) console.log(err);
                     else {
                         $scope.distance = res;
-                        $scope.$apply();
                     }
                 });
             });
         }
     };
-    
 
-    $scope.addSpawnBtn='assets/images/map/addspawn.svg';
-    $scope.addSpawnBtnFunc = function(){
-        if($scope.addSpawnId){
-            $http.get('/api/pokemons/'+$scope.addSpawnId)
+    $scope.info=$location.search();
+    if(window.self === window.top||$scope.info.latitude===undefined||$scope.info.longitude===undefined) location.pathname='/';
+    geocodeLatLng($scope.info.latitude,$scope.info.longitude,function(err,geoinfo){
+        if(err) console.log(err);
+        else {
+            $scope.info.address = geoinfo.formatted_address;
+            $scope.$apply();
+        }
+    });
+    $scope.getSighting();
+
+    $scope.addSightingBtn='assets/images/map/addSighting.svg';
+    $scope.addSightingBtnFunc = function(){
+        if($scope.addSighting.id){
+            $http.get('/api/pokemons/'+$scope.addSighting.id)
                 .success(function (data) {
-                    if(data) $scope.addSpawnBtn = data.img;
-                    else $scope.addSpawnBtn ='assets/images/map/addspawn.svg';
+                    if(data) $scope.addSightingBtn = data.img;
+                    else $scope.addSightingBtn ='assets/images/map/addSighting.svg';
                 })
                 .error(function (data) {
-                    $scope.addSpawnBtn ='assets/images/map/addspawn.svg';
+                    $scope.addSightingBtn ='assets/images/map/addSighting.svg';
                 });
         }
-        else $scope.addSpawnBtn ='assets/images/map/addspawn.svg';
+        else $scope.addSightingBtn ='assets/images/map/addSighting.svg';
     };
 });
 

@@ -23,21 +23,32 @@
 <body ng-controller="spawnController" class="animated fadeIn">
   <div class="container">
     <div class="row">
-      <div class="col-sm-12">
-        <b class="pull-left">{{address}}</b>
-        <b class="pull-right" style="cursor:pointer;" ng-if="!distance" ng-click="getETA();">ETA</b>
-        <b class="pull-right animated fadeInRight" ng-if="distance"><i class="fa fa-road fa-fw"></i> {{distance.distance}} | <i class="fa fa-clock-o fa-fw"></i> {{distance.duration}}</b>
+      <div class="col-sm-12" ng-if="info.pokemons" class="center" style="overflow-x:auto;display:block;overflow-y:hidden;white-space:nowrap;">
+        <div class="pull-left animated rotateIn" style="width:50px;height:50px;position:relative;margin-right:10px;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:center;-ms-flex-align:center;align-items:center;">
+          <img ng-src="{{addSightingBtn}}" style="max-height:50px;max-width:50px;margin-right:10px;-webkit-filter:contrast(0);filter: contrast(0);opacity: 0.5;margin:auto;display:block;">
+          <input ng-model="addSighting.id" ng-change="addSightingBtnFunc();" ng-keypress="addSighting($event);" style="position:absolute;top:10px;left:0;width:50px;border:none;background-color:transparent;text-align:center;font-weight:bold;color:rgba(255,255,255,.95);text-shadow:0 0 5px #000;outline:none;font-size:20px;">
+        </div>
+        <div class="pull-left" ng-repeat="d in info.data track by d.id" style="width:50px;height:50px;margin-right:10px;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:center;-ms-flex-align:center;align-items:center;">
+          <img ng-src="{{d.img}}" style="max-height:100%;max-width:100%;margin:auto;display: block;">
+        </div>
       </div>
     </div>
     <div class="row">
-      <div class="col-sm-12" class="center" style="overflow-x:auto;display:block;overflow-y:hidden;white-space:nowrap;">
-        <div class="pull-left animated rotateIn" style="width:50px;height:50px;position:relative;margin-right:10px;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:center;-ms-flex-align:center;align-items:center;">
-          <img ng-src="{{addSpawnBtn}}" style="max-height:50px;max-width:50px;margin-right:10px;-webkit-filter:contrast(0);filter: contrast(0);opacity: 0.5;margin:auto;display:block;">
-          <input ng-model="addSpawnId" ng-change="addSpawnBtnFunc()" ng-keypress="addSpawn($event);" style="position:absolute;top:10px;left:0;width:50px;border:none;background-color:transparent;text-align:center;font-weight:bold;color:rgba(255,255,255,.95);text-shadow:0 0 5px #000;outline:none;font-size:20px;">
-        </div>
-        <div class="pull-left animated fadeInRight" ng-repeat="d in info.data" style="width:50px;height:50px;margin-right:10px;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:center;-ms-flex-align:center;align-items:center;">
-          <img ng-src="{{d.img}}" style="max-height:100%;max-width:100%;margin:auto;display: block;">
-        </div>
+      <div class="col-sm-12">
+        <p ng-if="info.address">
+          <b>{{info.address}}</b>
+        </p>
+        <p ng-if="!info.address">
+          <b>
+            Latitude: {{info.latitude}}<br>
+            Longitude: {{info.longitude}}
+          </b>
+        </p>
+        <p>
+          <b style="cursor:pointer;" ng-if="!info.pokemons" ng-click="addSpawn();"><i class="fa fa-plus fa-fw"></i> Add Spawn</b>
+          <b style="cursor:pointer;" ng-if="info.pokemons && !distance" ng-click="getETA();"><i class="fa fa-tachometer fa-fw"></i> ETA</b>
+          <b ng-if="info.pokemons && distance"><i class="fa fa-road fa-fw"></i> {{distance.distance}} | <i class="fa fa-clock-o fa-fw"></i> {{distance.duration}}</b>
+        </p>
       </div>
     </div>
   </div>

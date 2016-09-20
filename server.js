@@ -255,6 +255,12 @@ app.get('/api/spawns', function (req, res) {
     });
   }
 });
+app.get('/api/spawns/:lat/:lng', function (req, res) {
+    Spawn.get(req.params.lat, req.params.lng, function (err, spawns) {
+      if (err) res.send(err);
+      else res.json(spawns);
+    });
+});
 
 app.post('/api/spawns', function (req, res) {
   var token = req.body.token || req.query.token || req.headers['x-access-token'];
