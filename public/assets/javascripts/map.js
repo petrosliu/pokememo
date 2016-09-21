@@ -5,6 +5,8 @@ var _pkmm_pokemons = null;
 var geocoder = null;
 var DistanceMatrixService = null;
 var newSpawnMarker = null;
+var loadSpawnMarker = null;
+var requireUpdateSpawnMarkers = false;
 
 var icons = {
     'sighting': {
@@ -144,16 +146,16 @@ var addSpawnMarker = function (location,info) {
     if (myLocationMarker && google.maps.geometry.spherical.computeDistanceBetween(myLocationMarker.getPosition(), location) < 200) {
         marker.setIcon(icons.sighting_near);
     }
-    marker.spawnCircle = addSpawnCircle(location);
+    marker._pkmm_spawnCircle = addSpawnCircle(location);
 
     marker.addListener('dblclick', function () {
         windowTransition(location, Math.min(map.getZoom() + 2, 17));
     });
     marker.addListener('click', function () {
         removeNewSpawnMarker();
-        if (marker.spawnCircle.getMap()) {
+        if (marker._pkmm_spawnCircle.getMap()) {
             marker._pkmm_info.close();
-            circleTransition(marker, marker.spawnCircle, 'close', function () {
+            circleTransition(marker, marker._pkmm_spawnCircle, 'close', function () {
                 if (myLocationMarker && google.maps.geometry.spherical.computeDistanceBetween(myLocationMarker.getPosition(), location) < 200) {
                     marker.setIcon(icons.sighting_near);
                 }
@@ -171,7 +173,7 @@ var addSpawnMarker = function (location,info) {
                 else {
                     marker.setIcon(icons.sighting_active);
                 }
-                circleTransition(marker, marker.spawnCircle, 'open');
+                circleTransition(marker, marker._pkmm_spawnCircle, 'open');
                 marker._pkmm_info.open(map, marker);
             });
         }
@@ -259,6 +261,18 @@ var addNewSpawnMarker = function(latitude, longitude){
 }
 
 var removeNewSpawnMarker = function() {
+    if(requireUpdateSpawnMarkers){
+        loadSpawnMarker(function(err,res){
+            if(err){Materialize.toast('Error: ' + err, 2000);}
+            else {
+                removeSpawnMarkers();
+                addSpawnMarkers(res);
+                removeNewSpawnMarker();
+            }
+        });
+        requireUpdateSpawnMarkers = false;
+    }
+
     if(newSpawnMarker){
         newSpawnMarker._pkmm_info.close();
         newSpawnMarker._pkmm_info.setMap(null);
@@ -280,6 +294,11 @@ var updateSpawnMarkers = function () {
 
 var removeSpawnMarkers = function () {
     for (var i = 0; i < spawnMarkers.length; i++) {
+        spawnMarkers[i]._pkmm_spawnCircle.setMap(null);
+        spawnMarkers[i]._pkmm_spawnCircle=null;
+        spawnMarkers[i]._pkmm_info.close();
+        spawnMarkers[i]._pkmm_info.setMap(null);
+        spawnMarkers[i]._pkmm_info=null;
         spawnMarkers[i].setMap(null);
         spawnMarkers[i]=null;
     }

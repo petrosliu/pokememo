@@ -213,32 +213,44 @@ pokememo.controller('mapController', function ($scope, $timeout, $http, $window)
     var getSpawns = function (latTop, latBottom, lngLeft, lngRight) {
 
     };
-    var getMySpawns = function () {
+    var getMySpawns = function (callback) {
+        $scope.render.spin = true;
         if ($window.localStorage['token']) {
             $http.get('api/spawns', {
                 params: { token: $window.localStorage['token'] }
             })
                 .success(function (data) {
                     $scope.mySpawns = data;
-                    $timeout(function () {
-                        $scope.render.map = true;
-                    }, 1000);
+                    callback(null,data);
+                    $scope.render.spin = false;
                 })
                 .error(function (data) {
-                    Materialize.toast('Error: ' + data, 2000);
+                    callback(data,null);
+                    $scope.render.spin = false;
                 });
         }
         else {
-            $timeout(function () {
-                $scope.render.map = true;
-            }, 1500);
+            callback(null,[]);
+            $scope.render.spin = false;
         }
     };
+
     $scope.render = { map: false, spin: true };
     $scope.getPokedex();
-    getMySpawns();
+    getMySpawns(function(err,res){
+        if(err){
+            Materialize.toast('Error: ' + err, 2000);
+        }
+        else{
+            $timeout(function () {
+                $scope.render.map = true;
+            }, 1000);
+        }
+    });
     $scope.mapInit = function () {
+        $scope.render.spin = true;
         $scope.map = mapInit();
+        loadSpawnMarker = getMySpawns;
         addSpawnMarkers($scope.mySpawns);
         $timeout(function () {
             $scope.render.spin = false;
@@ -296,6 +308,7 @@ pokememo.controller('spawnController', function ($scope, $http, $location, $wind
         }
     };
     $scope.addSpawn = function(){
+        parent.requireUpdateSpawnMarkers=true;
         $http.post('/api/spawns', { latitude: $scope.info.latitude, longitude: $scope.info.longitude, token: $window.localStorage['token'] })
             .success(function (data) {
                 $scope.getSighting();

@@ -1,7 +1,7 @@
-<div id='map' ng-if="render.map" ng-init='mapInit();'></div>
+<div id='map' class="animated fadeIn" ng-if="render.map" ng-init='mapInit();'></div>
 
-<div class='loading-icon valign-wrapper' ng-if="render.spin" style="height:100vh;">
-    <div class="center" style="width:100%;">
-        <img style="opacity:.8;width:64px;height:64px;" src="assets/images/map/spinner.gif">
+<div class='loading-icon' ng-if="render.spin">
+    <div style="width:100%;position:relative;">
+        <img style="position:absolute;opacity:.8;left:32px;top:96px;width:64px;height:64px;" src="assets/images/map/spinner.gif">
     </div>
 </div>
