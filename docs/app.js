@@ -2,7 +2,7 @@
 
 // define our application and pull in ngRoute and ngAnimate
 var pokememo = angular.module('pokememo', ['ngRoute', 'ngAnimate']);
-var hostname = '';
+var hostname = 'https://pokememo.herokuapp.com';
 // ROUTING ===============================================
 // set our routing for this application
 // each route will pull in a different controller

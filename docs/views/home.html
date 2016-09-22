@@ -1,0 +1,78 @@
+<div class="row valign-wrapper white z-depth-2">
+  <div class="col s12 center">
+    <h1>PokéMemo</h1>
+  </div>
+</div>
+
+<div class="row white z-depth-2" ng-if="!user">
+  <form class="col s12 l6 offset-l3">
+    <div class="row hoverable">
+      <input id="username" placeholder="Username" type="text" class="validate center" ng-model="logform.username">
+    </div>
+    <div class="row hoverable">
+      <input id="password" placeholder="Password" type="password" class="validate center" ng-model="logform.password">
+    </div>
+    <div class="row center">
+      <button class="waves-effect waves-light btn btn-flat" type="submit" ng-click="login()">Log in</button>
+      <button class="waves-effect waves-light btn btn-flat" ng-click="signup()">Sign up</button>
+    </div>
+  </form>
+</div>
+<div class="row white z-depth-2" ng-if="user">
+  <div class="col s3">
+    <div style="position:absolute;margin-top:-35px;margin-left:-50px;">
+      <img ng-src="assets/images/teams/team_{{user.player.team | teamcolor}}.png" style="width:150px;height:150px;opacity:.3;">
+    </div>
+  </div>
+  <div class="col s6 center">
+    <b style="font-size:20px;">{{user.name}}</b>
+  </div>
+  <div class="col s3">
+    <button class="btn-xs waves-effect waves-light btn btn-flat pull-right grey-text" ng-click="removeUser();"><i class="fa fa-sign-out fa-fw"></i></button>
+    <button class="btn-xs waves-effect waves-light btn btn-flat pull-right grey-text" ng-click="newUpdate();"><i class="fa fa-pencil-square-o fa-fw"></i></button>
+  </div>
+  <div class="col s12">
+    <div class="progress progress-striped active">
+        <div class="progress-bar {{user.player.team|teamcolor}}" role="progressbar" style="width:{{user.player.level/40*100}}%"></div>
+        <div class="pull-right">Lv.{{user.player.level}}&nbsp;</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="row white z-depth-2" ng-if="user.update">
+  <div class="input-field col s12 l6 offset-l3">
+    <div class="row hoverable">
+      <input id="username" placeholder="Username" type="text" class="center" ng-model="user.update.username">
+    </div>
+    <div class="row hoverable">
+      <input id="password" placeholder="Password" type="password" class="center" ng-model="user.update.password">
+    </div>
+    <div class="row hoverable">
+      <input id="name" placeholder="Player ID" type="text" class="center" ng-model="user.update.player.id">
+
+      <div class="fixed-action-btn horizontal" style="bottom:100px;right:-25px;position:absolute;">
+        <a class="btn-floating btn-large white"><img ng-src="assets/images/teams/team_{{user.update.player.team | teamcolor}}.png" style="width:40px;"></a>
+        <ul>
+          <li ng-repeat="t in ['','Instinct','Valor','Mystic']">
+            <a class="btn-floating white" ng-click="user.update.player.team=t"><img ng-src="assets/images/teams/team_{{t | teamcolor}}.png" style="width:20px;height:20px;transform:translateX(-8px);"></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row valign-wrapper">
+      <div class="col s1">
+        <b>Lv.</b>
+      </div>
+      <div class="col s11">
+      <p class="range-field" style="padding-top:20px;">
+        <input class="label-normal" type="range" id="lv" min="1" max="40" ng-model="user.update.player.level"/>
+      </p>
+      </div>
+    </div>
+    <div class="row center">
+      <button class="waves-effect waves-light btn btn-flat" type="submit" ng-click="updateUser();">Save</button>
+      <button class="waves-effect waves-light btn btn-flat" ng-click="user.update=null;">Cancel</button>
+    </div>
+  </div>
+</div>

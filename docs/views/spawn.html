@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html ng-app="pokememo">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-route.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-animate.min.js"></script>
+    <script src="https://use.fontawesome.com/4d4ce8ea89.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+    <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDKpjawI069owLU8QFpMeqInJAYBgtBueQ&signed_in=true&extension=.js&libraries=drawing,geometry'></script>
+    <script src="assets/javascripts/map.js"></script>
+    <script src="app.js"></script>
+</head>
+
+<body ng-controller="spawnController" class="animated fadeIn">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12" ng-if="info.pokemons" class="center" style="overflow-x:auto;display:block;overflow-y:hidden;white-space:nowrap;">
+        <div class="pull-left animated rotateIn" style="width:50px;height:50px;position:relative;margin-right:10px;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:center;-ms-flex-align:center;align-items:center;">
+          <img ng-src="{{addSightingBtn}}" style="max-height:50px;max-width:50px;margin-right:10px;-webkit-filter:contrast(0);filter: contrast(0);opacity: 0.5;margin:auto;display:block;">
+          <input ng-model="addSighting.id" ng-change="addSightingBtnFunc();" ng-keypress="addSighting($event);" style="position:absolute;top:10px;left:0;width:50px;border:none;background-color:transparent;text-align:center;font-weight:bold;color:rgba(255,255,255,.95);text-shadow:0 0 5px #000;outline:none;font-size:20px;" autofocus>
+        </div>
+        <div class="pull-left" ng-repeat="d in info.data track by d.id" style="width:50px;height:50px;margin-right:10px;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:center;-ms-flex-align:center;align-items:center;">
+          <img ng-src="{{d.img}}" style="max-height:100%;max-width:100%;margin:auto;display: block;">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <p ng-if="info.address">
+          <b>{{info.address}}</b>
+        </p>
+        <p ng-if="!info.address">
+          <b>
+            Latitude: {{info.latitude}}<br>
+            Longitude: {{info.longitude}}
+          </b>
+        </p>
+        <p>
+          <b style="cursor:pointer;" ng-if="!info.pokemons" ng-click="addSpawn();"><i class="fa fa-plus fa-fw"></i> Add Spawn</b>
+          <b style="cursor:pointer;" ng-if="info.pokemons && !distance" ng-click="getETA();"><i class="fa fa-tachometer fa-fw"></i> ETA</b>
+          <b ng-if="info.pokemons && distance"><i class="fa fa-road fa-fw"></i> {{distance.distance}} | <i class="fa fa-clock-o fa-fw"></i> {{distance.duration}}</b>
+        </p>
+        <p class="pull-right" ng-if="info.address" style="color:grey;font-size:10px;">
+          <b><i class="fa fa-map-marker fa-fw"></i>{{info.latitude}}, {{info.longitude}}</b>
+        </p>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

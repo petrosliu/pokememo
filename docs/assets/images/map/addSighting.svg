@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="128px" height="128px" viewBox="0 0 128 128" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
+    <title>128</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="128" fill="#7F7F7F">
+            <path d="M64,128 C99.346224,128 128,99.346224 128,64 C128,28.653776 99.346224,0 64,0 C28.653776,0 0,28.653776 0,64 C0,99.346224 28.653776,128 64,128 Z M64,118 C93.8233765,118 118,93.8233765 118,64 C118,34.1766235 93.8233765,10 64,10 C34.1766235,10 10,34.1766235 10,64 C10,93.8233765 34.1766235,118 64,118 Z" id="Combined-Shape"></path>
+            <rect id="Rectangle-9" x="58" y="29" width="12" height="70" rx="6"></rect>
+            <path d="M92.9864245,58 C96.3076305,58 99,60.6930342 99,64 L99,64 C99,67.3137085 96.2988087,70 92.9864245,70 L35.0135755,70 C31.6923695,70 29,67.3069658 29,64 L29,64 C29,60.6862915 31.7011913,58 35.0135755,58 L92.9864245,58" id="Rectangle-9"></path>
+        </g>
+    </g>
+</svg>

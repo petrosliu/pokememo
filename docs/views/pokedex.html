@@ -1,0 +1,150 @@
+<div class="row white z-depth-2 pokemon-item" ng-if="user">
+    <div class="col l3 s12 center pokemon-name">
+        {{user.name}}'s Pokédex
+    </div>
+    <div class="col l9 s12">
+        <div class="progress progress-striped active">
+            <div class="progress-bar {{user.player.team|teamcolor}}" role="progressbar" style="width:{{((pokemon | filter:{registered:true}).length/pokemon.length*100)|progress}}%"></div>
+            <div class="pull-right">{{(pokemon | filter:{registered:true}).length}}/{{pokemon.length}}&nbsp;</div>
+        </div>
+    </div>
+</div>
+<div class="row white z-depth-2">
+    <div class="col l4 m6 s12" ng-init="sortBy = 'id';" style="padding-top:5px;">
+        <label>Sort:</label>
+        <button class="btn-xs waves-effect waves-light btn btn-flat {{ (sortBy === 'id')? 'active':'' }}" ng-click="sortBy = 'id'"><i class="fa fa-sort-numeric-asc fa-fw"></i></button>
+        <button class="btn-xs waves-effect waves-light btn btn-flat {{ (sortBy === 'name')? 'active':'' }}" ng-click="sortBy = 'name'"><i class="fa fa-sort-alpha-asc fa-fw"></i></button>
+        <button class="btn-xs waves-effect waves-light btn btn-flat {{ (sortBy === 'progress')? 'active':'' }}" ng-click="sortBy = 'progress'"><i class="fa fa-tasks fa-fw"></i></button>
+        <button class="btn-xs waves-effect waves-light btn btn-flat {{ (sortBy === '-egg')? 'active':'' }}" ng-click="sortBy = '-egg'"><span class="fa-fw"><img class="egg-icon" src="assets/images/pokemons/000.png"></span></button>
+    </div>
+    <div class="col l4 m6 s12" ng-init="kindOf = 'all';" style="padding-top:5px;">
+        <label>Kind:</label>
+        <button class="btn-xs waves-effect waves-light btn btn-flat {{ (kindOf === 'all' )? 'active':''}}" ng-click="kindOf = 'all';query = '';">All</button>
+        <button class="btn-xs waves-effect waves-light btn btn-flat {{ (kindOf === 'catched')? 'active':''}}" ng-click="kindOf = 'catched';query = 'catched';"><span class="fa-fw"><img class="pikachu-icon" src="assets/images/pokemons/025.png"></span></button>
+        <button class="btn-xs waves-effect waves-light btn btn-flat {{ (kindOf === 'unseen')? 'active':''}}" ng-click="kindOf = 'unseen';query = 'unseen';"><span class="fa-fw"><img class="pikachu-icon unseen" src="assets/images/pokemons/025.png"></span></button>
+    </div>
+
+    <div class="input-group col l4 m12 s12 hoverable">
+        <div class="input-group-addon grey-text"><i class="fa fa-search"></i></div>
+        <input id="search-input" placeholder="Search" type="text" ng-model="query" style="font-family:Arial, FontAwesome">
+        <div class="input-group-addon">{{(pokemon | filter:{keywords:query}).length}}</div>
+    </div>
+</div>
+
+<div class="row pokemon-item valign-wrapper white z-depth-2" ng-repeat="p in pokemon | filter:{keywords:query} | orderBy:sortBy track by p.id">
+    <div class="col s3 sprite">
+        <img src="{{p.img}}" class="img-responsive {{(p.registered)?'seen':'unseen'}}" ng-click="(p.registered)?deregister(p):register(p);">
+    </div>
+    <div class="col s8">
+        <div class="col s12 pokemon-name">
+            <div>{{p.id | pokeidx}} {{ p.name }}</div>
+        </div>
+        <div class="col s12">
+            <div class="pull-left" ng-repeat="type in p.type"><span class="label label-{{type | lowercase}}">{{type}}</span>&nbsp;</div>
+            <div class="pull-left" ng-if="p.egg"><span class="label label-egg"><img src="assets/images/pokemons/000.png" class="egg-icon-xs">&nbsp;{{ p.egg }}km</span>&nbsp;</div>
+            <div class="pull-left" ng-if="p.location"><span class="label label-{{p.location | lowercase | spaceless}}"><i class="fa fa-map-marker"></i>&nbsp;{{p.location}}</span>&nbsp;</div>
+        </div>
+        <div class="col s12">
+            <div class="progress progress-striped" ng-click="showModel(p);">
+                <div ng-if="p.candy_amount!==undefined && p.candy_count" class="progress-bar label-{{p.type[0] | lowercase}}" role="progressbar"
+                    style="width:{{p.candy_amount/p.candy_count*100|progress}}%"></div>
+                <div ng-if="p.candy_amount!==undefined && p.candy_count" class="pull-right">{{p.candy_amount}}/{{p.candy_count}}&nbsp;</div>
+                <div ng-if="p.candy_amount!==undefined && !p.candy_count" class="progress-bar label-{{p.type[0] | lowercase}}" role="progressbar"
+                    style="width:{{p.candy_amount*100|progress}}%"></div>
+                <div ng-if="p.candy_amount!==undefined && !p.candy_count" class="pull-right">{{p.candy_amount}}&nbsp;</div>
+            </div>
+        </div>
+    </div>
+    <div class="col s1 unseen model-button" ng-click="showModel(p);">
+        <div class="right-align"><i class="fa fa-circle"></i></div>
+        <div class="right-align"><i class="fa fa-circle"></i></div>
+        <div class="right-align"><i class="fa fa-circle"></i></div>
+    </div>
+</div>
+<div class="row pokemon-item valign-wrapper grey-text white z-depth-2" ng-if="(pokemon | filter:{keywords:query}).length===0"
+    style="height:200px;">
+    <div class="col s12">
+        <h5 class="center">No sightings yet.</h5>
+        <h5 class="center"><i class="fa fa-search"></i></h5>
+    </div>
+</div>
+
+
+<div id="pokemon-modal" class="modal bottom-sheet">
+    <div class="modal-content">
+        <div class="row pokemon-item center">
+            <div class="col l4 s12">
+                <div class="row sprite">
+                    <img src="{{modal.pokemon.img}}" class="img-responsive {{(modal.pokemon.registered)?'seen':'unseen'}}" ng-click="(modal.pokemon.registered)?deregister(modal.pokemon):register(modal.pokemon);">
+                </div>
+                <div class="row">
+                    <div class="pokemon-name">
+                        <div>{{modal.pokemon.id | pokeidx}} {{ modal.pokemon.name }}</div>
+                    </div>
+                    <div>
+                        <span ng-repeat="type in modal.pokemon.type"><span class="label label-{{type | lowercase}}">{{type}}</span>&nbsp;</span>
+                    </div>
+                    <div>
+                        <span ng-if="modal.pokemon.egg"><span class="label label-egg"><img src="assets/images/pokemons/000.png" class="egg-icon-xs">&nbsp;{{ modal.pokemon.egg }}km</span>&nbsp;</span>
+                        <span ng-if="modal.pokemon.location"><span class="label label-{{modal.pokemon.location | lowercase | spaceless}}"><i class="fa fa-map-marker"></i>&nbsp;{{modal.pokemon.location}}</span>&nbsp;</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col l8 s12">
+                <div class="row">
+                    <div class="col s12">
+                        <button ng-if="modal.pokemon.candy_count" class="waves-effect waves-light btn btn-flat {{modal.candy_amount<modal.pokemon.candy_count?'disabled':''}}"
+                            ng-click="modal.candy_amount=modal.candy_amount-modal.pokemon.candy_count+1;updateCandy();register(modal.pokemon);">
+                            Envolve <span ng-if="envolve(modal.pokemon.candy_count,modal.candy_amount)" class="label label-{{modal.pokemon.type[0] | lowercase}}">{{envolve(modal.pokemon.candy_count,modal.candy_amount)}}</span></button>
+                        <button class="waves-effect waves-light btn btn-flat" ng-click="modal.candy_amount=+modal.candy_amount+3;updateCandy();">Catch</button>
+                        <button class="waves-effect waves-light btn btn-flat" ng-click="modal.candy_amount=+modal.candy_amount+1;updateCandy();">Transfer</button>
+                        <button class="waves-effect waves-light btn btn-flat" ng-click="modal.candy_amount=+modal.candy_amount+1;updateCandy();">Find</button>
+                    </div>
+                    <div class="col s12 left-align">
+                        <b>{{modal.pokemon.candy}}: {{modal.candy_amount}}</b>
+                    </div>
+                    <div class="col s12">
+                        <div class="progress progress-striped">
+                            <div ng-if="modal.pokemon.candy_amount!==undefined && modal.pokemon.candy_count" class="progress-bar
+                        label-{{modal.pokemon.type[0] | lowercase}}" role="progressbar" style="width:{{modal.candy_amount/modal.pokemon.candy_count*100|progress}}%"></div>
+                            <div ng-if="modal.pokemon.candy_amount!==undefined && modal.pokemon.candy_count" class="pull-right">{{modal.candy_amount}}/{{modal.pokemon.candy_count}}&nbsp;</div>
+                            <div ng-if="modal.pokemon.candy_amount!==undefined && !modal.pokemon.candy_count" class="progress-bar
+                        label-{{modal.pokemon.type[0] | lowercase}}" role="progressbar" style="width:{{modal.candy_amount*100|progress}}%"></div>
+                            <div ng-if="modal.pokemon.candy_amount!==undefined && !modal.pokemon.candy_count" class="pull-right">{{modal.candy_amount}}&nbsp;</div>
+                        </div>
+                    </div>
+                    <div class="col s12">
+                        <p ng-if="modal.pokemon.candy_amount!==undefined" class="range-field" style="padding-top:20px;">
+                            <input class="label-{{modal.pokemon.type[0]|lowercase}}" type="range" id="candy" min="0" max="{{modal.pokemon.candy_count||200}}"
+                                ng-model="modal.candy_amount" ng-mouseup="updateCandy();" />
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col s12" ng-if="modal.pokemon.prev_evolution.length">
+                        <div class="pull-left"><span class="label label-evolution"><i class="fa {{(modal.pokemon.prev_evolution.length >1)?'fa-reply-all':'fa-reply' }} fa-fw"></i></span></div>
+                        <div class="pull-left" ng-repeat="n in modal.pokemon.prev_evolution">&nbsp;<span class="label label-evolution">{{n | pokeidx}}</span></div>
+                    </div>
+                    <div class="col s12" ng-if="modal.pokemon.next_evolution.length">
+                        <div class="pull-left" an><span class="label label-evolution"><i class="fa {{(modal.pokemon.next_evolution.length >1)?'fa-reply-all':'fa-reply' }} fa-fw fa-rotate-180"></i></span></div>
+                        <div class="pull-left" ng-repeat="n in modal.pokemon.next_evolution">&nbsp;<span class="label label-evolution">{{n | pokeidx}}</span></div>
+                    </div>
+                    <div class="col s12" ng-if="modal.pokemon.strengths.length">
+                        <div class="pull-left"><span class="label label-strengths"><i class="fa fa-reply-all fa-rotate-90 fa-fw"></i></span></div>
+                        <div class="pull-left" ng-repeat="type in modal.pokemon.strengths">&nbsp;<span class="label label-{{type | lowercase}}">{{type}}</span></div>
+                    </div>
+                    <div class="col s12" ng-if="modal.pokemon.weaknesses.length">
+                        <div class="pull-left"><span class="label label-weaknesses"><i class="fa fa-reply-all fa-rotate-270 fa-fw"></i></span></div>
+                        <div class="pull-left" ng-repeat="type in modal.pokemon.weaknesses">&nbsp;<span class="label label-{{type | lowercase}}">{{type}}</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row close-modal center" onclick="$('#pokemon-modal').closeModal();">
+            <i class="fa fa-chevron-down fa-fw center"></i>
+        </div>
+    </div>
+</div>

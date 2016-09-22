@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html ng-app="pokememo">
+
+<head>
+    <title>PokéMemo</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="/assets/favicons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/assets/favicons/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="/assets/favicons/manifest.json">
+    <link rel="mask-icon" href="/assets/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-title" content="PokéMemo">
+    <meta name="application-name" content="PokéMemo">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="msapplication-config" content="/assets/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="assets/stylesheets/style.css">
+
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-route.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-animate.min.js"></script>
+    <script src="https://use.fontawesome.com/4d4ce8ea89.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+    <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDKpjawI069owLU8QFpMeqInJAYBgtBueQ&signed_in=true&extension=.js&libraries=drawing,geometry'></script>
+    <script src="assets/javascripts/map.js"></script>
+    <script src="app.js"></script>
+
+    <base href="/">
+</head>
+
+<body ng-controller="mainController">
+    <div class="bg-container">
+        <div class="landing-bg"></div>
+    </div>
+    <div class="navbar-fixed">
+        <nav>
+            <div class="nav-wrapper" style="background-color:#E7D57F;">
+                <a class="brand-logo center dropdown-button" data-hover="true" data-activates='dropdown' onclick="$('.dropdown-button').dropdown('open');"><img class="responsive-img" src="/assets/favicons/128.png" style="height:100px;"></a>
+                <ul id='dropdown' class='dropdown-content'>
+                    <li><a href="#!" onclick="$('.dropdown-button').dropdown('close');">Home</a></li>
+                    <li><a href="#pokedex" onclick="$('.dropdown-button').dropdown('close');">Pokédex</a></li>
+                    <li><a href="#map" onclick="$('.dropdown-button').dropdown('close');">Map</a></li>
+                    <li ng-if="user"><a ng-click="removeUser();" onclick="$('.dropdown-button').dropdown('close');">Sign out</a></li>
+                    <li><a onclick="$('.dropdown-button').dropdown('close');"><i class="fa fa-chevron-up"></i></a></li>
+                </ul>
+            </div>
+
+        </nav>
+    </div>
+    <div class="container" ng-view ng-Cloak>
+        <!-- included views -->
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('.landing-bg').css('background-image','url(' + randombgurl() + ')');
+            $(".button-collapse").sideNav();
+        });
+
+        var randombgurl = function(){
+            var bgtypes = ['default','bug','dragon','electric','fairy','fighting','fire','flying','ghost','ground','ice','normal','poison','psychic','rock','water'];
+            return '/assets/images/details_type_bg/details_type_bg_' + bgtypes[Math.floor(Math.random() * bgtypes.length)] + '.png';
+        };
+    </script>
+</body>
+
+</html>
