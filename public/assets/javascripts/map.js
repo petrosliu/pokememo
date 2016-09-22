@@ -464,10 +464,8 @@ var mapInit = function () {
     map = new google.maps.Map(mapElement, mapOptions);
     addMyLocationButton();
 
-
     google.maps.event.addListener(map, "click", function(event){
         addNewSpawnMarker(event.latLng.lat(),event.latLng.lng());
     });
-
     return map;
 };

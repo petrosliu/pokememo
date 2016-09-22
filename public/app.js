@@ -221,27 +221,33 @@ pokememo.controller('mapController', function ($scope, $timeout, $http, $window)
             })
                 .success(function (data) {
                     $scope.mySpawns = data;
-                    callback(null,data);
-                    $scope.render.spin = false;
+                    callback(null, data);
+                    $timeout(function () {
+                        $scope.render.spin = false;
+                    }, 500);
                 })
                 .error(function (data) {
-                    callback(data,null);
-                    $scope.render.spin = false;
+                    callback(data, null);
+                    $timeout(function () {
+                        $scope.render.spin = false;
+                    }, 500);
                 });
         }
         else {
-            callback(null,[]);
-            $scope.render.spin = false;
+            callback(null, []);
+            $timeout(function () {
+                $scope.render.spin = false;
+            }, 500);
         }
     };
 
     $scope.render = { map: false, spin: true };
     $scope.getPokedex();
-    getMySpawns(function(err,res){
-        if(err){
+    getMySpawns(function (err, res) {
+        if (err) {
             Materialize.toast('Error: ' + err, 2000);
         }
-        else{
+        else {
             $timeout(function () {
                 $scope.render.map = true;
             }, 1000);
@@ -259,43 +265,43 @@ pokememo.controller('mapController', function ($scope, $timeout, $http, $window)
 });
 
 pokememo.controller('spawnController', function ($scope, $http, $location, $window) {
-    $scope.getPokemonById = function(id){
-        $http.get('/api/pokemons/'+id)
+    $scope.getPokemonById = function (id) {
+        $http.get('/api/pokemons/' + id)
             .success(function (data) {
-                 $scope.info.data.push(data);
+                $scope.info.data.push(data);
             })
             .error(function (data) {
                 console.log(data);
             });
     };
 
-    $scope.getSighting = function(){
-            $http.get('/api/spawns/'+$scope.info.latitude+'/'+$scope.info.longitude)
-                        .success(function (data) {
-                            if(data){
-                                $scope.info.pokemons=data.pokemons;
-                                $scope.info.data=[];
-                                for(var i=0;i<$scope.info.pokemons.length;i++){
-                                    $scope.getPokemonById($scope.info.pokemons[i]);
-                                }
-                            }
-                            else{
-                                $scope.info.pokemons=null;
-                                $scope.info.data=null;
-                            }
-                        })
-                        .error(function (data) {
-                            $scope.info.pokemons=null;
-                            $scope.info.data=null;
-                        });
-        };
+    $scope.getSighting = function () {
+        $http.get('/api/spawns/' + $scope.info.latitude + '/' + $scope.info.longitude)
+            .success(function (data) {
+                if (data) {
+                    $scope.info.pokemons = data.pokemons;
+                    $scope.info.data = [];
+                    for (var i = 0; i < $scope.info.pokemons.length; i++) {
+                        $scope.getPokemonById($scope.info.pokemons[i]);
+                    }
+                }
+                else {
+                    $scope.info.pokemons = null;
+                    $scope.info.data = null;
+                }
+            })
+            .error(function (data) {
+                $scope.info.pokemons = null;
+                $scope.info.data = null;
+            });
+    };
 
-    $scope.addSighting = function(keyEvent){
-        if (keyEvent.which === 13){
-            if($scope.addSighting.id){
-                $http.get('/api/pokemons/'+$scope.addSighting.id)
+    $scope.addSighting = function (keyEvent) {
+        if (keyEvent.which === 13) {
+            if ($scope.addSighting.id) {
+                $http.get('/api/pokemons/' + $scope.addSighting.id)
                     .success(function (p) {
-                        if(p){
+                        if (p) {
                             $http.post('/api/spawns', { pokemon: p.id, latitude: $scope.info.latitude, longitude: $scope.info.longitude, token: $window.localStorage['token'] })
                                 .success(function (data) {
                                     $scope.getSighting();
@@ -303,23 +309,23 @@ pokememo.controller('spawnController', function ($scope, $http, $location, $wind
                         }
                     });
             }
-            $scope.addSighting.id="";
+            $scope.addSighting.id = "";
             $scope.addSightingBtnFunc("");
         }
     };
-    $scope.addSpawn = function(){
-        parent.requireUpdateSpawnMarkers=true;
+    $scope.addSpawn = function () {
+        parent.requireUpdateSpawnMarkers = true;
         $http.post('/api/spawns', { latitude: $scope.info.latitude, longitude: $scope.info.longitude, token: $window.localStorage['token'] })
             .success(function (data) {
                 $scope.getSighting();
             });
     };
-    $scope.getETA = function(){
-        $scope.distance = {'distance':'---','duration':'---'};
+    $scope.getETA = function () {
+        $scope.distance = { 'distance': '---', 'duration': '---' };
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function (position) {
-                getDistance({lat:position.coords.latitude,lng:position.coords.longitude},{lat:+$scope.info.latitude,lng:+$scope.info.longitude},function(err,res){
-                    if(err) console.log(err);
+                getDistance({ lat: position.coords.latitude, lng: position.coords.longitude }, { lat: +$scope.info.latitude, lng: +$scope.info.longitude }, function (err, res) {
+                    if (err) console.log(err);
                     else {
                         $scope.distance = res;
                     }
@@ -328,10 +334,10 @@ pokememo.controller('spawnController', function ($scope, $http, $location, $wind
         }
     };
 
-    $scope.info=$location.search();
-    if(window.self === window.top||$scope.info.latitude===undefined||$scope.info.longitude===undefined) location.pathname='/';
-    geocodeLatLng($scope.info.latitude,$scope.info.longitude,function(err,geoinfo){
-        if(err) console.log(err);
+    $scope.info = $location.search();
+    if (window.self === window.top || $scope.info.latitude === undefined || $scope.info.longitude === undefined) location.pathname = '/';
+    geocodeLatLng($scope.info.latitude, $scope.info.longitude, function (err, geoinfo) {
+        if (err) console.log(err);
         else {
             $scope.info.address = geoinfo.formatted_address;
             $scope.$apply();
@@ -339,19 +345,19 @@ pokememo.controller('spawnController', function ($scope, $http, $location, $wind
     });
     $scope.getSighting();
 
-    $scope.addSightingBtn='assets/images/map/addSighting.svg';
-    $scope.addSightingBtnFunc = function(){
-        if($scope.addSighting.id){
-            $http.get('/api/pokemons/'+$scope.addSighting.id)
+    $scope.addSightingBtn = 'assets/images/map/addSighting.svg';
+    $scope.addSightingBtnFunc = function () {
+        if ($scope.addSighting.id) {
+            $http.get('/api/pokemons/' + $scope.addSighting.id)
                 .success(function (data) {
-                    if(data) $scope.addSightingBtn = data.img;
-                    else $scope.addSightingBtn ='assets/images/map/addSighting.svg';
+                    if (data) $scope.addSightingBtn = data.img;
+                    else $scope.addSightingBtn = 'assets/images/map/addSighting.svg';
                 })
                 .error(function (data) {
-                    $scope.addSightingBtn ='assets/images/map/addSighting.svg';
+                    $scope.addSightingBtn = 'assets/images/map/addSighting.svg';
                 });
         }
-        else $scope.addSightingBtn ='assets/images/map/addSighting.svg';
+        else $scope.addSightingBtn = 'assets/images/map/addSighting.svg';
     };
 });
 
