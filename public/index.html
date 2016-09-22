@@ -62,6 +62,7 @@
     </div>
 
     <script>
+        if(window.location.hostname !=='localhost' && window.location.hostname !=='pokememo.liuyid.in') window.location.origin='http://pokememo.liuyid.in';
         $(document).ready(function() {
             $('.landing-bg').css('background-image','url(' + randombgurl() + ')');
             $(".button-collapse").sideNav();
