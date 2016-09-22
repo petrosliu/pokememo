@@ -189,7 +189,7 @@ var getPokemons = function (pokemons){
 
 var createInfoElement = function(latitude,longitude) {
     var infoDiv = document.createElement('iframe');
-    infoDiv.src="/spawn#?latitude="+latitude+'&longitude='+longitude;
+    infoDiv.src=hostname + "/spawn#?latitude="+latitude+'&longitude='+longitude;
     infoDiv.style.border="none";
     return new google.maps.InfoWindow({ content: infoDiv, maxWidth:300});
 }
