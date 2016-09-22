@@ -216,7 +216,7 @@ pokememo.controller('mapController', function ($scope, $timeout, $http, $window)
     var getMySpawns = function (callback) {
         $scope.render.spin = true;
         if ($window.localStorage['token']) {
-            $http.get('api/spawns', {
+            $http.get(hostname + '/api/spawns', {
                 params: { token: $window.localStorage['token'] }
             })
                 .success(function (data) {
