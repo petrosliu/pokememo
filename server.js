@@ -10,6 +10,13 @@ app.configure(function () {
   // pull information from html in POST
   app.use(express.urlencoded());
   app.use(express.json());
+  app.use(function (req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', 'http://pokememo.liuyid.in');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    next();
+});
 });
 
 app.listen(config.PORT || 8080);
