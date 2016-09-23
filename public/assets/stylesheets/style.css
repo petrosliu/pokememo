@@ -11,7 +11,7 @@ html {
     height: 100%;
 }
 div.navbar-fixed {
-    margin-bottom: 120px;
+    margin-bottom: 50px;
 }
 body > div.container > div.row {
     padding: 10px 10px 10px 10px;
@@ -294,4 +294,18 @@ input:focus {
 }
 .model-button {
     cursor: pointer;
+}
+.map-pokedex{
+    position:absolute;
+    top:56px;
+    left:-325px;
+    bottom:0;
+    width:400px;
+    overflow-y: scroll;
+    padding:30px;
+    transition-duration: .5s;
+}
+.map-pokedex:hover,
+.map-pokedex:focus{
+    left:0;
 }
