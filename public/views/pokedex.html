@@ -42,6 +42,7 @@
         <div class="col s12">
             <div class="pull-left" ng-repeat="type in p.type"><span class="label label-{{type | lowercase}}">{{type}}</span>&nbsp;</div>
             <div class="pull-left" ng-if="p.egg"><span class="label label-egg"><img src="assets/images/pokemons/000.png" class="egg-icon-xs">&nbsp;{{ p.egg }}km</span>&nbsp;</div>
+            <div class="pull-left" ng-if="p.buddy"><span class="label label-buddy"><i class="fa fa-smile-o"></i>&nbsp;{{ p.buddy }}km</span>&nbsp;</div>
             <div class="pull-left" ng-if="p.location"><span class="label label-{{p.location | lowercase | spaceless}}"><i class="fa fa-map-marker"></i>&nbsp;{{p.location}}</span>&nbsp;</div>
         </div>
         <div class="col s12">
@@ -86,6 +87,7 @@
                     </div>
                     <div>
                         <span ng-if="modal.pokemon.egg"><span class="label label-egg"><img src="assets/images/pokemons/000.png" class="egg-icon-xs">&nbsp;{{ modal.pokemon.egg }}km</span>&nbsp;</span>
+                        <div ng-if="modal.pokemon.buddy"><span class="label label-buddy"><i class="fa fa-smile-o"></i>&nbsp;{{ modal.pokemon.buddy }}km</span>&nbsp;</div>
                         <span ng-if="modal.pokemon.location"><span class="label label-{{modal.pokemon.location | lowercase | spaceless}}"><i class="fa fa-map-marker"></i>&nbsp;{{modal.pokemon.location}}</span>&nbsp;</span>
                     </div>
                 </div>
@@ -100,7 +102,9 @@
                             Envolve <span ng-if="envolve(modal.pokemon.candy_count,modal.candy_amount)" class="label label-{{modal.pokemon.type[0] | lowercase}}">{{envolve(modal.pokemon.candy_count,modal.candy_amount)}}</span></button>
                         <button class="waves-effect waves-light btn btn-flat" ng-click="modal.candy_amount=+modal.candy_amount+3;updateCandy();">Catch</button>
                         <button class="waves-effect waves-light btn btn-flat" ng-click="modal.candy_amount=+modal.candy_amount+1;updateCandy();">Transfer</button>
-                        <button class="waves-effect waves-light btn btn-flat" ng-click="modal.candy_amount=+modal.candy_amount+1;updateCandy();">Find</button>
+                        <button class="waves-effect waves-light btn btn-flat" ng-click="modal.candy_amount=+modal.candy_amount+1;updateCandy();">Find <span ng-if="modal.pokemon.candy_count-modal.candy_amount>0" class="label label-buddy">
+                            {{modal.pokemon.buddy*(modal.pokemon.candy_count-modal.candy_amount)}}km
+                        </span></button>
                     </div>
                     <div class="col s12 left-align">
                         <b>{{modal.pokemon.candy}}: {{modal.candy_amount}}</b>

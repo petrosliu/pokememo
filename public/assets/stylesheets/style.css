@@ -157,6 +157,7 @@ input.label-bug +.thumb {
 }
 .label-rock,
 .label-egg,
+.label-buddy,
 input.label-rock::-webkit-slider-thumb,
 input.label-rock +.thumb {
     background-color: dimgrey;
