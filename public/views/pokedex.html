@@ -97,7 +97,7 @@
                 <div class="row">
                     <div class="col s12">
                         <button ng-if="modal.pokemon.candy_count" class="waves-effect waves-light btn btn-flat {{modal.candy_amount<modal.pokemon.candy_count?'disabled':''}}"
-                            ng-click="modal.candy_amount=modal.candy_amount-modal.pokemon.candy_count+1;updateCandy();register(modal.pokemon);">
+                            ng-click="register(modal.pokemon);modal.candy_amount=modal.candy_amount-modal.pokemon.candy_count+1;updateCandy();">
                             Envolve <span ng-if="envolve(modal.pokemon.candy_count,modal.candy_amount)" class="label label-{{modal.pokemon.type[0] | lowercase}}">{{envolve(modal.pokemon.candy_count,modal.candy_amount)}}</span></button>
                         <button class="waves-effect waves-light btn btn-flat" ng-click="modal.candy_amount=+modal.candy_amount+3;updateCandy();">Catch</button>
                         <button class="waves-effect waves-light btn btn-flat" ng-click="modal.candy_amount=+modal.candy_amount+1;updateCandy();">Transfer</button>
