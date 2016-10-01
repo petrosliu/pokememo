@@ -30,7 +30,7 @@
                 <div class="pull-left" ng-if="p.location"><span class="label label-{{p.location | lowercase | spaceless}}"><i class="fa fa-map-marker"></i>&nbsp;{{p.location}}</span>&nbsp;</div>
             </div>
             <div class="col s12">
-                <div class="progress progress-striped" ng-click="showModel(p);">
+                <div class="progress progress-striped">
                     <div ng-if="p.candy_amount!==undefined && p.candy_count" class="progress-bar label-{{p.type[0] | lowercase}}" role="progressbar"
                         style="width:{{p.candy_amount/p.candy_count*100|progress}}%"></div>
                     <div ng-if="p.candy_amount!==undefined && p.candy_count" class="pull-right">{{p.candy_amount}}/{{p.candy_count}}&nbsp;</div>
