@@ -46,7 +46,7 @@
             <div class="pull-left" ng-if="p.location"><span class="label label-{{p.location | lowercase | spaceless}}"><i class="fa fa-map-marker"></i>&nbsp;{{p.location}}</span>&nbsp;</div>
         </div>
         <div class="col s12">
-            <div class="progress progress-striped" ng-click="showModel(p);">
+            <div class="progress progress-striped" ng-click="showModel($index);">
                 <div ng-if="p.candy_amount!==undefined && p.candy_count" class="progress-bar label-{{p.type[0] | lowercase}}" role="progressbar"
                     style="width:{{p.candy_amount/p.candy_count*100|progress}}%"></div>
                 <div ng-if="p.candy_amount!==undefined && p.candy_count" class="pull-right">{{p.candy_amount}}/{{p.candy_count}}&nbsp;</div>
@@ -56,7 +56,7 @@
             </div>
         </div>
     </div>
-    <div class="col s1 unseen model-button" ng-click="showModel(p);">
+    <div class="col s1 unseen model-button" ng-click="showModel($index);">
         <div class="right-align"><i class="fa fa-circle"></i></div>
         <div class="right-align"><i class="fa fa-circle"></i></div>
         <div class="right-align"><i class="fa fa-circle"></i></div>
@@ -73,28 +73,34 @@
 
 <div id="pokemon-modal" class="modal bottom-sheet">
     <div class="modal-content">
+        <div class="row">
+            <div class="col s6 center waves-effect waves-light btn btn-flat" ng-click="showModel(modal.index-1);">
+                <i class="fa fa-chevron-left fa-fw center"></i>
+            </div>
+            <div class="col s6 center waves-effect waves-light btn btn-flat" ng-click="showModel(modal.index+1);">
+                <i class="fa fa-chevron-right fa-fw center"></i>
+            </div>
+        </div>
         <div class="row pokemon-item center">
             <div class="col l4 s12">
-                <div class="row sprite">
-                    <img src="{{modal.pokemon.img}}" class="img-responsive {{(modal.pokemon.registered)?'seen':'unseen'}}" ng-click="(modal.pokemon.registered)?deregister(modal.pokemon):register(modal.pokemon);">
-                </div>
-                <div class="row">
+                <div class="row"  style="min-height: 100px;">
                     <div class="pokemon-name">
-                        <div>{{modal.pokemon.id | pokeidx}} {{ modal.pokemon.name }}</div>
+                        <div style="font-size:25px;">{{modal.pokemon.id | pokeidx}} {{ modal.pokemon.name }}</div>
                     </div>
                     <div>
                         <span ng-repeat="type in modal.pokemon.type"><span class="label label-{{type | lowercase}}">{{type}}</span>&nbsp;</span>
-                    </div>
-                    <div>
                         <span ng-if="modal.pokemon.egg"><span class="label label-egg"><img src="assets/images/pokemons/000.png" class="egg-icon-xs">&nbsp;{{ modal.pokemon.egg }}km</span>&nbsp;</span>
-                        <div ng-if="modal.pokemon.buddy"><span class="label label-buddy"><i class="fa fa-smile-o"></i>&nbsp;{{ modal.pokemon.buddy }}km</span>&nbsp;</div>
+                        <span ng-if="modal.pokemon.buddy"><span class="label label-buddy"><i class="fa fa-smile-o"></i>&nbsp;{{ modal.pokemon.buddy }}km</span>&nbsp;</span>
                         <span ng-if="modal.pokemon.location"><span class="label label-{{modal.pokemon.location | lowercase | spaceless}}"><i class="fa fa-map-marker"></i>&nbsp;{{modal.pokemon.location}}</span>&nbsp;</span>
                     </div>
+                </div>
+                <div class="row sprite" style="min-height: 200px;">
+                    <img src="{{modal.pokemon.img}}" class="img-responsive {{(modal.pokemon.registered)?'seen':'unseen'}}" ng-click="(modal.pokemon.registered)?deregister(modal.pokemon):register(modal.pokemon);">
                 </div>
             </div>
 
             <div class="col l8 s12">
-                <div class="row">
+                <div class="row" style="{{modal.disable?'pointer-events: none;opacity: 0.4;':''}}">
                     <div class="col s12">
                         <button ng-if="modal.pokemon.candy_count" class="waves-effect waves-light btn btn-flat {{modal.candy_amount<modal.pokemon.candy_count?'disabled':''}}"
                             ng-click="register(modal.pokemon);modal.candy_amount=modal.candy_amount-modal.pokemon.candy_count+1;updateCandy();">
@@ -146,8 +152,10 @@
                 </div>
             </div>
         </div>
-        <div class="row close-modal center" onclick="$('#pokemon-modal').closeModal();">
-            <i class="fa fa-chevron-down fa-fw center"></i>
+        <div class="row">
+            <div class="col s12 center waves-effect waves-light btn btn-flat close-modal" onclick="$('#pokemon-modal').closeModal();">
+                <i class="fa fa-chevron-down fa-fw center"></i>
+            </div>
         </div>
     </div>
 </div>

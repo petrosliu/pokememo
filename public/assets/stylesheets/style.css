@@ -73,8 +73,10 @@ div.sprite > img {
     -webkit-transition-duration: 1s;
 }
 .modal div.sprite > img {
-    max-height: none;
-    max-width: none;
+    max-height: 200px;
+    max-width: 200px;
+    display: block;
+    margin: 0 auto;
 }
 .seen {
     -webkit-filter: contrast(1);
@@ -255,6 +257,7 @@ input:focus {
 .modal.bottom-sheet div.close-modal{
     visibility: visible;
     text-align: center;
+    max-height: none;
 }
 @media only screen and (min-width: 601px) {
     #map {
@@ -265,6 +268,7 @@ input:focus {
     }
     .modal.bottom-sheet div.close-modal{
         visibility: hidden;
+        max-height: 0;
     }
 }
 .loading-icon {

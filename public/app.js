@@ -173,11 +173,23 @@ pokememo.controller('pokedexController', function ($scope, $http, $window, $filt
         }
     };
 
-    $scope.showModel = function (pokemon) {
-        if ($scope.pokedex[pokemon.id] || $scope.pokedex[pokemon.candy] !== undefined) {
+    $scope.showModel = function (idx) {
+        $scope.modal.index = idx;
+        var pokemon=$filter('orderBy')($filter('filter')($scope.pokemon, {keywords:$scope.query}), $scope.sortBy)[idx];
+        if(pokemon){
             $scope.modal.pokemon = pokemon;
-            $scope.modal.candy_amount = $scope.pokedex[pokemon.candy];
+            if ($scope.pokedex[pokemon.id] || $scope.pokedex[pokemon.candy] !== undefined) {
+                $scope.modal.candy_amount = $scope.pokedex[pokemon.candy];
+                $scope.modal.disable=false;
+            }
+            else{
+                $scope.modal.candy_amount = 0;
+                $scope.modal.disable=true;
+            }
             $('#pokemon-modal').openModal();
+        }
+        else{
+            $('#pokemon-modal').closeModal();
         }
     };
 
