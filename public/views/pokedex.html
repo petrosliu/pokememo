@@ -15,6 +15,7 @@
         <button class="btn-xs waves-effect waves-light btn btn-flat {{ (sortBy === 'id')? 'active':'' }}" ng-click="sortBy = 'id'"><i class="fa fa-sort-numeric-asc fa-fw"></i></button>
         <button class="btn-xs waves-effect waves-light btn btn-flat {{ (sortBy === 'name')? 'active':'' }}" ng-click="sortBy = 'name'"><i class="fa fa-sort-alpha-asc fa-fw"></i></button>
         <button class="btn-xs waves-effect waves-light btn btn-flat {{ (sortBy === 'progress')? 'active':'' }}" ng-click="sortBy = 'progress'"><i class="fa fa-tasks fa-fw"></i></button>
+        <button class="btn-xs waves-effect waves-light btn btn-flat {{ (sortBy === 'buddy_mileage')? 'active':'' }}" ng-click="sortBy = 'buddy_mileage'"><i class="fa fa-tachometer fa-fw"></i></button>
         <button class="btn-xs waves-effect waves-light btn btn-flat {{ (sortBy === '-egg')? 'active':'' }}" ng-click="sortBy = '-egg'"><span class="fa-fw"><img class="egg-icon" src="assets/images/pokemons/000.png"></span></button>
     </div>
     <div class="col l4 m6 s12" ng-init="kindOf = 'all';" style="padding-top:5px;">
@@ -107,7 +108,7 @@
                             Envolve <span ng-if="envolve(modal.pokemon.candy_count,modal.candy_amount)" class="label label-{{modal.pokemon.type[0] | lowercase}}">{{envolve(modal.pokemon.candy_count,modal.candy_amount)}}</span></button>
                         <button class="waves-effect waves-light btn btn-flat" ng-click="modal.candy_amount=+modal.candy_amount+3;updateCandy();">Catch</button>
                         <button class="waves-effect waves-light btn btn-flat" ng-click="modal.candy_amount=+modal.candy_amount+1;updateCandy();">Transfer</button>
-                        <button class="waves-effect waves-light btn btn-flat" ng-click="modal.candy_amount=+modal.candy_amount+1;updateCandy();">Find <span ng-if="modal.pokemon.candy_count-modal.candy_amount>0" class="label label-buddy">
+                        <button class="waves-effect waves-light btn btn-flat" ng-if="modal.registered || modal.candy_amount" ng-click="modal.candy_amount=+modal.candy_amount+1;updateCandy();">Find <span ng-if="modal.pokemon.candy_count-modal.candy_amount>0" class="label label-buddy">
                             {{modal.pokemon.buddy*(modal.pokemon.candy_count-modal.candy_amount)}}km
                         </span></button>
                     </div>

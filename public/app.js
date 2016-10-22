@@ -56,6 +56,13 @@ pokememo.controller('mainController', function ($scope, $http, $window) {
                 for (var i = 0; i < data.length; i++) {
                     data[i].registered = ($scope.pokedex[data[i].id] === true);
                     data[i].candy_amount = +$scope.pokedex[data[i].candy] || 0;
+                    data[i].buddy_mileage = 1001;
+                    if(data[i].registered || data[i].candy_amount){
+                        data[i].buddy_mileage = 999;
+                        if(data[i].candy_amount < data[i].candy_count){
+                            data[i].buddy_mileage = (data[i].candy_count-data[i].candy_amount)*data[i].buddy;
+                        }
+                    }
                     if (data[i].registered) {
                         data[i].keywords.push('catched');
                         data[i].progress = 1000;
