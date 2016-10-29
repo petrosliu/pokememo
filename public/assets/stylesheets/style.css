@@ -90,9 +90,14 @@ div.sprite > img {
 }
 img.egg-icon {
     height: 25px;
+    -webkit-filter: brightness(0);
+    filter: brightness(0);
 }
-img.egg-icon-xs {
-    height: 14px;
+img.icon-xs {
+    max-height: 12px;
+    max-width: 12px;
+    -webkit-filter: contrast(0) brightness(100);
+    filter: contrast(0) brightness(100);
 }
 img.pikachu-icon {
     height: 18px;
