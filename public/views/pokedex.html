@@ -34,7 +34,7 @@
 
 <div class="row pokemon-item valign-wrapper white z-depth-2" ng-repeat="p in pokemon | filter:{keywords:query} | orderBy:sortBy track by p.id">
     <div class="col s3 sprite">
-        <img src="{{p.img}}" class="img-responsive {{(p.registered)?'seen':'unseen'}}" ng-click="(p.registered)?deregister(p):register(p);">
+        <img ng-src="{{p.img}}" class="img-responsive {{(p.registered)?'seen':'unseen'}}" ng-click="(p.registered)?deregister(p):register(p);">
     </div>
     <div class="col s8">
         <div class="col s12 pokemon-name">
