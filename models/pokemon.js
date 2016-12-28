@@ -516,7 +516,7 @@ var pokemonRawData =
         egg: 0,
         buddy: 1,
         next_evolution: [],
-        prev_evolution: [172,25],
+        prev_evolution: [172, 25],
         location: '',
         gif: 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/raichu.gif'
     },
@@ -702,7 +702,7 @@ var pokemonRawData =
         egg: 0,
         buddy: 1,
         next_evolution: [],
-        prev_evolution: [173,35],
+        prev_evolution: [173, 35],
         location: '',
         gif: 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/clefable.gif'
     },
@@ -770,7 +770,7 @@ var pokemonRawData =
         egg: 0,
         buddy: 1,
         next_evolution: [],
-        prev_evolution: [174,39],
+        prev_evolution: [174, 39],
         location: '',
         gif: 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/wigglytuff.gif'
     },
@@ -2871,7 +2871,7 @@ var pokemonRawData =
         weaknesses: ['Electric', 'Grass', 'Dragon', 'Ground'],
         egg: 5,
         buddy: 1,
-        next_evolution: [25,26],
+        next_evolution: [25, 26],
         prev_evolution: [],
         location: 'Unavailable',
         gif: 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/pichu.gif'
@@ -2888,7 +2888,7 @@ var pokemonRawData =
         weaknesses: ['Rock', 'Steel', 'Ghost'],
         egg: 2,
         buddy: 1,
-        next_evolution: [35,36],
+        next_evolution: [35, 36],
         prev_evolution: [],
         location: 'Unavailable',
         gif: 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/cleffa.gif'
@@ -2905,7 +2905,7 @@ var pokemonRawData =
         weaknesses: ['Rock', 'Steel', 'Ghost'],
         egg: 2,
         buddy: 1,
-        next_evolution: [39,40],
+        next_evolution: [39, 40],
         prev_evolution: [],
         location: 'Unavailable',
         gif: 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/igglybuff.gif'
@@ -2931,11 +2931,11 @@ var pokemonRawData =
         id: 176,
         name: 'Togetic',
         img: 'http://www.pkparaiso.com/xy/sprites/pokemon/176.png',
-        type: ['fairy','Flying'],
+        type: ['fairy', 'Flying'],
         candy: 'Togepi Candy',
         candy_count: '50',
         immunes: [],
-        strengths: ['Grass','Fighting', 'Dragon', 'Dark', 'Bug'],
+        strengths: ['Grass', 'Fighting', 'Dragon', 'Dark', 'Bug'],
         weaknesses: ['Fire', 'Poison', 'Steel', 'Electric', 'Rock'],
         egg: 0,
         buddy: 5,
