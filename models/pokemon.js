@@ -15,7 +15,7 @@ var pokemonRawData =
     [{
         id: 1,
         name: 'Bulbasaur',
-        img: 'assets/images/pokemons/001.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/001.png',
         type: ['Grass', 'Poison'],
         candy: 'Bulbasaur Candy',
         candy_count: 0,
@@ -42,7 +42,7 @@ var pokemonRawData =
     {
         id: 2,
         name: 'Ivysaur',
-        img: 'assets/images/pokemons/002.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/002.png',
         type: ['Grass', 'Poison'],
         candy: 'Bulbasaur Candy',
         candy_count: '25',
@@ -69,7 +69,7 @@ var pokemonRawData =
     {
         id: 3,
         name: 'Venusaur',
-        img: 'assets/images/pokemons/003.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/003.png',
         type: ['Grass', 'Poison'],
         candy: 'Bulbasaur Candy',
         candy_count: '100',
@@ -96,7 +96,7 @@ var pokemonRawData =
     {
         id: 4,
         name: 'Charmander',
-        img: 'assets/images/pokemons/004.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/004.png',
         type: ['Fire'],
         candy: 'Charmander Candy',
         candy_count: 0,
@@ -113,7 +113,7 @@ var pokemonRawData =
     {
         id: 5,
         name: 'Charmeleon',
-        img: 'assets/images/pokemons/005.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/005.png',
         type: ['Fire'],
         candy: 'Charmander Candy',
         candy_count: '25',
@@ -130,7 +130,7 @@ var pokemonRawData =
     {
         id: 6,
         name: 'Charizard',
-        img: 'assets/images/pokemons/006.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/006.png',
         type: ['Fire', 'Flying'],
         candy: 'Charmander Candy',
         candy_count: '100',
@@ -147,7 +147,7 @@ var pokemonRawData =
     {
         id: 7,
         name: 'Squirtle',
-        img: 'assets/images/pokemons/007.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/007.png',
         type: ['Water'],
         candy: 'Squirtle Candy',
         candy_count: 0,
@@ -164,7 +164,7 @@ var pokemonRawData =
     {
         id: 8,
         name: 'Wartortle',
-        img: 'assets/images/pokemons/008.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/008.png',
         type: ['Water'],
         candy: 'Squirtle Candy',
         candy_count: '25',
@@ -181,7 +181,7 @@ var pokemonRawData =
     {
         id: 9,
         name: 'Blastoise',
-        img: 'assets/images/pokemons/009.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/009.png',
         type: ['Water'],
         candy: 'Squirtle Candy',
         candy_count: '100',
@@ -198,7 +198,7 @@ var pokemonRawData =
     {
         id: 10,
         name: 'Caterpie',
-        img: 'assets/images/pokemons/010.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/010.png',
         type: ['Bug'],
         candy: 'Caterpie Candy',
         candy_count: 0,
@@ -215,7 +215,7 @@ var pokemonRawData =
     {
         id: 11,
         name: 'Metapod',
-        img: 'assets/images/pokemons/011.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/011.png',
         type: ['Bug'],
         candy: 'Caterpie Candy',
         candy_count: '12',
@@ -232,7 +232,7 @@ var pokemonRawData =
     {
         id: 12,
         name: 'Butterfree',
-        img: 'assets/images/pokemons/012.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/012.png',
         type: ['Bug', 'Flying'],
         candy: 'Caterpie Candy',
         candy_count: '50',
@@ -258,7 +258,7 @@ var pokemonRawData =
     {
         id: 13,
         name: 'Weedle',
-        img: 'assets/images/pokemons/013.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/013.png',
         type: ['Bug', 'Poison'],
         candy: 'Weedle Candy',
         candy_count: 0,
@@ -284,7 +284,7 @@ var pokemonRawData =
     {
         id: 14,
         name: 'Kakuna',
-        img: 'assets/images/pokemons/014.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/014.png',
         type: ['Bug', 'Poison'],
         candy: 'Weedle Candy',
         candy_count: '12',
@@ -310,7 +310,7 @@ var pokemonRawData =
     {
         id: 15,
         name: 'Beedrill',
-        img: 'assets/images/pokemons/015.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/015.png',
         type: ['Bug', 'Poison'],
         candy: 'Weedle Candy',
         candy_count: '50',
@@ -336,7 +336,7 @@ var pokemonRawData =
     {
         id: 16,
         name: 'Pidgey',
-        img: 'assets/images/pokemons/016.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/016.png',
         type: ['Normal', 'Flying'],
         candy: 'Pidgey Candy',
         candy_count: 0,
@@ -353,7 +353,7 @@ var pokemonRawData =
     {
         id: 17,
         name: 'Pidgeotto',
-        img: 'assets/images/pokemons/017.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/017.png',
         type: ['Normal', 'Flying'],
         candy: 'Pidgey Candy',
         candy_count: '12',
@@ -370,7 +370,7 @@ var pokemonRawData =
     {
         id: 18,
         name: 'Pidgeot',
-        img: 'assets/images/pokemons/018.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/018.png',
         type: ['Normal', 'Flying'],
         candy: 'Pidgey Candy',
         candy_count: '50',
@@ -387,7 +387,7 @@ var pokemonRawData =
     {
         id: 19,
         name: 'Rattata',
-        img: 'assets/images/pokemons/019.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/019.png',
         type: ['Normal'],
         candy: 'Rattata Candy',
         candy_count: 0,
@@ -404,7 +404,7 @@ var pokemonRawData =
     {
         id: 20,
         name: 'Raticate',
-        img: 'assets/images/pokemons/020.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/020.png',
         type: ['Normal'],
         candy: 'Rattata Candy',
         candy_count: '25',
@@ -421,7 +421,7 @@ var pokemonRawData =
     {
         id: 21,
         name: 'Spearow',
-        img: 'assets/images/pokemons/021.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/021.png',
         type: ['Normal', 'Flying'],
         candy: 'Spearow Candy',
         candy_count: 0,
@@ -438,7 +438,7 @@ var pokemonRawData =
     {
         id: 22,
         name: 'Fearow',
-        img: 'assets/images/pokemons/022.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/022.png',
         type: ['Normal', 'Flying'],
         candy: 'Spearow Candy',
         candy_count: '50',
@@ -455,7 +455,7 @@ var pokemonRawData =
     {
         id: 23,
         name: 'Ekans',
-        img: 'assets/images/pokemons/023.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/023.png',
         type: ['Poison'],
         candy: 'Ekans Candy',
         candy_count: 0,
@@ -472,7 +472,7 @@ var pokemonRawData =
     {
         id: 24,
         name: 'Arbok',
-        img: 'assets/images/pokemons/024.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/024.png',
         type: ['Poison'],
         candy: 'Ekans Candy',
         candy_count: '50',
@@ -489,24 +489,24 @@ var pokemonRawData =
     {
         id: 25,
         name: 'Pikachu',
-        img: 'assets/images/pokemons/025.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/025.png',
         type: ['Electric'],
         candy: 'Pikachu Candy',
-        candy_count: 0,
+        candy_count: '25',
         immunes: [],
         strengths: ['Water', 'Flying'],
         weaknesses: ['Electric', 'Grass', 'Dragon', 'Ground'],
         egg: 2,
         buddy: 1,
         next_evolution: [26],
-        prev_evolution: [],
+        prev_evolution: [172],
         location: '',
         gif: 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/pikachu.gif'
     },
     {
         id: 26,
         name: 'Raichu',
-        img: 'assets/images/pokemons/026.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/026.png',
         type: ['Electric'],
         candy: 'Pikachu Candy',
         candy_count: '50',
@@ -516,14 +516,14 @@ var pokemonRawData =
         egg: 0,
         buddy: 1,
         next_evolution: [],
-        prev_evolution: [25],
+        prev_evolution: [172,25],
         location: '',
         gif: 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/raichu.gif'
     },
     {
         id: 27,
         name: 'Sandshrew',
-        img: 'assets/images/pokemons/027.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/027.png',
         type: ['Ground'],
         candy: 'Sandshrew Candy',
         candy_count: 0,
@@ -540,7 +540,7 @@ var pokemonRawData =
     {
         id: 28,
         name: 'Sandslash',
-        img: 'assets/images/pokemons/028.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/028.png',
         type: ['Ground'],
         candy: 'Sandshrew Candy',
         candy_count: '50',
@@ -557,7 +557,7 @@ var pokemonRawData =
     {
         id: 29,
         name: 'Nidoran♀',
-        img: 'assets/images/pokemons/029.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/029.png',
         type: ['Poison'],
         candy: 'Nidoran♀ Candy',
         candy_count: 0,
@@ -574,7 +574,7 @@ var pokemonRawData =
     {
         id: 30,
         name: 'Nidorina',
-        img: 'assets/images/pokemons/030.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/030.png',
         type: ['Poison'],
         candy: 'Nidoran♀ Candy',
         candy_count: '25',
@@ -591,7 +591,7 @@ var pokemonRawData =
     {
         id: 31,
         name: 'Nidoqueen',
-        img: 'assets/images/pokemons/031.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/031.png',
         type: ['Poison', 'Ground'],
         candy: 'Nidoran♀ Candy',
         candy_count: '100',
@@ -616,7 +616,7 @@ var pokemonRawData =
     {
         id: 32,
         name: 'Nidoran♂',
-        img: 'assets/images/pokemons/032.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/032.png',
         type: ['Poison'],
         candy: 'Nidoran♂ Candy',
         candy_count: 0,
@@ -633,7 +633,7 @@ var pokemonRawData =
     {
         id: 33,
         name: 'Nidorino',
-        img: 'assets/images/pokemons/033.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/033.png',
         type: ['Poison'],
         candy: 'Nidoran♂ Candy',
         candy_count: '25',
@@ -650,7 +650,7 @@ var pokemonRawData =
     {
         id: 34,
         name: 'Nidoking',
-        img: 'assets/images/pokemons/034.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/034.png',
         type: ['Poison', 'Ground'],
         candy: 'Nidoran♂ Candy',
         candy_count: '100',
@@ -675,24 +675,24 @@ var pokemonRawData =
     {
         id: 35,
         name: 'Clefairy',
-        img: 'assets/images/pokemons/035.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/035.png',
         type: ['Fairy'],
         candy: 'Clefairy Candy',
-        candy_count: 0,
+        candy_count: '25',
         immunes: [],
         strengths: ['Fighting', 'Dragon', 'Dark'],
         weaknesses: ['Fire', 'Poison', 'Steel'],
         egg: 2,
         buddy: 1,
         next_evolution: [36],
-        prev_evolution: [],
+        prev_evolution: [173],
         location: '',
         gif: 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/clefairy.gif'
     },
     {
         id: 36,
         name: 'Clefable',
-        img: 'assets/images/pokemons/036.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/036.png',
         type: ['Fairy'],
         candy: 'Clefairy Candy',
         candy_count: '50',
@@ -702,14 +702,14 @@ var pokemonRawData =
         egg: 0,
         buddy: 1,
         next_evolution: [],
-        prev_evolution: [35],
+        prev_evolution: [173,35],
         location: '',
         gif: 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/clefable.gif'
     },
     {
         id: 37,
         name: 'Vulpix',
-        img: 'assets/images/pokemons/037.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/037.png',
         type: ['Fire'],
         candy: 'Vulpix Candy',
         candy_count: 0,
@@ -726,7 +726,7 @@ var pokemonRawData =
     {
         id: 38,
         name: 'Ninetales',
-        img: 'assets/images/pokemons/038.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/038.png',
         type: ['Fire'],
         candy: 'Vulpix Candy',
         candy_count: '50',
@@ -743,24 +743,24 @@ var pokemonRawData =
     {
         id: 39,
         name: 'Jigglypuff',
-        img: 'assets/images/pokemons/039.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/039.png',
         type: ['Normal'],
         candy: 'Jigglypuff Candy',
-        candy_count: 0,
+        candy_count: '25',
         immunes: [],
         strengths: [],
         weaknesses: ['Rock', 'Steel', 'Ghost'],
         egg: 2,
         buddy: 1,
         next_evolution: [40],
-        prev_evolution: [],
+        prev_evolution: [174],
         location: '',
         gif: 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/jigglypuff.gif'
     },
     {
         id: 40,
         name: 'Wigglytuff',
-        img: 'assets/images/pokemons/040.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/040.png',
         type: ['Normal'],
         candy: 'Jigglypuff Candy',
         candy_count: '50',
@@ -770,14 +770,14 @@ var pokemonRawData =
         egg: 0,
         buddy: 1,
         next_evolution: [],
-        prev_evolution: [39],
+        prev_evolution: [174,39],
         location: '',
         gif: 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/wigglytuff.gif'
     },
     {
         id: 41,
         name: 'Zubat',
-        img: 'assets/images/pokemons/041.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/041.png',
         type: ['Poison', 'Flying'],
         candy: 'Zubat Candy',
         candy_count: 0,
@@ -794,7 +794,7 @@ var pokemonRawData =
     {
         id: 42,
         name: 'Golbat',
-        img: 'assets/images/pokemons/042.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/042.png',
         type: ['Poison', 'Flying'],
         candy: 'Zubat Candy',
         candy_count: '50',
@@ -811,7 +811,7 @@ var pokemonRawData =
     {
         id: 43,
         name: 'Oddish',
-        img: 'assets/images/pokemons/043.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/043.png',
         type: ['Grass', 'Poison'],
         candy: 'Oddish Candy',
         candy_count: 0,
@@ -838,7 +838,7 @@ var pokemonRawData =
     {
         id: 44,
         name: 'Gloom',
-        img: 'assets/images/pokemons/044.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/044.png',
         type: ['Grass', 'Poison'],
         candy: 'Oddish Candy',
         candy_count: '25',
@@ -865,7 +865,7 @@ var pokemonRawData =
     {
         id: 45,
         name: 'Vileplume',
-        img: 'assets/images/pokemons/045.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/045.png',
         type: ['Grass', 'Poison'],
         candy: 'Oddish Candy',
         candy_count: '100',
@@ -892,7 +892,7 @@ var pokemonRawData =
     {
         id: 46,
         name: 'Paras',
-        img: 'assets/images/pokemons/046.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/046.png',
         type: ['Bug', 'Grass'],
         candy: 'Paras Candy',
         candy_count: 0,
@@ -919,7 +919,7 @@ var pokemonRawData =
     {
         id: 47,
         name: 'Parasect',
-        img: 'assets/images/pokemons/047.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/047.png',
         type: ['Bug', 'Grass'],
         candy: 'Paras Candy',
         candy_count: '50',
@@ -946,7 +946,7 @@ var pokemonRawData =
     {
         id: 48,
         name: 'Venonat',
-        img: 'assets/images/pokemons/048.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/048.png',
         type: ['Bug', 'Poison'],
         candy: 'Venonat Candy',
         candy_count: 0,
@@ -972,7 +972,7 @@ var pokemonRawData =
     {
         id: 49,
         name: 'Venomoth',
-        img: 'assets/images/pokemons/049.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/049.png',
         type: ['Bug', 'Poison'],
         candy: 'Venonat Candy',
         candy_count: '50',
@@ -998,7 +998,7 @@ var pokemonRawData =
     {
         id: 50,
         name: 'Diglett',
-        img: 'assets/images/pokemons/050.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/050.png',
         type: ['Ground'],
         candy: 'Diglett Candy',
         candy_count: 0,
@@ -1015,7 +1015,7 @@ var pokemonRawData =
     {
         id: 51,
         name: 'Dugtrio',
-        img: 'assets/images/pokemons/051.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/051.png',
         type: ['Ground'],
         candy: 'Diglett Candy',
         candy_count: '50',
@@ -1032,7 +1032,7 @@ var pokemonRawData =
     {
         id: 52,
         name: 'Meowth',
-        img: 'assets/images/pokemons/052.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/052.png',
         type: ['Normal'],
         candy: 'Meowth Candy',
         candy_count: 0,
@@ -1049,7 +1049,7 @@ var pokemonRawData =
     {
         id: 53,
         name: 'Persian',
-        img: 'assets/images/pokemons/053.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/053.png',
         type: ['Normal'],
         candy: 'Meowth Candy',
         candy_count: '50',
@@ -1066,7 +1066,7 @@ var pokemonRawData =
     {
         id: 54,
         name: 'Psyduck',
-        img: 'assets/images/pokemons/054.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/054.png',
         type: ['Water'],
         candy: 'Psyduck Candy',
         candy_count: 0,
@@ -1083,7 +1083,7 @@ var pokemonRawData =
     {
         id: 55,
         name: 'Golduck',
-        img: 'assets/images/pokemons/055.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/055.png',
         type: ['Water'],
         candy: 'Psyduck Candy',
         candy_count: '50',
@@ -1100,7 +1100,7 @@ var pokemonRawData =
     {
         id: 56,
         name: 'Mankey',
-        img: 'assets/images/pokemons/056.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/056.png',
         type: ['Fighting'],
         candy: 'Mankey Candy',
         candy_count: 0,
@@ -1117,7 +1117,7 @@ var pokemonRawData =
     {
         id: 57,
         name: 'Primeape',
-        img: 'assets/images/pokemons/057.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/057.png',
         type: ['Fighting'],
         candy: 'Mankey Candy',
         candy_count: '50',
@@ -1134,7 +1134,7 @@ var pokemonRawData =
     {
         id: 58,
         name: 'Growlithe',
-        img: 'assets/images/pokemons/058.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/058.png',
         type: ['Fire'],
         candy: 'Growlithe Candy',
         candy_count: 0,
@@ -1151,7 +1151,7 @@ var pokemonRawData =
     {
         id: 59,
         name: 'Arcanine',
-        img: 'assets/images/pokemons/059.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/059.png',
         type: ['Fire'],
         candy: 'Growlithe Candy',
         candy_count: '50',
@@ -1168,7 +1168,7 @@ var pokemonRawData =
     {
         id: 60,
         name: 'Poliwag',
-        img: 'assets/images/pokemons/060.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/060.png',
         type: ['Water'],
         candy: 'Poliwag Candy',
         candy_count: 0,
@@ -1185,7 +1185,7 @@ var pokemonRawData =
     {
         id: 61,
         name: 'Poliwhirl',
-        img: 'assets/images/pokemons/061.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/061.png',
         type: ['Water'],
         candy: 'Poliwag Candy',
         candy_count: '25',
@@ -1202,7 +1202,7 @@ var pokemonRawData =
     {
         id: 62,
         name: 'Poliwrath',
-        img: 'assets/images/pokemons/062.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/062.png',
         type: ['Water', 'Fighting'],
         candy: 'Poliwag Candy',
         candy_count: '100',
@@ -1228,7 +1228,7 @@ var pokemonRawData =
     {
         id: 63,
         name: 'Abra',
-        img: 'assets/images/pokemons/063.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/063.png',
         type: ['Psychic'],
         candy: 'Abra Candy',
         candy_count: 0,
@@ -1245,7 +1245,7 @@ var pokemonRawData =
     {
         id: 64,
         name: 'Kadabra',
-        img: 'assets/images/pokemons/064.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/064.png',
         type: ['Psychic'],
         candy: 'Abra Candy',
         candy_count: '25',
@@ -1262,7 +1262,7 @@ var pokemonRawData =
     {
         id: 65,
         name: 'Alakazam',
-        img: 'assets/images/pokemons/065.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/065.png',
         type: ['Psychic'],
         candy: 'Abra Candy',
         candy_count: '100',
@@ -1279,7 +1279,7 @@ var pokemonRawData =
     {
         id: 66,
         name: 'Machop',
-        img: 'assets/images/pokemons/066.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/066.png',
         type: ['Fighting'],
         candy: 'Machop Candy',
         candy_count: 0,
@@ -1296,7 +1296,7 @@ var pokemonRawData =
     {
         id: 67,
         name: 'Machoke',
-        img: 'assets/images/pokemons/067.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/067.png',
         type: ['Fighting'],
         candy: 'Machop Candy',
         candy_count: '25',
@@ -1313,7 +1313,7 @@ var pokemonRawData =
     {
         id: 68,
         name: 'Machamp',
-        img: 'assets/images/pokemons/068.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/068.png',
         type: ['Fighting'],
         candy: 'Machop Candy',
         candy_count: '100',
@@ -1330,7 +1330,7 @@ var pokemonRawData =
     {
         id: 69,
         name: 'Bellsprout',
-        img: 'assets/images/pokemons/069.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/069.png',
         type: ['Grass', 'Poison'],
         candy: 'Bellsprout Candy',
         candy_count: 0,
@@ -1357,7 +1357,7 @@ var pokemonRawData =
     {
         id: 70,
         name: 'Weepinbell',
-        img: 'assets/images/pokemons/070.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/070.png',
         type: ['Grass', 'Poison'],
         candy: 'Bellsprout Candy',
         candy_count: '25',
@@ -1384,7 +1384,7 @@ var pokemonRawData =
     {
         id: 71,
         name: 'Victreebel',
-        img: 'assets/images/pokemons/071.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/071.png',
         type: ['Grass', 'Poison'],
         candy: 'Bellsprout Candy',
         candy_count: '100',
@@ -1411,7 +1411,7 @@ var pokemonRawData =
     {
         id: 72,
         name: 'Tentacool',
-        img: 'assets/images/pokemons/072.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/072.png',
         type: ['Water', 'Poison'],
         candy: 'Tentacool Candy',
         candy_count: 0,
@@ -1436,7 +1436,7 @@ var pokemonRawData =
     {
         id: 73,
         name: 'Tentacruel',
-        img: 'assets/images/pokemons/073.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/073.png',
         type: ['Water', 'Poison'],
         candy: 'Tentacool Candy',
         candy_count: '50',
@@ -1461,7 +1461,7 @@ var pokemonRawData =
     {
         id: 74,
         name: 'Geodude',
-        img: 'assets/images/pokemons/074.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/074.png',
         type: ['Rock', 'Ground'],
         candy: 'Geodude Candy',
         candy_count: 0,
@@ -1486,7 +1486,7 @@ var pokemonRawData =
     {
         id: 75,
         name: 'Graveler',
-        img: 'assets/images/pokemons/075.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/075.png',
         type: ['Rock', 'Ground'],
         candy: 'Geodude Candy',
         candy_count: '25',
@@ -1511,7 +1511,7 @@ var pokemonRawData =
     {
         id: 76,
         name: 'Golem',
-        img: 'assets/images/pokemons/076.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/076.png',
         type: ['Rock', 'Ground'],
         candy: 'Geodude Candy',
         candy_count: '100',
@@ -1536,7 +1536,7 @@ var pokemonRawData =
     {
         id: 77,
         name: 'Ponyta',
-        img: 'assets/images/pokemons/077.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/077.png',
         type: ['Fire'],
         candy: 'Ponyta Candy',
         candy_count: 0,
@@ -1553,7 +1553,7 @@ var pokemonRawData =
     {
         id: 78,
         name: 'Rapidash',
-        img: 'assets/images/pokemons/078.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/078.png',
         type: ['Fire'],
         candy: 'Ponyta Candy',
         candy_count: '50',
@@ -1570,7 +1570,7 @@ var pokemonRawData =
     {
         id: 79,
         name: 'Slowpoke',
-        img: 'assets/images/pokemons/079.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/079.png',
         type: ['Water', 'Psychic'],
         candy: 'Slowpoke Candy',
         candy_count: 0,
@@ -1587,7 +1587,7 @@ var pokemonRawData =
     {
         id: 80,
         name: 'Slowbro',
-        img: 'assets/images/pokemons/080.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/080.png',
         type: ['Water', 'Psychic'],
         candy: 'Slowpoke Candy',
         candy_count: '50',
@@ -1604,7 +1604,7 @@ var pokemonRawData =
     {
         id: 81,
         name: 'Magnemite',
-        img: 'assets/images/pokemons/081.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/081.png',
         type: ['Electric', 'Steel'],
         candy: 'Magnemite Candy',
         candy_count: 0,
@@ -1621,7 +1621,7 @@ var pokemonRawData =
     {
         id: 82,
         name: 'Magneton',
-        img: 'assets/images/pokemons/082.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/082.png',
         type: ['Electric', 'Steel'],
         candy: 'Magnemite Candy',
         candy_count: '50',
@@ -1638,7 +1638,7 @@ var pokemonRawData =
     {
         id: 83,
         name: 'Farfetch\'d',
-        img: 'assets/images/pokemons/083.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/083.png',
         type: ['Normal', 'Flying'],
         candy: 'Farfetch\'d Candy',
         candy_count: 0,
@@ -1655,7 +1655,7 @@ var pokemonRawData =
     {
         id: 84,
         name: 'Doduo',
-        img: 'assets/images/pokemons/084.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/084.png',
         type: ['Normal', 'Flying'],
         candy: 'Doduo Candy',
         candy_count: 0,
@@ -1672,7 +1672,7 @@ var pokemonRawData =
     {
         id: 85,
         name: 'Dodrio',
-        img: 'assets/images/pokemons/085.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/085.png',
         type: ['Normal', 'Flying'],
         candy: 'Doduo Candy',
         candy_count: '50',
@@ -1689,7 +1689,7 @@ var pokemonRawData =
     {
         id: 86,
         name: 'Seel',
-        img: 'assets/images/pokemons/086.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/086.png',
         type: ['Water'],
         candy: 'Seel Candy',
         candy_count: 0,
@@ -1706,7 +1706,7 @@ var pokemonRawData =
     {
         id: 87,
         name: 'Dewgong',
-        img: 'assets/images/pokemons/087.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/087.png',
         type: ['Water', 'Ice'],
         candy: 'Seel Candy',
         candy_count: '50',
@@ -1723,7 +1723,7 @@ var pokemonRawData =
     {
         id: 88,
         name: 'Grimer',
-        img: 'assets/images/pokemons/088.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/088.png',
         type: ['Poison'],
         candy: 'Grimer Candy',
         candy_count: 0,
@@ -1740,7 +1740,7 @@ var pokemonRawData =
     {
         id: 89,
         name: 'Muk',
-        img: 'assets/images/pokemons/089.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/089.png',
         type: ['Poison'],
         candy: 'Grimer Candy',
         candy_count: '50',
@@ -1757,7 +1757,7 @@ var pokemonRawData =
     {
         id: 90,
         name: 'Shellder',
-        img: 'assets/images/pokemons/090.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/090.png',
         type: ['Water'],
         candy: 'Shellder Candy',
         candy_count: 0,
@@ -1774,7 +1774,7 @@ var pokemonRawData =
     {
         id: 91,
         name: 'Cloyster',
-        img: 'assets/images/pokemons/091.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/091.png',
         type: ['Water', 'Ice'],
         candy: 'Shellder Candy',
         candy_count: '50',
@@ -1791,7 +1791,7 @@ var pokemonRawData =
     {
         id: 92,
         name: 'Gastly',
-        img: 'assets/images/pokemons/092.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/092.png',
         type: ['Ghost', 'Poison'],
         candy: 'Gastly Candy',
         candy_count: 0,
@@ -1808,7 +1808,7 @@ var pokemonRawData =
     {
         id: 93,
         name: 'Haunter',
-        img: 'assets/images/pokemons/093.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/093.png',
         type: ['Ghost', 'Poison'],
         candy: 'Gastly Candy',
         candy_count: '25',
@@ -1825,7 +1825,7 @@ var pokemonRawData =
     {
         id: 94,
         name: 'Gengar',
-        img: 'assets/images/pokemons/094.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/094.png',
         type: ['Ghost', 'Poison'],
         candy: 'Gastly Candy',
         candy_count: '100',
@@ -1842,7 +1842,7 @@ var pokemonRawData =
     {
         id: 95,
         name: 'Onix',
-        img: 'assets/images/pokemons/095.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/095.png',
         type: ['Rock', 'Ground'],
         candy: 'Onix Candy',
         candy_count: 0,
@@ -1867,7 +1867,7 @@ var pokemonRawData =
     {
         id: 96,
         name: 'Drowzee',
-        img: 'assets/images/pokemons/096.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/096.png',
         type: ['Psychic'],
         candy: 'Drowzee Candy',
         candy_count: 0,
@@ -1884,7 +1884,7 @@ var pokemonRawData =
     {
         id: 97,
         name: 'Hypno',
-        img: 'assets/images/pokemons/097.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/097.png',
         type: ['Psychic'],
         candy: 'Drowzee Candy',
         candy_count: '50',
@@ -1901,7 +1901,7 @@ var pokemonRawData =
     {
         id: 98,
         name: 'Krabby',
-        img: 'assets/images/pokemons/098.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/098.png',
         type: ['Water'],
         candy: 'Krabby Candy',
         candy_count: 0,
@@ -1918,7 +1918,7 @@ var pokemonRawData =
     {
         id: 99,
         name: 'Kingler',
-        img: 'assets/images/pokemons/099.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/099.png',
         type: ['Water'],
         candy: 'Krabby Candy',
         candy_count: '50',
@@ -1935,7 +1935,7 @@ var pokemonRawData =
     {
         id: 100,
         name: 'Voltorb',
-        img: 'assets/images/pokemons/100.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/100.png',
         type: ['Electric'],
         candy: 'Voltorb Candy',
         candy_count: 0,
@@ -1952,7 +1952,7 @@ var pokemonRawData =
     {
         id: 101,
         name: 'Electrode',
-        img: 'assets/images/pokemons/101.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/101.png',
         type: ['Electric'],
         candy: 'Voltorb Candy',
         candy_count: '50',
@@ -1969,7 +1969,7 @@ var pokemonRawData =
     {
         id: 102,
         name: 'Exeggcute',
-        img: 'assets/images/pokemons/102.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/102.png',
         type: ['Grass', 'Psychic'],
         candy: 'Exeggcute Candy',
         candy_count: 0,
@@ -1995,7 +1995,7 @@ var pokemonRawData =
     {
         id: 103,
         name: 'Exeggutor',
-        img: 'assets/images/pokemons/103.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/103.png',
         type: ['Grass', 'Psychic'],
         candy: 'Exeggcute Candy',
         candy_count: '50',
@@ -2021,7 +2021,7 @@ var pokemonRawData =
     {
         id: 104,
         name: 'Cubone',
-        img: 'assets/images/pokemons/104.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/104.png',
         type: ['Ground'],
         candy: 'Cubone Candy',
         candy_count: 0,
@@ -2038,7 +2038,7 @@ var pokemonRawData =
     {
         id: 105,
         name: 'Marowak',
-        img: 'assets/images/pokemons/105.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/105.png',
         type: ['Ground'],
         candy: 'Cubone Candy',
         candy_count: '50',
@@ -2055,7 +2055,7 @@ var pokemonRawData =
     {
         id: 106,
         name: 'Hitmonlee',
-        img: 'assets/images/pokemons/106.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/106.png',
         type: ['Fighting'],
         candy: 'Hitmonlee Candy',
         candy_count: 0,
@@ -2072,7 +2072,7 @@ var pokemonRawData =
     {
         id: 107,
         name: 'Hitmonchan',
-        img: 'assets/images/pokemons/107.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/107.png',
         type: ['Fighting'],
         candy: 'Hitmonchan Candy',
         candy_count: 0,
@@ -2089,7 +2089,7 @@ var pokemonRawData =
     {
         id: 108,
         name: 'Lickitung',
-        img: 'assets/images/pokemons/108.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/108.png',
         type: ['Normal'],
         candy: 'Lickitung Candy',
         candy_count: 0,
@@ -2106,7 +2106,7 @@ var pokemonRawData =
     {
         id: 109,
         name: 'Koffing',
-        img: 'assets/images/pokemons/109.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/109.png',
         type: ['Poison'],
         candy: 'Koffing Candy',
         candy_count: 0,
@@ -2123,7 +2123,7 @@ var pokemonRawData =
     {
         id: 110,
         name: 'Weezing',
-        img: 'assets/images/pokemons/110.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/110.png',
         type: ['Poison'],
         candy: 'Koffing Candy',
         candy_count: '50',
@@ -2140,7 +2140,7 @@ var pokemonRawData =
     {
         id: 111,
         name: 'Rhyhorn',
-        img: 'assets/images/pokemons/111.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/111.png',
         type: ['Ground', 'Rock'],
         candy: 'Rhyhorn Candy',
         candy_count: 0,
@@ -2165,7 +2165,7 @@ var pokemonRawData =
     {
         id: 112,
         name: 'Rhydon',
-        img: 'assets/images/pokemons/112.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/112.png',
         type: ['Ground', 'Rock'],
         candy: 'Rhyhorn Candy',
         candy_count: '50',
@@ -2190,7 +2190,7 @@ var pokemonRawData =
     {
         id: 113,
         name: 'Chansey',
-        img: 'assets/images/pokemons/113.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/113.png',
         type: ['Normal'],
         candy: 'Chansey Candy',
         candy_count: 0,
@@ -2207,7 +2207,7 @@ var pokemonRawData =
     {
         id: 114,
         name: 'Tangela',
-        img: 'assets/images/pokemons/114.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/114.png',
         type: ['Grass'],
         candy: 'Tangela Candy',
         candy_count: 0,
@@ -2224,7 +2224,7 @@ var pokemonRawData =
     {
         id: 115,
         name: 'Kangaskhan',
-        img: 'assets/images/pokemons/115.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/115.png',
         type: ['Normal'],
         candy: 'Kangaskhan Candy',
         candy_count: 0,
@@ -2241,7 +2241,7 @@ var pokemonRawData =
     {
         id: 116,
         name: 'Horsea',
-        img: 'assets/images/pokemons/116.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/116.png',
         type: ['Water'],
         candy: 'Horsea Candy',
         candy_count: 0,
@@ -2258,7 +2258,7 @@ var pokemonRawData =
     {
         id: 117,
         name: 'Seadra',
-        img: 'assets/images/pokemons/117.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/117.png',
         type: ['Water'],
         candy: 'Horsea Candy',
         candy_count: '50',
@@ -2275,7 +2275,7 @@ var pokemonRawData =
     {
         id: 118,
         name: 'Goldeen',
-        img: 'assets/images/pokemons/118.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/118.png',
         type: ['Water'],
         candy: 'Goldeen Candy',
         candy_count: 0,
@@ -2292,7 +2292,7 @@ var pokemonRawData =
     {
         id: 119,
         name: 'Seaking',
-        img: 'assets/images/pokemons/119.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/119.png',
         type: ['Water'],
         candy: 'Goldeen Candy',
         candy_count: '50',
@@ -2309,7 +2309,7 @@ var pokemonRawData =
     {
         id: 120,
         name: 'Staryu',
-        img: 'assets/images/pokemons/120.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/120.png',
         type: ['Water'],
         candy: 'Staryu Candy',
         candy_count: 0,
@@ -2326,7 +2326,7 @@ var pokemonRawData =
     {
         id: 121,
         name: 'Starmie',
-        img: 'assets/images/pokemons/121.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/121.png',
         type: ['Water', 'Psychic'],
         candy: 'Staryu Candy',
         candy_count: '50',
@@ -2343,7 +2343,7 @@ var pokemonRawData =
     {
         id: 122,
         name: 'Mr. Mime',
-        img: 'assets/images/pokemons/122.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/122.png',
         type: ['Psychic'],
         candy: 'Mr. Mime Candy',
         candy_count: 0,
@@ -2360,7 +2360,7 @@ var pokemonRawData =
     {
         id: 123,
         name: 'Scyther',
-        img: 'assets/images/pokemons/123.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/123.png',
         type: ['Bug', 'Flying'],
         candy: 'Scyther Candy',
         candy_count: 0,
@@ -2386,58 +2386,58 @@ var pokemonRawData =
     {
         id: 124,
         name: 'Jynx',
-        img: 'assets/images/pokemons/124.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/124.png',
         type: ['Ice', 'Psychic'],
         candy: 'Jynx Candy',
-        candy_count: 0,
+        candy_count: '25',
         immunes: [],
         strengths: ['Grass', 'Ground', 'Flying', 'Dragon', 'Fighting', 'Poison'],
         weaknesses: ['Fire', 'Water', 'Ice', 'Steel', 'Psychic', 'Dark'],
         egg: 10,
         buddy: 5,
         next_evolution: [],
-        prev_evolution: [],
+        prev_evolution: [238],
         location: '',
         gif: 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/jynx.gif'
     },
     {
         id: 125,
         name: 'Electabuzz',
-        img: 'assets/images/pokemons/125.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/125.png',
         type: ['Electric'],
         candy: 'Electabuzz Candy',
-        candy_count: 0,
+        candy_count: '25',
         immunes: [],
         strengths: ['Water', 'Flying'],
         weaknesses: ['Electric', 'Grass', 'Dragon', 'Ground'],
         egg: 10,
         buddy: 5,
         next_evolution: [],
-        prev_evolution: [],
+        prev_evolution: [239],
         location: '',
         gif: 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/electabuzz.gif'
     },
     {
         id: 126,
         name: 'Magmar',
-        img: 'assets/images/pokemons/126.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/126.png',
         type: ['Fire'],
         candy: 'Magmar Candy',
-        candy_count: 0,
+        candy_count: '25',
         immunes: [],
         strengths: ['Grass', 'Ice', 'Bug', 'Steel'],
         weaknesses: ['Fire', 'Water', 'Rock', 'Dragon'],
         egg: 10,
         buddy: 5,
         next_evolution: [],
-        prev_evolution: [],
+        prev_evolution: [240],
         location: '',
         gif: 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/magmar.gif'
     },
     {
         id: 127,
         name: 'Pinsir',
-        img: 'assets/images/pokemons/127.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/127.png',
         type: ['Bug'],
         candy: 'Pinsir Candy',
         candy_count: 0,
@@ -2454,7 +2454,7 @@ var pokemonRawData =
     {
         id: 128,
         name: 'Tauros',
-        img: 'assets/images/pokemons/128.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/128.png',
         type: ['Normal'],
         candy: 'Tauros Candy',
         candy_count: 0,
@@ -2471,7 +2471,7 @@ var pokemonRawData =
     {
         id: 129,
         name: 'Magikarp',
-        img: 'assets/images/pokemons/129.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/129.png',
         type: ['Water'],
         candy: 'Magikarp Candy',
         candy_count: 0,
@@ -2488,7 +2488,7 @@ var pokemonRawData =
     {
         id: 130,
         name: 'Gyarados',
-        img: 'assets/images/pokemons/130.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/130.png',
         type: ['Water', 'Flying'],
         candy: 'Magikarp Candy',
         candy_count: '400',
@@ -2505,7 +2505,7 @@ var pokemonRawData =
     {
         id: 131,
         name: 'Lapras',
-        img: 'assets/images/pokemons/131.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/131.png',
         type: ['Water', 'Ice'],
         candy: 'Lapras Candy',
         candy_count: 0,
@@ -2522,7 +2522,7 @@ var pokemonRawData =
     {
         id: 132,
         name: 'Ditto',
-        img: 'assets/images/pokemons/132.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/132.png',
         type: ['Normal'],
         candy: 'None',
         candy_count: 0,
@@ -2539,7 +2539,7 @@ var pokemonRawData =
     {
         id: 133,
         name: 'Eevee',
-        img: 'assets/images/pokemons/133.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/133.png',
         type: ['Normal'],
         candy: 'Eevee Candy',
         candy_count: 0,
@@ -2556,7 +2556,7 @@ var pokemonRawData =
     {
         id: 134,
         name: 'Vaporeon',
-        img: 'assets/images/pokemons/134.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/134.png',
         type: ['Water'],
         candy: 'Eevee Candy',
         candy_count: '25',
@@ -2573,7 +2573,7 @@ var pokemonRawData =
     {
         id: 135,
         name: 'Jolteon',
-        img: 'assets/images/pokemons/135.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/135.png',
         type: ['Electric'],
         candy: 'Eevee Candy',
         candy_count: '25',
@@ -2590,7 +2590,7 @@ var pokemonRawData =
     {
         id: 136,
         name: 'Flareon',
-        img: 'assets/images/pokemons/136.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/136.png',
         type: ['Fire'],
         candy: 'Eevee Candy',
         candy_count: '25',
@@ -2607,7 +2607,7 @@ var pokemonRawData =
     {
         id: 137,
         name: 'Porygon',
-        img: 'assets/images/pokemons/137.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/137.png',
         type: ['Normal'],
         candy: 'Porygon Candy',
         candy_count: 0,
@@ -2624,7 +2624,7 @@ var pokemonRawData =
     {
         id: 138,
         name: 'Omanyte',
-        img: 'assets/images/pokemons/138.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/138.png',
         type: ['Rock', 'Water'],
         candy: 'Omanyte Candy',
         candy_count: 0,
@@ -2641,7 +2641,7 @@ var pokemonRawData =
     {
         id: 139,
         name: 'Omastar',
-        img: 'assets/images/pokemons/139.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/139.png',
         type: ['Rock', 'Water'],
         candy: 'Omanyte Candy',
         candy_count: '50',
@@ -2658,7 +2658,7 @@ var pokemonRawData =
     {
         id: 140,
         name: 'Kabuto',
-        img: 'assets/images/pokemons/140.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/140.png',
         type: ['Rock', 'Water'],
         candy: 'Kabuto Candy',
         candy_count: 0,
@@ -2675,7 +2675,7 @@ var pokemonRawData =
     {
         id: 141,
         name: 'Kabutops',
-        img: 'assets/images/pokemons/141.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/141.png',
         type: ['Rock', 'Water'],
         candy: 'Kabuto Candy',
         candy_count: '50',
@@ -2692,7 +2692,7 @@ var pokemonRawData =
     {
         id: 142,
         name: 'Aerodactyl',
-        img: 'assets/images/pokemons/142.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/142.png',
         type: ['Rock', 'Flying'],
         candy: 'Aerodactyl Candy',
         candy_count: 0,
@@ -2709,7 +2709,7 @@ var pokemonRawData =
     {
         id: 143,
         name: 'Snorlax',
-        img: 'assets/images/pokemons/143.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/143.png',
         type: ['Normal'],
         candy: 'Snorlax Candy',
         candy_count: 0,
@@ -2726,7 +2726,7 @@ var pokemonRawData =
     {
         id: 144,
         name: 'Articuno',
-        img: 'assets/images/pokemons/144.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/144.png',
         type: ['Ice', 'Flying'],
         candy: 'None',
         candy_count: 0,
@@ -2743,7 +2743,7 @@ var pokemonRawData =
     {
         id: 145,
         name: 'Zapdos',
-        img: 'assets/images/pokemons/145.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/145.png',
         type: ['Electric', 'Flying'],
         candy: 'None',
         candy_count: 0,
@@ -2760,7 +2760,7 @@ var pokemonRawData =
     {
         id: 146,
         name: 'Moltres',
-        img: 'assets/images/pokemons/146.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/146.png',
         type: ['Fire', 'Flying'],
         candy: 'None',
         candy_count: 0,
@@ -2777,7 +2777,7 @@ var pokemonRawData =
     {
         id: 147,
         name: 'Dratini',
-        img: 'assets/images/pokemons/147.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/147.png',
         type: ['Dragon'],
         candy: 'Dratini Candy',
         candy_count: 0,
@@ -2794,7 +2794,7 @@ var pokemonRawData =
     {
         id: 148,
         name: 'Dragonair',
-        img: 'assets/images/pokemons/148.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/148.png',
         type: ['Dragon'],
         candy: 'Dratini Candy',
         candy_count: '25',
@@ -2811,7 +2811,7 @@ var pokemonRawData =
     {
         id: 149,
         name: 'Dragonite',
-        img: 'assets/images/pokemons/149.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/149.png',
         type: ['Dragon', 'Flying'],
         candy: 'Dratini Candy',
         candy_count: '100',
@@ -2828,7 +2828,7 @@ var pokemonRawData =
     {
         id: 150,
         name: 'Mewtwo',
-        img: 'assets/images/pokemons/150.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/150.png',
         type: ['Psychic'],
         candy: 'None',
         candy_count: 0,
@@ -2845,7 +2845,7 @@ var pokemonRawData =
     {
         id: 151,
         name: 'Mew',
-        img: 'assets/images/pokemons/151.png',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/151.png',
         type: ['Psychic'],
         candy: 'None',
         candy_count: 0,
@@ -2858,6 +2858,142 @@ var pokemonRawData =
         prev_evolution: [],
         location: 'Unavailable',
         gif: 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/mew.gif'
+    },
+    {
+        id: 172,
+        name: 'Pichu',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/172.png',
+        type: ['Electric'],
+        candy: 'Pikachu Candy',
+        candy_count: 0,
+        immunes: [],
+        strengths: ['Water', 'Flying'],
+        weaknesses: ['Electric', 'Grass', 'Dragon', 'Ground'],
+        egg: 5,
+        buddy: 1,
+        next_evolution: [25,26],
+        prev_evolution: [],
+        location: 'Unavailable',
+        gif: 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/pichu.gif'
+    },
+    {
+        id: 173,
+        name: 'Cleffa',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/173.png',
+        type: ['Normal'],
+        candy: 'Clefairy Candy',
+        candy_count: 0,
+        immunes: [],
+        strengths: [],
+        weaknesses: ['Rock', 'Steel', 'Ghost'],
+        egg: 2,
+        buddy: 1,
+        next_evolution: [35,36],
+        prev_evolution: [],
+        location: 'Unavailable',
+        gif: 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/cleffa.gif'
+    },
+    {
+        id: 174,
+        name: 'Igglybuff',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/174.png',
+        type: ['Normal'],
+        candy: 'Jigglypuff Candy',
+        candy_count: 0,
+        immunes: [],
+        strengths: [],
+        weaknesses: ['Rock', 'Steel', 'Ghost'],
+        egg: 2,
+        buddy: 1,
+        next_evolution: [39,40],
+        prev_evolution: [],
+        location: 'Unavailable',
+        gif: 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/igglybuff.gif'
+    },
+    {
+        id: 175,
+        name: 'Togepi',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/175.png',
+        type: ['Normal'],
+        candy: 'Togepi Candy',
+        candy_count: 0,
+        immunes: [],
+        strengths: [],
+        weaknesses: ['Rock', 'Steel', 'Ghost'],
+        egg: 5,
+        buddy: 5,
+        next_evolution: [176],
+        prev_evolution: [],
+        location: 'Unavailable',
+        gif: 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/togepi.gif'
+    },
+    {
+        id: 176,
+        name: 'Togetic',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/176.png',
+        type: ['fairy','Flying'],
+        candy: 'Togepi Candy',
+        candy_count: '50',
+        immunes: [],
+        strengths: ['Grass','Fighting', 'Dragon', 'Dark', 'Bug'],
+        weaknesses: ['Fire', 'Poison', 'Steel', 'Electric', 'Rock'],
+        egg: 0,
+        buddy: 5,
+        next_evolution: [],
+        prev_evolution: [175],
+        location: 'Unavailable',
+        gif: 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/togetic.gif'
+    },
+    {
+        id: 238,
+        name: 'Smoochum',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/238.png',
+        type: ['Ice', 'Psychic'],
+        candy: 'Jynx Candy',
+        candy_count: 0,
+        immunes: [],
+        strengths: ['Grass', 'Ground', 'Flying', 'Dragon', 'Fighting', 'Poison'],
+        weaknesses: ['Fire', 'Water', 'Ice', 'Steel', 'Psychic', 'Dark'],
+        egg: 10,
+        buddy: 5,
+        next_evolution: [124],
+        prev_evolution: [],
+        location: 'Unavailable',
+        gif: 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/smoochum.gif'
+    },
+    {
+        id: 239,
+        name: 'Elekid',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/239.png',
+        type: ['Electric'],
+        candy: 'Electabuzz Candy',
+        candy_count: 0,
+        immunes: [],
+        strengths: ['Water', 'Flying'],
+        weaknesses: ['Electric', 'Grass', 'Dragon', 'Ground'],
+        egg: 10,
+        buddy: 5,
+        next_evolution: [125],
+        prev_evolution: [],
+        location: 'Unavailable',
+        gif: 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/elekid.gif'
+    },
+    {
+        id: 240,
+        name: 'Magby',
+        img: 'http://www.pkparaiso.com/xy/sprites/pokemon/240.png',
+        type: ['Fire'],
+        candy: 'Magmar Candy',
+        candy_count: 0,
+        immunes: [],
+        strengths: ['Grass', 'Ice', 'Bug', 'Steel'],
+        weaknesses: ['Fire', 'Water', 'Rock', 'Dragon'],
+        egg: 10,
+        buddy: 5,
+        next_evolution: [126],
+        prev_evolution: [],
+        location: 'Unavailable',
+        gif: 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/magby.gif'
     }];
 
 var pokemonSchema = new mongoose.Schema({
